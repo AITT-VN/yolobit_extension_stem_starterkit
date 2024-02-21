@@ -9,7 +9,7 @@ Blockly.Blocks["stemkit_led_tiny"] = {
       colour: ColorBlock,
       nextStatement: null,
       tooltip: "",
-      message0: "%5 LED %1 đổi %2 thành %3 %4",
+      message0: "%5 LED màu %1 đổi %2 thành %3 %4",
       previousStatement: null,
       args0: [
         {
@@ -131,7 +131,7 @@ Blockly.Blocks['stemkit_ultrasonic_checkdistance'] = {
     this.jsonInit(
       {
         "type": "stemkit_ultrasonic_checkdistance",
-        "message0": "%5 khoảng cách %4 < %1 %2 %3",
+        "message0": "%4 khoảng cách %3 < %1 %2cm",
         "args0": [
           {
             "type": "input_dummy"
@@ -140,20 +140,6 @@ Blockly.Blocks['stemkit_ultrasonic_checkdistance'] = {
             "type": "input_value",
             "name": "DISTANCE",
             "check": "Number"
-          },
-          {
-            "type": "field_dropdown",
-            "name": "TYPE",
-            "options": [
-              [
-                "cm",
-                "CM"
-              ],
-              [
-                "mm",
-                "MM"
-              ]
-            ]
           },
           {
             "type": "field_dropdown",
@@ -189,7 +175,6 @@ Blockly.Blocks['stemkit_ultrasonic_checkdistance'] = {
 
 Blockly.Python['stemkit_ultrasonic_checkdistance'] = function (block) {
   var value_distance = Blockly.Python.valueToCode(block, 'DISTANCE', Blockly.Python.ORDER_ATOMIC);
-  var dropdown_type = block.getFieldValue('TYPE');
   var dropdown_port = block.getFieldValue('PORT');
   var port ;
   if (dropdown_port == 'A'){
@@ -201,12 +186,7 @@ Blockly.Python['stemkit_ultrasonic_checkdistance'] = function (block) {
   Blockly.Python.definitions_['import_yolobit'] = 'from yolobit import *';
   Blockly.Python.definitions_['import_ultrasonic'] = 'from stemkit_hcsr04 import HCSR04\n' + port;
   // TODO: Assemble Python into code variable.
-  var code = '';
-  if (dropdown_type == 'CM')
-    code = 'stemkit_ultrasonic.distance_cm() < ' + value_distance;
-  else
-    code = 'stemkit_ultrasonic.distance_mm() < ' + value_distance;
-  // TODO: Change ORDER_NONE to the correct strength.
+  var code = 'stemkit_ultrasonic.distance_cm() < ' + value_distance;
   return [code, Blockly.Python.ORDER_NONE];
 };
 
@@ -270,7 +250,7 @@ Blockly.Blocks['stemkit_dual_usb'] = {
     this.jsonInit(
       {
         "type": "stemkit_dual_usb",
-        "message0": "%3 máy bơm %1 bật (0-100) %2 %%",
+        "message0": "%3 máy bơm %1 bật %2 %%",
         "args0": [
           {
             "type": "field_dropdown",
@@ -324,7 +304,7 @@ Blockly.Blocks['stemkit_move_motor'] = {
     this.jsonInit(
       {
         "type": "stemkit_move_motor",
-        "message0": "%3 M1 %1 %4 M2 %2 (0-100)",
+        "message0": "%3 M1 %1  M2 %2 (0-100)",
         "args0": [
           {
             "type": "input_value",
@@ -335,14 +315,6 @@ Blockly.Blocks['stemkit_move_motor'] = {
             "type": "input_value",
             "name": "right_wheel_speed",
             "check": "Number",
-          },
-          {
-            "type": "field_image",
-            "src": ImgUrl + 'move.svg',
-            "width": 30,
-            "height": 30,
-            "alt": "*",
-            "flipRtl": false
           },
           {
             "type": "field_image",
