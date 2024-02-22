@@ -18,9 +18,6 @@ class Motor():
         self.inb1 = PWM(Pin(pin10.pin), freq=500, duty=0)
         self.inb2 = PWM(Pin(pin15.pin), freq=500, duty=0)
 
-        self.servo1 = PWM(Pin(pin11.pin), freq=50, duty=0)
-        self.servo2 = PWM(Pin(pin16.pin), freq=50, duty=0)
-
         self.m1_speed = 0
         self.m2_speed = 0
         self.stop()
@@ -108,36 +105,8 @@ class Motor():
         self.m2_speed = m2_speed
 
 
-    def servo_write(self, index, value, max=180):
-        if index not in [1, 2]:
-            print("Servo index out of range")
-            return None
-        if value < 0 or value > max:
-            print("Servo position out of range. Must be from 0 to " +
-                  str(max) + " degree")
-            return
 
-        # duty for servo is between 25 - 115
-        duty = 25 + int((value/max)*100)
-
-        if index == 1:
-            self.servo1.duty(duty)
-        else:
-            self.servo2.duty(duty)
-
-    def servo360_write(self, index, value):
-        if value < -100 or value > 100:
-            print("Servo 360 speed out of range. Must be from -100 to 100")
-            return
-
-        if value == 0:
-            self.servo_write(index, 0)
-            return
-        else:
-            degree = 90 - (value/100)*90
-            self.servo_write(index, degree)
-
-motor = Motor()
+stemkit_motor = Motor()
 
 
 def stop_all():  # override stop function called by app
