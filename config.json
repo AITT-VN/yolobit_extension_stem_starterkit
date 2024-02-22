@@ -2,7 +2,7 @@
     "name": "STEM Kit",
     "description": "Mục mở rộng dành cho bộ STEM Starter kit",
     "libs": [
-        "stemkit_rgbled.py", "stemkit_hcsr04.py", "stemkit_sound_player.py", "motor.py"
+        "stemkit_rgbled.py", "stemkit_hcsr04.py", "stemkit_sound_player.py", "stemkit_motor.py"
     ],
     "blocks": [
         "definition.js"
