@@ -41,7 +41,7 @@ Blockly.Blocks["stemkit_led_tiny"] = {
         {type: "input_dummy"},
         {
           "type": "field_image",
-          "src": ImgUrl + 'rgb.png',
+          "src": ImgUrl + 'tiny-rgb.png',
           "width": 30,
           "height": 30,
           "alt": "*",
