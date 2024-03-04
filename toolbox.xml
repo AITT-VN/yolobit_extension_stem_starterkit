@@ -1,28 +1,6 @@
 <xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display: none">
   <category name="STEM KIT" colour="#44cbc6" icon="share-alt">
-    <block type="stemkit_soil_sensor"/>
-
-    <block type="stemkit_ultrasonic_read"/>
-    <block type="stemkit_ultrasonic_checkdistance">
-      <value name="DISTANCE">
-        <shadow type="math_number">
-          <field name="NUM">0</field>
-        </shadow>
-      </value>
-    </block>
-
-    <block type="stemkit_dual_usb">
-      <value name="percent"><shadow type="math_number"><field name="NUM">70</field></shadow></value>
-    </block>
-
-    <block type="stemkit_led_tiny">
-      <value name="COLOR">
-        <shadow type="colour_picker">
-          <field name="COLOUR">#ff0000</field>
-        </shadow>
-      </value>
-    </block>
-
+    <label text="Động cơ" web-class="blockLabelStyle"></label>
     <block type="stemkit_move_motor">
       <value name="left_wheel_speed">
         <shadow type="math_number">
@@ -54,6 +32,13 @@
       </value>
     </block>
 
+    <sep gap="30"></sep>
+    <label text="Đèn và loa" web-class="blockLabelStyle"></label>
+    
+    <block type="stemkit_mini_pump">
+      <value name="percent"><shadow type="math_number"><field name="NUM">70</field></shadow></value>
+    </block>
+
     <block type="stemkit_sound_playtrack">
       <value name="track">
         <shadow type="math_number">
@@ -63,6 +48,27 @@
       <value name="vol">
         <shadow type="math_number">
           <field name="NUM">20</field>
+        </shadow>
+      </value>
+    </block>
+
+    <block type="stemkit_led_tiny">
+      <value name="COLOR">
+        <shadow type="colour_picker">
+          <field name="COLOUR">#ff0000</field>
+        </shadow>
+      </value>
+    </block>
+
+    <sep gap="30"></sep>
+    <label text="Cảm biến" web-class="blockLabelStyle"></label>
+
+    <block type="stemkit_soil_sensor"/>
+    <block type="stemkit_ultrasonic_read"/>
+    <block type="stemkit_ultrasonic_checkdistance">
+      <value name="DISTANCE">
+        <shadow type="math_number">
+          <field name="NUM">0</field>
         </shadow>
       </value>
     </block>

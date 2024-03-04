@@ -1,4 +1,4 @@
-const ColorBlock = '#44cbc6';
+const StemKitColorBlock = '#44cbc6';
 const ImgUrl = 'https://ohstem-public.s3.ap-southeast-1.amazonaws.com/extensions/AITT-VN/yolobit_extension_stem_starterkit/images/';
 // Tiny LED Module
 
@@ -6,7 +6,7 @@ Blockly.Blocks["stemkit_led_tiny"] = {
   init: function () {
     this.jsonInit({
       inputsInline: true,
-      colour: ColorBlock,
+      colour: StemKitColorBlock,
       nextStatement: null,
       tooltip: "",
       message0: "%5 LED màu %1 đổi %2 thành %3 %4",
@@ -99,7 +99,7 @@ Blockly.Blocks['stemkit_ultrasonic_read'] = {
           }
         ],
         "output": null,
-        "colour": ColorBlock,
+        "colour": StemKitColorBlock,
         "tooltip": "Đọc giá trị đo được của cảm biến khoảng cách",
         "helpUrl": ""
       }
@@ -165,7 +165,7 @@ Blockly.Blocks['stemkit_ultrasonic_checkdistance'] = {
           }
         ],
         "output": "Boolean",
-        "colour": ColorBlock,
+        "colour": StemKitColorBlock,
         "tooltip": "Kiểm tra xem khoảng cách đo được của cảm biến có lớn hơn giá trị được chọn hay không",
         "helpUrl": ""
       }
@@ -222,7 +222,7 @@ Blockly.Blocks['stemkit_soil_sensor'] = {
           }
         ],
         "output": "Number",
-        "colour": ColorBlock,
+        "colour": StemKitColorBlock,
         "tooltip": "",
         "helpUrl": ""
       }
@@ -239,9 +239,7 @@ Blockly.Python['stemkit_soil_sensor'] = function(block) {
   return [code, Blockly.Python.ORDER_NONE];
 };
 
-// Dual USB Module
-
-Blockly.Blocks['stemkit_dual_usb'] = {
+Blockly.Blocks['stemkit_mini_pump'] = {
   /**
    * Block for waiting.
    * @this Blockly.Block
@@ -249,7 +247,7 @@ Blockly.Blocks['stemkit_dual_usb'] = {
   init: function() {
     this.jsonInit(
       {
-        "type": "stemkit_dual_usb",
+        "type": "stemkit_mini_pump",
         "message0": "%3 máy bơm %1 bật %2 %%",
         "args0": [
           {
@@ -257,12 +255,12 @@ Blockly.Blocks['stemkit_dual_usb'] = {
             "name": "NAME",
             "options": [
               [
-                "A",
-                "pin0"
+                "M1",
+                "0"
               ],
               [
-                "B",
-                "pin1"
+                "M2",
+                "1"
               ]
             ]
           },
@@ -282,7 +280,7 @@ Blockly.Blocks['stemkit_dual_usb'] = {
         ],
         "previousStatement": null,
         "nextStatement": null,
-        "colour": ColorBlock,
+        "colour": StemKitColorBlock,
         "tooltip": "",
         "helpUrl": ""
       }
@@ -290,13 +288,17 @@ Blockly.Blocks['stemkit_dual_usb'] = {
   }
 };
 
-Blockly.Python['stemkit_dual_usb'] = function(block) {
-  Blockly.Python.definitions_['import_yolobit'] = 'from yolobit import *';
+Blockly.Python['stemkit_mini_pump'] = function(block) {
+  Blockly.Python.definitions_['import_stemkit_motor'] = 'from stemkit_motor import *';
   var dropdown_name = block.getFieldValue('NAME');
   var value_percent = Blockly.Python.valueToCode(block, 'percent', Blockly.Python.ORDER_ATOMIC);
+  
   // TODO: Assemble Python into code variable.
-  var code = ''+dropdown_name+'.write_analog(round(translate('+value_percent+', 0, 100, 0, 1023)))\n';
-  return code;
+  if (dropdown_name == "0") {
+    return "stemkit_motor.set_speed(m1=" + value_percent + ")\n";  
+  } else {
+    return "stemkit_motor.set_speed(m1=None, m2=" + value_percent + ")\n";  
+  }
 };
 
 Blockly.Blocks['stemkit_move_motor'] = {
@@ -304,7 +306,7 @@ Blockly.Blocks['stemkit_move_motor'] = {
     this.jsonInit(
       {
         "type": "stemkit_move_motor",
-        "message0": "%3 M1 %1  M2 %2 (0-100)",
+        "message0": "%3 M1 %1 M2 %2 (-100<->100)",
         "args0": [
           {
             "type": "input_value",
@@ -328,7 +330,7 @@ Blockly.Blocks['stemkit_move_motor'] = {
         "inputsInline": true,
         "previousStatement": null,
         "nextStatement": null,
-        "colour": ColorBlock,
+        "colour": StemKitColorBlock,
       }
     );
   }
@@ -339,7 +341,7 @@ Blockly.Python["stemkit_move_motor"] = function (block) {
   var left_wheel_speed = Blockly.Python.valueToCode(block, 'left_wheel_speed', Blockly.Python.ORDER_ATOMIC);
   var right_wheel_speed = Blockly.Python.valueToCode(block, 'right_wheel_speed', Blockly.Python.ORDER_ATOMIC);
   // TODO: Assemble Python into code variable.
-  var code = "stemkit_motor.set_wheel_speed(" + left_wheel_speed + ", " + right_wheel_speed + ")\n";
+  var code = "motor.set_speed(" + left_wheel_speed + ", " + right_wheel_speed + ")\n";
   return code;
 };
 
@@ -361,7 +363,7 @@ Blockly.Blocks['motor_stop'] = {
       "inputsInline": true,
       "previousStatement": null,
       "nextStatement": null,
-      "colour": ColorBlock,
+      "colour": StemKitColorBlock,
     });
   }
 };
@@ -369,16 +371,16 @@ Blockly.Blocks['motor_stop'] = {
 Blockly.Python["motor_stop"] = function (block) {
   Blockly.Python.definitions_['import_stemkit_motor'] = 'from stemkit_motor import *';
   // TODO: Assemble Python into code variable.
-  var code = "stemkit_motor.stop()\n";
+  var code = "motor.stop()\n";
   return code;
 };
 
 Blockly.Blocks["servo_write_angle"] = {
   init: function () {
     this.jsonInit({
-      colour: ColorBlock,
+      colour: StemKitColorBlock,
       nextStatement: null,
-      message0: "%3 %2 quay đến góc %1 (0-180)",
+      message0: "%3 %2 quay góc %1 (0 <-> 180)",
       previousStatement: null,
       args0: [
         { type: "input_value", name: "angle", check: "Number" },
@@ -423,7 +425,7 @@ Blockly.Blocks['servo360_write'] = {
     this.jsonInit(
       {
         "type": "servo360_write",
-        "message0": "%3 %1 quay %2 (0-100)",
+        "message0": "%3 %1 quay %2 (-100 <-> 100)",
         "args0": [
           {
             type: "field_dropdown",
@@ -450,7 +452,7 @@ Blockly.Blocks['servo360_write'] = {
         "inputsInline": true,
         "previousStatement": null,
         "nextStatement": null,
-        colour: ColorBlock
+        colour: StemKitColorBlock
       }
     );
   }
@@ -512,7 +514,7 @@ Blockly.Blocks['stemkit_sound_playtrack'] = {
         inputsInline: true,
         previousStatement: null,
         nextStatement: null,
-        colour: ColorBlock,
+        colour: StemKitColorBlock,
         tooltip: "",
         helpUrl: ""
       }
