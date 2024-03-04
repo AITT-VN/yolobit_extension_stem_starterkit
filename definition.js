@@ -59,9 +59,9 @@ Blockly.Python['stemkit_led_tiny'] = function(block) {
   var color = Blockly.Python.valueToCode(block, 'COLOR', Blockly.Python.ORDER_ATOMIC);
   Blockly.Python.definitions_['import_yolobit'] = 'from yolobit import *';
   Blockly.Python.definitions_['import_led_tiny'] = 'from stemkit_rgbled import RGBLed';
-  Blockly.Python.definitions_['import_led_tiny_init'] = 'tiny_rgb = RGBLed('+ port +'.pin, 4)';
+  Blockly.Python.definitions_['import_led_tiny_init'] = 'tiny_rgb = RGBLed(' + port + '.pin, 4)';
   // TODO: Assemble Python into code variable.
-  var code = "tiny_rgb.show("+ option +", hex_to_rgb("+ color +"))\n";
+  var code = "tiny_rgb.show(" + option + ", hex_to_rgb(" + color + "))\n";
   return code;
 };
 
@@ -295,9 +295,9 @@ Blockly.Python['stemkit_mini_pump'] = function(block) {
   
   // TODO: Assemble Python into code variable.
   if (dropdown_name == "0") {
-    return "stemkit_motor.set_speed(m1=" + value_percent + ")\n";  
+    return "motor.set_speed(" + value_percent + ")\n";  
   } else {
-    return "stemkit_motor.set_speed(m1=None, m2=" + value_percent + ")\n";  
+    return "motor.set_speed(None, " + value_percent + ")\n";  
   }
 };
 
@@ -306,7 +306,7 @@ Blockly.Blocks['stemkit_move_motor'] = {
     this.jsonInit(
       {
         "type": "stemkit_move_motor",
-        "message0": "%3 M1 %1 M2 %2 (-100<->100)",
+        "message0": "%3 M1 %1 M2 %2 (-100:100)",
         "args0": [
           {
             "type": "input_value",
@@ -380,7 +380,7 @@ Blockly.Blocks["servo_write_angle"] = {
     this.jsonInit({
       colour: StemKitColorBlock,
       nextStatement: null,
-      message0: "%3 %2 quay góc %1 (0 <-> 180)",
+      message0: "%3 %2 quay góc %1 (0:180)",
       previousStatement: null,
       args0: [
         { type: "input_value", name: "angle", check: "Number" },
@@ -407,12 +407,12 @@ Blockly.Blocks["servo_write_angle"] = {
 };
 
 Blockly.Python['servo_write_angle'] = function (block) {
-  Blockly.Python.definitions_['import_stemkit_motor'] = 'from stemkit_motor import *';
+  Blockly.Python.definitions_['import_yolobit'] = 'from yolobit import *';
   var value_output = Blockly.Python.valueToCode(block, 'angle', Blockly.Python.ORDER_ATOMIC);
   var dropdown_pin = block.getFieldValue('pin');
   var code = '';
   if (dropdown_pin == '1'){
-    code = 'pin11.servo_write('+ value_output + ')\n';
+    code = 'pin6.servo_write('+ value_output + ')\n';
   }
   else{
     code = 'pin16.servo_write('+ value_output + ')\n';
@@ -425,7 +425,7 @@ Blockly.Blocks['servo360_write'] = {
     this.jsonInit(
       {
         "type": "servo360_write",
-        "message0": "%3 %1 quay %2 (-100 <-> 100)",
+        "message0": "%3 %1 quay %2 (-100:100)",
         "args0": [
           {
             type: "field_dropdown",
@@ -459,12 +459,12 @@ Blockly.Blocks['servo360_write'] = {
 };
 
 Blockly.Python['servo360_write'] = function (block) {
-  Blockly.Python.definitions_['import_stemkit_motor'] = 'from stemkit_motor import *';
+  Blockly.Python.definitions_['import_yolobit'] = 'from yolobit import *';
   var value_output = Blockly.Python.valueToCode(block, 'speed', Blockly.Python.ORDER_ATOMIC);
   var dropdown_pin = block.getFieldValue('pin');
   var code = '';
   if (dropdown_pin == '1'){
-    code = 'pin11.servo360_write('+ value_output + ')\n';
+    code = 'pin6.servo360_write('+ value_output + ')\n';
   }
   else{
     code = 'pin16.servo360_write('+ value_output + ')\n';
