@@ -6,7 +6,8 @@
         "stemkit_hcsr04.py", 
         "stemkit_sound_player.py", 
         "stemkit_motor.py", 
-        "stemkit_mpr121.py"
+        "stemkit_mpr121.py",
+        "stemkit_mq.py"
     ],
     "blocks": [
         "definition.js"

@@ -548,7 +548,17 @@ Blockly.Python['stemkit_sound_playtrack'] = function(block) {
 Blockly.Blocks["stemkit_mpr121_scan"] = {
   init: function() {
     this.jsonInit({
-      "message0": 'keypad có phím đang nhấn',
+      "message0": '%1keypad có phím đang nhấn',
+      "args0":[
+        {
+          "type": "field_image",
+          "src": "https://png.pngtree.com/png-vector/20190228/ourmid/pngtree-keypad-icon-design-template-vector-isolated-png-image_711402.jpg",
+          "width": 30,
+          "height": 30,
+          "alt": "*",
+          "flipRtl": false
+        }
+      ],
       "output": null,
       "colour": StemKitColorBlock,
       "tooltip": "",
@@ -571,7 +581,7 @@ Blockly.Blocks['stemkit_mpr121_check'] = {
     this.jsonInit(
       {
         "type": "stemkit_mpr121_check",
-        "message0": 'keypad phím %1 được nhấn',
+        "message0": '%2keypad phím %1 được nhấn',
         "args0": [
           {
             "type": "field_dropdown",
@@ -626,6 +636,14 @@ Blockly.Blocks['stemkit_mpr121_check'] = {
                 "11"
               ]
             ]
+          },
+          {
+            "type": "field_image",
+            "src": "https://png.pngtree.com/png-vector/20190228/ourmid/pngtree-keypad-icon-design-template-vector-isolated-png-image_711402.jpg",
+            "width": 30,
+            "height": 30,
+            "alt": "*",
+            "flipRtl": false
           }
         ],
         "output": "Boolean",
@@ -650,9 +668,17 @@ Blockly.Python['stemkit_mpr121_check'] = function(block) {
 Blockly.Blocks["stemkit_mpr121_read"] = {
   init: function() {
     this.jsonInit({
-      "message0": 'keypad các chữ đã nhấn = %1',
-      args0: [
-        { type: "input_value", name: "VALUE", check: "String" }
+      "message0": '%2keypad các chữ đã nhấn = %1',
+      "args0": [
+        { type: "input_value", name: "VALUE", check: "String" },
+        {
+          "type": "field_image",
+          "src": "https://png.pngtree.com/png-vector/20190228/ourmid/pngtree-keypad-icon-design-template-vector-isolated-png-image_711402.jpg",
+          "width": 30,
+          "height": 30,
+          "alt": "*",
+          "flipRtl": false
+        }
       ],
       "output": null,
       "colour": StemKitColorBlock,
@@ -679,9 +705,18 @@ Blockly.Blocks['stemkit_mpr121_clear'] = {
       "colour": StemKitColorBlock,
       nextStatement: null,
       tooltip: "keypad xóa các chữ đã nhấn",
-      message0: "keypad xóa các chữ đã nhấn",
+      message0: "%1keypad xóa các chữ đã nhấn",
       previousStatement: null,
-      args0: [],
+      args0: [
+        {
+          "type": "field_image",
+          "src": "https://png.pngtree.com/png-vector/20190228/ourmid/pngtree-keypad-icon-design-template-vector-isolated-png-image_711402.jpg",
+          "width": 30,
+          "height": 30,
+          "alt": "*",
+          "flipRtl": false
+        }
+      ],
       helpUrl: "",
     });
   },
@@ -700,9 +735,18 @@ Blockly.Blocks['stemkit_mpr121_sound_off'] = {
       "colour": StemKitColorBlock,
       nextStatement: null,
       tooltip: "keypad tắt âm thanh",
-      message0: "keypad tắt âm thanh",
+      message0: "%1keypad tắt âm thanh",
       previousStatement: null,
-      args0: [],
+      args0: [
+        {
+          "type": "field_image",
+          "src": "https://png.pngtree.com/png-vector/20190228/ourmid/pngtree-keypad-icon-design-template-vector-isolated-png-image_711402.jpg",
+          "width": 30,
+          "height": 30,
+          "alt": "*",
+          "flipRtl": false
+        }
+      ],
       helpUrl: "",
     });
   },
@@ -713,4 +757,115 @@ Blockly.Python['stemkit_mpr121_sound_off'] = function(block) {
   // TODO: Assemble Python into code variable.
   var code ="touchpad.sound = False\n";
   return code;
+};
+//Gas sensor block
+
+Blockly.Blocks["stemkit_gas_sensor"] = {
+  init: function () {
+    this.jsonInit({
+      colour: StemKitColorBlock,
+      tooltip: "",
+      message0: "%2 nồng độ khí Gas %1",
+      args0: [
+        {
+          "type": "field_dropdown",
+          "name": "PORT",
+          "options": [
+            [
+              "A",
+              "A"
+            ],
+            [
+              "B",
+              "B"
+            ]
+          ]
+        },
+        {
+          "type": "field_image",
+          "src": "https://thumb.silhouette-ac.com/t/d3/d3b6690d14b7257b7cfe59a179a862a0_w.jpeg",
+          "width": 30,
+          "height": 30,
+          "alt": "*",
+          "flipRtl": false
+        }
+      ],
+      output: "Number",
+      helpUrl: "",
+    });
+  },
+};
+
+Blockly.Python["stemkit_gas_sensor"] = function (block) {
+  var dropdown_port = block.getFieldValue('PORT');
+  var mq_pin;
+
+  if (dropdown_port == 'A'){
+    mq_pin = 'mq = MQ(Pin(pin0.adc_pin)) # analog PIN';
+  }
+  else{
+    mq_pin = 'mq = MQ(Pin(pin1.adc_pin)) # analog PIN';
+  }
+  Blockly.Python.definitions_['import_yolobit'] = 'from yolobit import *';
+  Blockly.Python.definitions_['import_mq'] = 'from stemkit_mq import MQ';
+  Blockly.Python.definitions_["import_create_mq"] = mq_pin;
+  // TODO: Assemble Python into code variable.
+
+  var code = 'mq.get_ppm()';
+  return [code, Blockly.Python.ORDER_NONE];
+};
+
+Blockly.Blocks["stemkit_gas_detected"] = {
+  init: function () {
+    this.jsonInit({
+      colour: StemKitColorBlock,
+      tooltip: "",
+      message0: "%2 %1 phát hiện khí Gas",
+      args0: [
+        {
+          "type": "field_dropdown",
+          "name": "PORT",
+          "options": [
+            [
+              "A",
+              "A"
+            ],
+            [
+              "B",
+              "B"
+            ]
+          ]
+        },
+        {
+          "type": "field_image",
+          "src": "https://thumb.silhouette-ac.com/t/d3/d3b6690d14b7257b7cfe59a179a862a0_w.jpeg",
+          "width": 30,
+          "height": 30,
+          "alt": "*",
+          "flipRtl": false
+        }
+      ],
+      output: "Boolean",
+      helpUrl: "",
+    });
+  },
+};
+
+Blockly.Python["stemkit_gas_detected"] = function (block) {
+  var dropdown_port = block.getFieldValue('PORT');
+  var mq_pin;
+
+  if (dropdown_port == 'A'){
+    mq_pin = 'mq = MQ(Pin(pin0.adc_pin)) # analog PIN';
+  }
+  else{
+    mq_pin = 'mq = MQ(Pin(pin1.adc_pin)) # analog PIN';
+  }
+  Blockly.Python.definitions_['import_yolobit'] = 'from yolobit import *';
+  Blockly.Python.definitions_['import_mq'] = 'from stemkit_mq import MQ';
+  Blockly.Python.definitions_["import_create_mq"] = mq_pin;
+  // TODO: Assemble Python into code variable.
+
+  var code = 'mq.get_ppm() > 50';
+  return [code, Blockly.Python.ORDER_NONE];
 };
