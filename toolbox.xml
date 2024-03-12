@@ -72,6 +72,22 @@
         </shadow>
       </value>
     </block>
+
+    <sep gap="30"></sep>
+    <label text="KEYPAD" web-class="blockLabelStyle"></label>
+
+    <block type="stemkit_mpr121_check"/>
+    <block type="stemkit_mpr121_read">
+      <value name="VALUE">
+        <shadow type="text">
+          <field name="TEXT">1234#</field>
+        </shadow>
+      </value>
+    </block>    
+    
+    <block type="stemkit_mpr121_clear"/>
+    <block type="stemkit_mpr121_scan"/>
+    <block type="stemkit_mpr121_sound_off"/>
     
   </category>
 </xml>

@@ -541,3 +541,176 @@ Blockly.Python['stemkit_sound_playtrack'] = function(block) {
   var code = 'sound.write(set_volume(' + number_vol + '))\n'+'sound.write(play_track(' + number_track + '))\n';
   return code;
 };
+
+// MPR121 blocks
+
+// nếu có phím được nhấn
+Blockly.Blocks["stemkit_mpr121_scan"] = {
+  init: function() {
+    this.jsonInit({
+      "message0": 'keypad có phím đang nhấn',
+      "output": null,
+      "colour": StemKitColorBlock,
+      "tooltip": "",
+      "helpUrl": ""
+    });
+  }
+};
+
+Blockly.Python["stemkit_mpr121_scan"] = function(block) {
+  Blockly.Python.definitions_["import_stemkit_mpr121"] = "from stemkit_mpr121 import touchpad\ntouchpad.reset()";
+  // TODO: Assemble Python into code variable.
+  var code ="touchpad.scan() != -1";
+  return [code, Blockly.Python.ORDER_NONE];
+};
+
+
+// nếu đọc phím dg nhấn = #
+Blockly.Blocks['stemkit_mpr121_check'] = {
+  init: function() {
+    this.jsonInit(
+      {
+        "type": "stemkit_mpr121_check",
+        "message0": 'keypad phím %1 được nhấn',
+        "args0": [
+          {
+            "type": "field_dropdown",
+            "name": "KEY",
+            "options": [
+              [
+                "0",
+                "0"
+              ],
+              [
+                "1",
+                "1"
+              ],
+              [
+                "2",
+                "2"
+              ],
+              [
+                "3",
+                "3"
+              ],
+              [
+                "4",
+                "4"
+              ],
+              [
+                "5",
+                "5"
+              ],
+              [
+                "6",
+                "6"
+              ],
+              [
+                "7",
+                "7"
+              ],
+              [
+                "8",
+                "8"
+              ],
+              [
+                "9",
+                "9"
+              ],
+              [
+                "*",
+                "10"
+              ],
+              [
+                "#",
+                "11"
+              ]
+            ]
+          }
+        ],
+        "output": "Boolean",
+        "colour": StemKitColorBlock,
+        "tooltip": "",
+        "helpUrl": ""
+      }
+    );
+  }
+};
+
+Blockly.Python['stemkit_mpr121_check'] = function(block) {
+  Blockly.Python.definitions_["import_stemkit_mpr121"] = "from stemkit_mpr121 import touchpad\ntouchpad.reset()";
+  // TODO: Assemble Python into code variable.
+  var key = block.getFieldValue('KEY');
+  var code = 'touchpad.scan() == ' + key;
+  return [code, Blockly.Python.ORDER_NONE];
+};
+
+// đọc hết chữ đã nhấn = abc
+
+Blockly.Blocks["stemkit_mpr121_read"] = {
+  init: function() {
+    this.jsonInit({
+      "message0": 'keypad các chữ đã nhấn = %1',
+      args0: [
+        { type: "input_value", name: "VALUE", check: "String" }
+      ],
+      "output": null,
+      "colour": StemKitColorBlock,
+      "tooltip": "",
+      "helpUrl": ""
+    });
+  }
+};
+
+Blockly.Python["stemkit_mpr121_read"] = function(block) {
+  Blockly.Python.definitions_["import_stemkit_mpr121"] = "from stemkit_mpr121 import touchpad\ntouchpad.reset()";
+
+  // TODO: Assemble Python into code variable.
+  var value = Blockly.Python.valueToCode(block, 'VALUE', Blockly.Python.ORDER_ATOMIC);
+  var code ="touchpad.read() == " + value;
+  return [code, Blockly.Python.ORDER_NONE];
+};
+
+// xóa chữ đã nhấn
+
+Blockly.Blocks['stemkit_mpr121_clear'] = {
+  init: function () {
+    this.jsonInit({
+      "colour": StemKitColorBlock,
+      nextStatement: null,
+      tooltip: "keypad xóa các chữ đã nhấn",
+      message0: "keypad xóa các chữ đã nhấn",
+      previousStatement: null,
+      args0: [],
+      helpUrl: "",
+    });
+  },
+};
+
+Blockly.Python['stemkit_mpr121_clear'] = function(block) {
+  Blockly.Python.definitions_["import_stemkit_mpr121"] = "from stemkit_mpr121 import touchpad\ntouchpad.reset()";
+  // TODO: Assemble Python into code variable.
+  var code ="touchpad.clear()\n";
+  return code;
+};
+
+Blockly.Blocks['stemkit_mpr121_sound_off'] = {
+  init: function () {
+    this.jsonInit({
+      "colour": StemKitColorBlock,
+      nextStatement: null,
+      tooltip: "keypad tắt âm thanh",
+      message0: "keypad tắt âm thanh",
+      previousStatement: null,
+      args0: [],
+      helpUrl: "",
+    });
+  },
+};
+
+Blockly.Python['stemkit_mpr121_sound_off'] = function(block) {
+  Blockly.Python.definitions_["import_stemkit_mpr121"] = "from stemkit_mpr121 import touchpad\ntouchpad.reset()";
+  // TODO: Assemble Python into code variable.
+  var code ="touchpad.sound = False\n";
+  return code;
+};
