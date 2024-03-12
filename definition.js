@@ -552,7 +552,7 @@ Blockly.Blocks["stemkit_mpr121_scan"] = {
       "args0":[
         {
           "type": "field_image",
-          "src": "https://png.pngtree.com/png-vector/20190228/ourmid/pngtree-keypad-icon-design-template-vector-isolated-png-image_711402.jpg",
+          "src": ImgUrl + 'keypad.png',
           "width": 30,
           "height": 30,
           "alt": "*",
@@ -639,7 +639,7 @@ Blockly.Blocks['stemkit_mpr121_check'] = {
           },
           {
             "type": "field_image",
-            "src": "https://png.pngtree.com/png-vector/20190228/ourmid/pngtree-keypad-icon-design-template-vector-isolated-png-image_711402.jpg",
+            "src": ImgUrl + 'keypad.png',
             "width": 30,
             "height": 30,
             "alt": "*",
@@ -668,17 +668,21 @@ Blockly.Python['stemkit_mpr121_check'] = function(block) {
 Blockly.Blocks["stemkit_mpr121_read"] = {
   init: function() {
     this.jsonInit({
-      "message0": '%2keypad các chữ đã nhấn = %1',
+      "message0": '%2keypad các chữ đã nhấn = %1 %3',
       "args0": [
         { type: "input_value", name: "VALUE", check: "String" },
         {
           "type": "field_image",
-          "src": "https://png.pngtree.com/png-vector/20190228/ourmid/pngtree-keypad-icon-design-template-vector-isolated-png-image_711402.jpg",
+          "src": ImgUrl + 'keypad.png',
           "width": 30,
           "height": 30,
           "alt": "*",
           "flipRtl": false
+        },
+        {
+          "type": "input_dummy"
         }
+        
       ],
       "output": null,
       "colour": StemKitColorBlock,
@@ -710,7 +714,7 @@ Blockly.Blocks['stemkit_mpr121_clear'] = {
       args0: [
         {
           "type": "field_image",
-          "src": "https://png.pngtree.com/png-vector/20190228/ourmid/pngtree-keypad-icon-design-template-vector-isolated-png-image_711402.jpg",
+          "src": ImgUrl + 'keypad.png',
           "width": 30,
           "height": 30,
           "alt": "*",
@@ -740,7 +744,7 @@ Blockly.Blocks['stemkit_mpr121_sound_off'] = {
       args0: [
         {
           "type": "field_image",
-          "src": "https://png.pngtree.com/png-vector/20190228/ourmid/pngtree-keypad-icon-design-template-vector-isolated-png-image_711402.jpg",
+          "src": ImgUrl + 'keypad.png',
           "width": 30,
           "height": 30,
           "alt": "*",
