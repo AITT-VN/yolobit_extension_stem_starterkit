@@ -90,8 +90,6 @@
     <block type="stemkit_mpr121_clear"/>
     <block type="stemkit_mpr121_scan"/>
     <block type="stemkit_mpr121_sound_off"/>
-    <block type="stemkit_gas_sensor"/>
-    <block type="stemkit_gas_detected"/>
     
   </category>
 </xml>
