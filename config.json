@@ -7,7 +7,11 @@
         "stemkit_sound_player.py", 
         "stemkit_motor.py", 
         "stemkit_mpr121.py",
-        "stemkit_mq.py"
+        "stemkit_mq.py",
+        "stemkit_pcf8574.py",
+        "stemkit_robocon.py",
+        "stemkit_remotecontrol.py",
+        "gamepad.py"
     ],
     "blocks": [
         "definition.js"

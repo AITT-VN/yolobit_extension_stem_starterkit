@@ -1,6 +1,6 @@
 const StemKitColorBlock = '#44cbc6';
 const ImgUrl = 'https://ohstem-public.s3.ap-southeast-1.amazonaws.com/extensions/AITT-VN/yolobit_extension_stem_starterkit/images/';
-// Tiny LED Module
+const ImgUrl2 = 'https://ohstem-public.s3.ap-southeast-1.amazonaws.com/extensions/AITT-VN/yolobit_extension_rover/images/';
 
 Blockly.Blocks["stemkit_led_tiny"] = {
   init: function () {
@@ -380,7 +380,7 @@ Blockly.Blocks["servo_write_angle"] = {
     this.jsonInit({
       colour: StemKitColorBlock,
       nextStatement: null,
-      message0: "%3 %2 quay góc %1 (0:180)",
+      message0: "%3 xoay servo %2 góc %1 (0:180)",
       previousStatement: null,
       args0: [
         { type: "input_value", name: "angle", check: "Number" },
@@ -425,7 +425,7 @@ Blockly.Blocks['servo360_write'] = {
     this.jsonInit(
       {
         "type": "servo360_write",
-        "message0": "%3 %1 quay %2 (-100:100)",
+        "message0": "%3 quay servo 360 %1 tốc độ %2 (-100:100)",
         "args0": [
           {
             type: "field_dropdown",
@@ -872,4 +872,833 @@ Blockly.Python["stemkit_gas_detected"] = function (block) {
 
   var code = 'mq.get_ppm() > 50';
   return [code, Blockly.Python.ORDER_NONE];
+};
+
+
+// Robot Move
+Blockly.Blocks['robot_move'] = {
+  init: function () {
+    this.jsonInit(
+      {
+        "type": "robot_move",
+        "message0": "%1 di chuyển %2 tốc độ %3",
+        "args0": [
+          {
+            "type": "field_image",
+            "src": ImgUrl2 + 'move.svg',
+            "width": 20,
+            "height": 20,
+            "alt": "",
+            "flipRtl": false
+          },
+          {
+            "type": "field_dropdown",
+            "name": "direction",
+            "options": [
+              [
+                {
+                  "src": ImgUrl2 + 'arrow-up.svg',
+                  "width": 15,
+                  "height": 15,
+                  "alt": "*"
+                },
+                "forward"
+              ],
+              [
+                {
+                  "src": ImgUrl2 + 'arrow-down.svg',
+                  "width": 15,
+                  "height": 15,
+                  "alt": "*"
+                },
+                "backward"
+              ],
+              [
+                {
+                  "src": ImgUrl2 + 'arrow-left.svg',
+                  "width": 15,
+                  "height": 15,
+                  "alt": "*"
+                },
+                "turn_left"
+              ],
+              [
+                {
+                  "src": ImgUrl2 + 'arrow-right.svg',
+                  "width": 15,
+                  "height": 15,
+                  "alt": "*"
+                },
+                "turn_right"
+              ]
+            ]
+          },
+          {
+            min: 0,
+            type: "input_value",
+            check: "Number",
+            value: 50,
+            name: "speed",
+          }
+        ],
+        "inputsInline": true,
+        "previousStatement": null,
+        "nextStatement": null,
+        "colour": StemKitColorBlock,
+        "tooltip": "",
+        "helpUrl": ""
+      }
+    );
+  }
+};
+
+Blockly.Python["robot_move"] = function (block) {
+  Blockly.Python.definitions_['import_robot'] = 'from stemkit_motor import *';
+  var dir = block.getFieldValue("direction");
+  var speed = Blockly.Python.valueToCode(block, 'speed', Blockly.Python.ORDER_ATOMIC);
+  // TODO: Assemble Python into code variable.
+  var code = "motor." + dir + "(" + speed + ")\n";
+  return code;
+};
+
+Blockly.Blocks['robot_move_delay'] = {
+  init: function () {
+    this.jsonInit(
+      {
+        "type": "robot_move_delay",
+        "message0": "%1 di chuyển %2 tốc độ %3 trong %4 giây",
+        "args0": [
+          {
+            "type": "field_image",
+            "src": ImgUrl2 + 'move.svg',
+            "width": 20,
+            "height": 20,
+            "alt": "",
+            "flipRtl": false
+          },
+          {
+            "type": "field_dropdown",
+            "name": "direction",
+            "options": [
+              [
+                {
+                  "src": ImgUrl2 + 'arrow-up.svg',
+                  "width": 15,
+                  "height": 15,
+                  "alt": "*"
+                },
+                "forward"
+              ],
+              [
+                {
+                  "src": ImgUrl2 + 'arrow-down.svg',
+                  "width": 15,
+                  "height": 15,
+                  "alt": "*"
+                },
+                "backward"
+              ],
+              [
+                {
+                  "src": ImgUrl2 + 'arrow-left.svg',
+                  "width": 15,
+                  "height": 15,
+                  "alt": "*"
+                },
+                "turn_left"
+              ],
+              [
+                {
+                  "src": ImgUrl2 + 'arrow-right.svg',
+                  "width": 15,
+                  "height": 15,
+                  "alt": "*"
+                },
+                "turn_right"
+              ]
+            ]
+          },
+          {
+            min: 0,
+            type: "input_value",
+            check: "Number",
+            value: 50,
+            name: "speed",
+          },
+          {
+            min: 0,
+            type: "input_value",
+            check: "Number",
+            name: "time",
+          }
+        ],
+        "inputsInline": true,
+        "previousStatement": null,
+        "nextStatement": null,
+        "colour": StemKitColorBlock,
+        "tooltip": "",
+        "helpUrl": ""
+      }
+    );
+  }
+};
+
+Blockly.Python["robot_move_delay"] = function (block) {
+  Blockly.Python.definitions_['import_robot'] = 'from stemkit_motor import *';
+  var dir = block.getFieldValue("direction");
+  var speed = Blockly.Python.valueToCode(block, 'speed', Blockly.Python.ORDER_ATOMIC);
+  var time = Blockly.Python.valueToCode(block, 'time', Blockly.Python.ORDER_ATOMIC);
+  // TODO: Assemble Python into code variable.
+  var code = "motor." + dir + "(" + speed + ", " + time + ")\n";
+  return code;
+};
+
+Blockly.Blocks['robot_move_motor'] = {
+  init: function () {
+    this.jsonInit(
+      {
+        "type": "robot_move_motor",
+        "message0": "%3 M1 %1 M2 %2 (-100:100)",
+        "args0": [
+          {
+            "type": "input_value",
+            "name": "left_wheel_speed",
+            "check": "Number",
+          },
+          {
+            "type": "input_value",
+            "name": "right_wheel_speed",
+            "check": "Number",
+          },
+          {
+            "type": "field_image",
+            "src": ImgUrl2 + 'motor.svg',
+            "width": 20,
+            "height": 20,
+            "alt": "*",
+            "flipRtl": false
+          }
+        ],
+        "inputsInline": true,
+        "previousStatement": null,
+        "nextStatement": null,
+        "colour": StemKitColorBlock,
+        "tooltip": "",
+        "helpUrl": ""
+      }
+    );
+  }
+};
+
+Blockly.Python["robot_move_motor"] = function (block) {
+  Blockly.Python.definitions_['import_robot'] = 'from stemkit_motor import *';
+  var left_wheel_speed = Blockly.Python.valueToCode(block, 'left_wheel_speed', Blockly.Python.ORDER_ATOMIC);
+  var right_wheel_speed = Blockly.Python.valueToCode(block, 'right_wheel_speed', Blockly.Python.ORDER_ATOMIC);
+  // TODO: Assemble Python into code variable.
+  var code = "motor.set_wheel_speed(" + left_wheel_speed + ", " + right_wheel_speed + ")\n";
+  return code;
+};
+
+Blockly.Blocks['robot_stop'] = {
+  init: function () {
+    this.jsonInit({
+      "type": "robot_stop",
+      "message0": "%1 dừng di chuyển",
+      "args0": [
+        {
+          "type": "field_image",
+          "src":  ImgUrl2 + 'stop.svg',
+          "width": 20,
+          "height": 20,
+          "alt": "*",
+          "flipRtl": false
+        }],
+      "inputsInline": true,
+      "previousStatement": null,
+      "nextStatement": null,
+      "colour": StemKitColorBlock,
+      "tooltip": "",
+      "helpUrl": ""
+    });
+  }
+};
+
+Blockly.Python["robot_stop"] = function (block) {
+  Blockly.Python.definitions_['import_robot'] = 'from stemkit_motor import *';
+  // TODO: Assemble Python into code variable.
+  var code = "motor.stop()\n";
+  return code;
+};
+
+
+// Line Array
+Blockly.Blocks['robot_line_sensor_read_all'] = {
+  init: function () {
+    this.jsonInit(
+      {
+        "type": "robot_line_sensor_read_all",
+        "message0": "%1 cảm biến line phát hiện S1 %2 S2 %3 S3 %4 S4 %5",
+        "args0": [
+          {
+            "type": "field_image",
+            "src": ImgUrl2 + 'line.svg',
+            "width": 15,
+            "height": 15,
+            "alt": "*",
+            "flipRtl": false
+          },
+          {
+            "type": "field_dropdown",
+            "name": "S1",
+            "options": [
+              [
+                {
+                  "src": ImgUrl2 + 'line_finder_none_detect.png',
+                  "width": 15,
+                  "height": 15,
+                  "alt": "none"
+                },
+                "0"
+              ],
+              [
+                {
+                  "src": ImgUrl2 + 'line_finder_detect.png',
+                  "width": 15,
+                  "height": 15,
+                  "alt": "detect"
+                },
+                "1"
+              ]
+            ]
+          },
+          {
+            "type": "field_dropdown",
+            "name": "S2",
+            "options": [
+              [
+                {
+                  "src": ImgUrl2 + 'line_finder_none_detect.png',
+                  "width": 15,
+                  "height": 15,
+                  "alt": "none"
+                },
+                "0"
+              ],
+              [
+                {
+                  "src": ImgUrl2 + 'line_finder_detect.png',
+                  "width": 15,
+                  "height": 15,
+                  "alt": "detect"
+                },
+                "1"
+              ]
+            ]
+          },
+          {
+            "type": "field_dropdown",
+            "name": "S3",
+            "options": [
+              [
+                {
+                  "src": ImgUrl2 + 'line_finder_none_detect.png',
+                  "width": 15,
+                  "height": 15,
+                  "alt": "none"
+                },
+                "0"
+              ],
+              [
+                {
+                  "src": ImgUrl2 + 'line_finder_detect.png',
+                  "width": 15,
+                  "height": 15,
+                  "alt": "detect"
+                },
+                "1"
+              ]
+            ]
+          },
+          {
+            "type": "field_dropdown",
+            "name": "S4",
+            "options": [
+              [
+                {
+                  "src": ImgUrl2 + 'line_finder_none_detect.png',
+                  "width": 15,
+                  "height": 15,
+                  "alt": "none"
+                },
+                "0"
+              ],
+              [
+                {
+                  "src": ImgUrl2 + 'line_finder_detect.png',
+                  "width": 15,
+                  "height": 15,
+                  "alt": "detect"
+                },
+                "1"
+              ]
+            ]
+          }
+        ],
+        "colour": StemKitColorBlock,
+        "output": "Boolean",
+        "tooltip": "",
+        "helpUrl": ""
+      }
+    );
+  }
+};
+
+Blockly.Python["robot_line_sensor_read_all"] = function (block) {
+  Blockly.Python.definitions_['import_robot'] = 'from stemkit_motor import *';
+  var S1 = block.getFieldValue("S1");
+  var S2 = block.getFieldValue("S2");
+  var S3 = block.getFieldValue("S3");
+  var S4 = block.getFieldValue("S4");
+  // TODO: Assemble Python into code variable.
+  var code = "motor.read_line_sensors() == (" + S1 + ", " + S2 + ", " + S3 + ", " + S4 + ")";
+  return [code, Blockly.Python.ORDER_NONE];
+};
+
+
+Blockly.Blocks['robot_line_sensor_read_single'] = {
+  init: function () {
+    this.jsonInit(
+      {
+        "type": "robot_line_sensor_read_single",
+        "message0": "%1 cảm biến line đọc giá trị %2",
+        "args0": [
+          {
+            "type": "field_image",
+            "src": ImgUrl2 + 'line.svg',
+            "width": 15,
+            "height": 15,
+            "alt": "*",
+            "flipRtl": false
+          },
+          {
+            "type": "field_dropdown",
+            "name": "pin",
+            "options": [
+              ["S1", "1"],
+              ["S2", "2"],
+              ["S3", "3"],
+              ["S4", "4"],
+            ],
+          },
+        ],
+        "colour": StemKitColorBlock,
+        "output": "",
+        "tooltip": "",
+        "helpUrl": ""
+      }
+    );
+  }
+};
+
+Blockly.Python["robot_line_sensor_read_single"] = function (block) {
+  Blockly.Python.definitions_['import_robot'] = 'from stemkit_motor import *';
+  var pin = block.getFieldValue("pin");
+  // TODO: Assemble Python into code variable.
+  var code = "motor.read_line_sensors(" + pin + ")";
+  return [code, Blockly.Python.ORDER_NONE];
+};
+
+
+//Robocon
+
+Blockly.Blocks['stemkit_robocon_follow_line_until_cross'] = {
+  init: function () {
+    this.jsonInit(
+      {
+        "type": "stemkit_robocon_follow_line_until_cross",
+        "message0": "%3 dò line tốc độ %1 gặp vạch ngang rồi %2",
+        "args0": [
+          {
+            type: "input_value",
+            check: "Number",
+            value: 50,
+            name: "speed",
+          },
+          {
+            type: "field_dropdown",
+            name: "stop",
+            options: [
+            ["dừng và khóa", "BRAKE"],
+            ["không làm gì", "None"],
+            ]
+          },
+          {
+            "type": "field_image",
+            "src": ImgUrl2 + 'line.svg',
+            "width": 15,
+            "height": 15,
+            "alt": "*",
+            "flipRtl": false
+          }
+        ],
+        "inputsInline": true,
+        "previousStatement": null,
+        "nextStatement": null,
+        "colour": StemKitColorBlock,
+        "tooltip": "",
+        "helpUrl": ""
+      }
+    );
+  }
+};
+
+Blockly.Python["stemkit_robocon_follow_line_until_cross"] = function (block) {
+  Blockly.Python.definitions_['import_robot'] = 'from stemkit_motor import *';
+  Blockly.Python.definitions_['import_robocon'] = 'from stemkit_robocon import *';
+  var speed = Blockly.Python.valueToCode(block, 'speed', Blockly.Python.ORDER_ATOMIC);
+  var stop = block.getFieldValue('stop');
+  // TODO: Assemble Python into code variable.
+  var code = "follow_line_until_cross(" + speed + ", 15000, " + stop + ")\n";
+  return code;
+};
+
+Blockly.Blocks['stemkit_robocon_follow_line_until_end'] = {
+  init: function () {
+    this.jsonInit(
+      {
+        "type": "stemkit_robocon_follow_line_until_end",
+        "message0": "%3 dò line tốc độ %1 đến cuối vạch đen rồi %2",
+        "args0": [
+          {
+            type: "input_value",
+            check: "Number",
+            value: 50,
+            name: "speed",
+          },
+          {
+            type: "field_dropdown",
+            name: "stop",
+            options: [
+            ["dừng và khóa", "BRAKE"],
+            ["không làm gì", "None"],
+            ]
+          },
+          {
+            "type": "field_image",
+            "src": ImgUrl2 + 'line.svg',
+            "width": 15,
+            "height": 15,
+            "alt": "*",
+            "flipRtl": false
+          }
+        ],
+        "inputsInline": true,
+        "previousStatement": null,
+        "nextStatement": null,
+        "colour": StemKitColorBlock,
+        "tooltip": "",
+        "helpUrl": ""
+      }
+    );
+  }
+};
+
+Blockly.Python["stemkit_robocon_follow_line_until_end"] = function (block) {
+  Blockly.Python.definitions_['import_robot'] = 'from stemkit_motor import *';
+  Blockly.Python.definitions_['import_robocon'] = 'from stemkit_robocon import *';
+  var speed = Blockly.Python.valueToCode(block, 'speed', Blockly.Python.ORDER_ATOMIC);
+  var stop = block.getFieldValue('stop');
+  // TODO: Assemble Python into code variable.
+  var code = "follow_line_until_end(" + speed + ", 15000, " + stop + ")\n";
+  return code;
+};
+
+Blockly.Blocks['stemkit_robocon_turn_until_line_detected_then'] = {
+  init: function () {
+    this.jsonInit(
+      {
+        "type": "stemkit_robocon_turn_until_line_detected_then",
+        "message0": "%4 quay %1 tốc độ %2 gặp vạch đen rồi %3",
+        "args0": [
+          {
+            "type": "field_dropdown",
+            "name": "direction",
+            "options": [
+              [
+                {
+                  "src": "static/blocks/block_images/860774.svg",
+                  "width": 15,
+                  "height": 15,
+                  "alt": "*"
+                },
+                "left"
+              ],
+              [
+                {
+                  "src": "static/blocks/block_images/74474.svg",
+                  "width": 15,
+                  "height": 15,
+                  "alt": "*"
+                },
+                "right"
+              ]
+            ]
+          },
+          {
+            "type": "input_value",
+            "name": "speed",
+            "check": "Number",
+          },
+          {
+            type: "field_dropdown",
+            name: "stop",
+            options: [
+            ["dừng và khóa", "BRAKE"],
+            ["không làm gì", "None"],
+            ]
+          },
+          {
+            "type": "field_image",
+            "src": ImgUrl2 + 'line.svg',
+            "width": 15,
+            "height": 15,
+            "alt": "*",
+            "flipRtl": false
+          }
+        ],
+        "inputsInline": true,
+        "previousStatement": null,
+        "nextStatement": null,
+        "colour": StemKitColorBlock,
+        "tooltip": "",
+        "helpUrl": ""
+      }
+    );
+  }
+};
+
+Blockly.Python["stemkit_robocon_turn_until_line_detected_then"] = function (block) {
+  Blockly.Python.definitions_['import_robot'] = 'from stemkit_motor import *';
+  Blockly.Python.definitions_['import_robocon'] = 'from stemkit_robocon import *';
+  var dir = block.getFieldValue('direction');
+  var speed = Blockly.Python.valueToCode(block, 'speed', Blockly.Python.ORDER_ATOMIC);
+  var stop = block.getFieldValue('stop');
+  // TODO: Assemble Python into code variable.
+  var code = "";
+  if (dir == "left") {
+    code = "turn_until_line_detected(" + -speed + ", " + speed + ", 5000, " + stop + ")\n";
+  } else {
+    code = "turn_until_line_detected(" + speed + ", " + -speed + ", 5000, " + stop + ")\n";
+  }
+  return code;
+};
+
+Blockly.Blocks['stemkit_robocon_follow_line_until'] = {
+  init: function () {
+    this.jsonInit(
+      {
+        "type": "stemkit_robocon_follow_line_until",
+        "message0": "%4 dò line tốc độ %1 đến khi %2 tối đa %3 giây",
+        "args0": [
+          {
+            type: "input_value",
+            check: "Number",
+            value: 50,
+            name: "speed",
+          },
+          {
+            "type": "input_value",
+            "name": "condition",
+          },
+          {
+            type: "input_value",
+            check: "Number",
+            name: "timeout",
+          },
+          {
+            "type": "field_image",
+            "src": ImgUrl2 + 'line.svg',
+            "width": 15,
+            "height": 15,
+            "alt": "*",
+            "flipRtl": false
+          }
+        ],
+        "inputsInline": true,
+        "previousStatement": null,
+        "nextStatement": null,
+        "colour": StemKitColorBlock,
+        "tooltip": "",
+        "helpUrl": ""
+      }
+    );
+  }
+};
+Blockly.Python["stemkit_robocon_follow_line_until"] = function (block) {
+  Blockly.Python.definitions_['import_robot'] = 'from stemkit_motor import *';
+  Blockly.Python.definitions_['import_robocon'] = 'from stemkit_robocon import *';
+  var speed = Blockly.Python.valueToCode(block, 'speed', Blockly.Python.ORDER_ATOMIC);
+  var condition = Blockly.Python.valueToCode(block, 'condition', Blockly.Python.ORDER_ATOMIC);
+  var timeout = Blockly.Python.valueToCode(block, 'timeout', Blockly.Python.ORDER_ATOMIC);
+  // TODO: Assemble Python into code variable.
+  var code = "follow_line_until(" + speed + ", " + "lambda: (" + condition + "), " + timeout * 1000 + ")\n";
+  return code;
+};
+
+Blockly.Blocks['stemkit_robocon_follow_line_delay'] = {
+  init: function () {
+    this.jsonInit(
+      {
+        "type": "stemkit_robocon_follow_line_delay",
+        "message0": "%3 dò line tốc độ %1 (0-100) trong %2 giây",
+        "args0": [
+
+          {
+            min: 0,
+            type: "input_value",
+            check: "Number",
+            value: 50,
+            name: "speed",
+          },
+          {
+            min: 0,
+            type: "input_value",
+            check: "Number",
+            name: "timeout",
+          },
+          {
+            "type": "field_image",
+            "src": ImgUrl2 + 'line.svg',
+            "width": 15,
+            "height": 15,
+            "alt": "*",
+            "flipRtl": false
+          }
+        ],
+        "inputsInline": true,
+        "previousStatement": null,
+        "nextStatement": null,
+        "colour": StemKitColorBlock,
+        "tooltip": "",
+        "helpUrl": ""
+      }
+    );
+  }
+};
+
+Blockly.Python["stemkit_robocon_follow_line_delay"] = function (block) {
+  Blockly.Python.definitions_['import_robot'] = 'from stemkit_motor import *';
+  Blockly.Python.definitions_['import_robocon'] = 'from stemkit_robocon import *';
+  var speed = Blockly.Python.valueToCode(block, 'speed', Blockly.Python.ORDER_ATOMIC);
+  var timeout = Blockly.Python.valueToCode(block, 'timeout', Blockly.Python.ORDER_ATOMIC);
+  // TODO: Assemble Python into code variable.
+  var code = "follow_line_until(" + speed + ", " + "lambda: (False), " + timeout * 1000 + ")\n";
+  return code;
+};
+
+
+// REMOTE CONTROL BLOCK
+
+Blockly.Blocks['stemkit_remote_control_init'] = {
+  init: function () {
+    this.jsonInit(
+      {
+        type: "stemkit_remote_control_init",
+        message0: "bật chế độ điều khiển bằng gamepad",
+        previousStatement: null,
+        nextStatement: null,
+        args0: [
+        ],
+        colour: StemKitColorBlock,
+        tooltip: "",
+        helpUrl: ""
+      }
+    )
+  },
+};
+
+Blockly.Python['stemkit_remote_control_init'] = function (block) {
+  Blockly.Python.definitions_['import_stemkit_remotecontrol'] = 'from stemkit_remotecontrol import *';
+  // TODO: Assemble Python into code variable.
+  var code = "";
+  return code;
+};
+
+Blockly.Blocks['stemkit_remote_control_processing'] = {
+  init: function () {
+    this.jsonInit(
+      {
+        type: "stemkit_remote_control_processing",
+        message0: "xử lý lệnh từ gamepad",
+        previousStatement: null,
+        nextStatement: null,
+        args0: [
+        ],
+        colour: StemKitColorBlock,
+        tooltip: "",
+        helpUrl: ""
+      }
+    )
+  },
+};
+
+Blockly.Python['stemkit_remote_control_processing'] = function (block) {
+  Blockly.Python.definitions_['import_stemkit_remote_control'] = 'from stemkit_remotecontrol import *';
+  // TODO: Assemble Python into code variable.
+  var code = "stemkit_rc_mode.run()\n";
+  return code;
+};
+
+Blockly.Blocks["stemkit_remote_control_on_button_pressed"] = {
+  init: function () {
+    this.jsonInit({
+      colour: StemKitColorBlock,
+      message0: "nếu nút %1 được nhấn%2%3",
+      tooltip: "",
+      args0: [
+        {
+          type: "field_dropdown",
+          name: "BUTTON",
+          options: [
+            ['A', 'A'],
+            ['B', 'B'],
+            ['C', 'C'],
+            ['D', 'D']
+          ],
+        },
+        {
+          type: "input_dummy",
+        },
+        {
+          type: "input_statement",
+          name: "ACTION",
+        },
+      ],
+      helpUrl: "",
+    });
+  },
+};
+
+Blockly.Python['stemkit_remote_control_on_button_pressed'] = function (block) {
+  Blockly.Python.definitions_['import_stemkit_remote_control'] = 'from stemkit_remotecontrol import *';
+  var button = block.getFieldValue('BUTTON');
+  var statements_action = Blockly.Python.statementToCode(block, 'ACTION');
+
+  var globals = buildGlobalString(block);
+
+  var cbFunctionName = Blockly.Python.provideFunction_(
+    'on_gamepad_button_' + button,
+    (globals != '') ?
+      ['def ' + Blockly.Python.FUNCTION_NAME_PLACEHOLDER_ + '():',
+        globals,
+      statements_action || Blockly.Python.PASS
+      ] :
+      ['def ' + Blockly.Python.FUNCTION_NAME_PLACEHOLDER_ + '():',
+      statements_action || Blockly.Python.PASS
+      ]);
+
+  var code = 'stemkit_rc_mode.set_command(BTN_' + button + ', ' + cbFunctionName + ')\n';
+  Blockly.Python.definitions_['on_gamepad_button_callback' + button] = code;
+
+  return '';
 };
