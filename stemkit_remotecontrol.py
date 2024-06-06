@@ -14,6 +14,15 @@ BTN_BACKWARD = '!B615'
 BTN_LEFT = '!B714'
 BTN_RIGHT = '!B814'
 
+MOVE1 = const(0)
+MOVE2 = const(1)
+MOVE3 = const(2)
+MOVE4 = const(3)
+MOVE5 = const(4)
+MOVE6 = const(5)
+MOVE7 = const(6)
+MOVE8 = const(7)
+
 BTN_A = '!B11:'
 BTN_B = '!B219'
 BTN_C = '!B318'
@@ -61,6 +70,8 @@ class StemKitRemoteControlMode():
         if self._gamepad_v2 != None:
             # read status
             
+            x, y, angle, dir, distance = self._gamepad_v2.read_joystick(0)
+            
             self._gamepad_v2.update()
 
             if self._gamepad_v2._isconnected == True:
@@ -72,6 +83,22 @@ class StemKitRemoteControlMode():
                     self._cmd = BTN_LEFT
                 elif self._gamepad_v2.data['dpad_right']:
                     self._cmd = BTN_RIGHT
+                elif dir == 5:
+                    self._cmd = MOVE1
+                elif dir == 4:
+                    self._cmd = MOVE2
+                elif dir == 3:
+                    self._cmd = MOVE3
+                elif dir == 2:
+                    self._cmd = MOVE4
+                elif dir == 1:
+                    self._cmd = MOVE5
+                elif dir == 8:
+                    self._cmd = MOVE6
+                elif dir == 7:
+                    self._cmd = MOVE7
+                elif dir == 6:
+                    self._cmd = MOVE8
                 elif self._gamepad_v2.data['a']:
                     self._cmd = BTN_C
                 elif self._gamepad_v2.data['b']:
@@ -102,6 +129,30 @@ class StemKitRemoteControlMode():
 
         elif self._cmd == BTN_RIGHT:
             motor.turn_right(self._speed)
+            
+        elif self._cmd == MOVE1:
+            motor.turn_right(self._speed)
+            
+        elif self._cmd == MOVE5:
+            motor.turn_left(self._speed)
+            
+        elif self._cmd == MOVE3:
+            motor.forward(self._speed)
+            
+        elif self._cmd == MOVE7:
+            motor.backward(self._speed)
+            
+        elif self._cmd == MOVE2:
+            motor.set_wheel_speed(self._speed, -(self._speed/2))
+            
+        elif self._cmd == MOVE4:
+            motor.set_wheel_speed(self._speed/2, -self._speed)
+            
+        elif self._cmd == MOVE6:
+            motor.set_wheel_speed(-(self._speed/2), self._speed)
+            
+        elif self._cmd == MOVE8:
+            motor.set_wheel_speed(-self._speed, self._speed/2)
         
         elif self._cmd in self._cmd_handlers:
             if self._cmd_handlers[self._cmd] != None:
@@ -113,29 +164,3 @@ class StemKitRemoteControlMode():
         self._last_cmd = self._cmd
 
 stemkit_rc_mode = StemKitRemoteControlMode()
-
-''' 
-
-# Example code
-
-def on_gamepad_button_A():
-    # button A: lift down and release gripper
-    rover.servo_write(2, 0)
-    time.sleep_ms(500)
-    rover.servo_write(1, 0)
-
-def on_gamepad_button_D():
-    # button D: collect and lift up gripper
-    rover.servo_write(1, 90)
-    time.sleep_ms(500)
-    rover.servo_write(2, 90)
-
-# allow user to config what to do when a gamepad button pressed
-rc_mode.set_command(BTN_A, on_gamepad_button_A)
-rc_mode.set_command(BTN_D, on_gamepad_button_D)
-
-while True:
-    rc_mode.run()
-    time.sleep_ms(50)
-
-'''
