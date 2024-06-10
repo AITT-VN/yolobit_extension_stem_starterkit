@@ -295,9 +295,9 @@ Blockly.Python['stemkit_mini_pump'] = function(block) {
   
   // TODO: Assemble Python into code variable.
   if (dropdown_name == "0") {
-    return "motor.set_speed(" + value_percent + ")\n";  
+    return "motor.set_wheel_speed(" + value_percent + ")\n";  
   } else {
-    return "motor.set_speed(None, " + value_percent + ")\n";  
+    return "motor.set_wheel_speed(None, " + value_percent + ")\n";  
   }
 };
 
@@ -341,7 +341,7 @@ Blockly.Python["stemkit_move_motor"] = function (block) {
   var left_wheel_speed = Blockly.Python.valueToCode(block, 'left_wheel_speed', Blockly.Python.ORDER_ATOMIC);
   var right_wheel_speed = Blockly.Python.valueToCode(block, 'right_wheel_speed', Blockly.Python.ORDER_ATOMIC);
   // TODO: Assemble Python into code variable.
-  var code = "motor.set_speed(" + left_wheel_speed + ", " + right_wheel_speed + ")\n";
+  var code = "motor.set_wheel_speed(" + left_wheel_speed + ", " + right_wheel_speed + ")\n";
   return code;
 };
 
