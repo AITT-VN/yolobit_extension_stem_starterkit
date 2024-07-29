@@ -92,6 +92,7 @@
     </block>
     <block type="stemkit_gas_sensor"/>
     <block type="stemkit_gas_detected"/>
+    <block type="stemkit_light_sensor"/>
     <block type="robot_line_sensor_read_all"/>
 
     <sep gap="30"></sep>

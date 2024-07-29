@@ -2,6 +2,7 @@ const StemKitColorBlock = '#44cbc6';
 const ImgUrl = 'https://ohstem-public.s3.ap-southeast-1.amazonaws.com/extensions/AITT-VN/yolobit_extension_stem_starterkit/images/';
 const ImgUrl2 = 'https://ohstem-public.s3.ap-southeast-1.amazonaws.com/extensions/AITT-VN/yolobit_extension_rover/images/';
 
+// RGB LED
 Blockly.Blocks["stemkit_led_tiny"] = {
   init: function () {
     this.jsonInit({
@@ -238,6 +239,57 @@ Blockly.Python['stemkit_soil_sensor'] = function(block) {
   // TODO: Change ORDER_NONE to the correct strength.
   return [code, Blockly.Python.ORDER_NONE];
 };
+
+// Cảm biến ánh sáng
+
+Blockly.Blocks['stemkit_light_sensor'] = {
+  init: function() {
+    this.jsonInit(
+      {
+        "type": "stemkit_light_sensor",
+        "message0": "%2 đọc cảm biến ánh sáng (%%) %1",
+        "args0": [
+          {
+            "type": "field_dropdown",
+            "name": "NAME",
+            "options": [
+              [
+                "A",
+                "pin0"
+              ],
+              [
+                "B",
+                "pin1"
+              ]
+            ]
+          },
+          {
+            "type": "field_image",
+            "src": ImgUrl + 'light.png',
+            "width": 20,
+            "height": 20,
+            "alt": "*",
+            "flipRtl": false
+          }
+        ],
+        "output": null,
+        "colour": StemKitColorBlock,
+        "tooltip": "Đọc giá trị của cảm biến ánh sáng",
+        "helpUrl": ""
+      }
+    );
+  }
+};
+
+Blockly.Python['stemkit_light_sensor'] = function(block) {
+  Blockly.Python.definitions_['import_yolobit'] = 'from yolobit import *';
+  var dropdown_name = block.getFieldValue('NAME');
+  // TODO: Assemble Python into code variable.
+  var code = 'round(translate((' + dropdown_name + '.read_analog()), 0, 4095, 0, 100))';
+  // TODO: Change ORDER_NONE to the correct strength.
+  return [code, Blockly.Python.ORDER_NONE];
+};
+// bơm mini
 
 Blockly.Blocks['stemkit_mini_pump'] = {
   /**
