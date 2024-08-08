@@ -9,8 +9,8 @@ Blockly.Blocks["stemkit_led_tiny"] = {
       inputsInline: true,
       colour: StemKitColorBlock,
       nextStatement: null,
-      tooltip: "",
-      message0: "%5 LED màu %1 đổi %2 thành %3 %4",
+      tooltip: Blockly.Msg.BLOCK_STEMKIT_LED_TINY_TOOLTIP,
+      message0: Blockly.Msg.BLOCK_STEMKIT_LED_TINY_MESSAGE0,
       previousStatement: null,
       args0: [
         {
@@ -31,7 +31,7 @@ Blockly.Blocks["stemkit_led_tiny"] = {
           type: "field_dropdown",
           name: "option",
           options: [
-            ["tất cả", "0"],
+            [Blockly.Msg.BLOCK_STEMKIT_ALL_MSG, "0"],
             ["1", "1"],
             ["2", "2"],
             ["3", "3"],
@@ -74,7 +74,7 @@ Blockly.Blocks['stemkit_ultrasonic_read'] = {
     this.jsonInit(
       {
         "type": "stemkit_ultrasonic_read",
-        "message0": "%2 khoảng cách %1",
+        "message0": Blockly.Msg.BLOCK_STEMKIT_SONIC_READ_MESSAGE0,
         "args0": [
           {
             "type": "field_dropdown",
@@ -101,7 +101,7 @@ Blockly.Blocks['stemkit_ultrasonic_read'] = {
         ],
         "output": null,
         "colour": StemKitColorBlock,
-        "tooltip": "Đọc giá trị đo được của cảm biến khoảng cách",
+        "tooltip": Blockly.Msg.BLOCK_STEMKIT_SONIC_READ_TOOLTIP,
         "helpUrl": ""
       }
     );
@@ -132,7 +132,7 @@ Blockly.Blocks['stemkit_ultrasonic_checkdistance'] = {
     this.jsonInit(
       {
         "type": "stemkit_ultrasonic_checkdistance",
-        "message0": "%4 khoảng cách %3 < %1 %2cm",
+        "message0": Blockly.Msg.BLOCK_STEMKIT_SONIC_CHECK_MESSAGE0,
         "args0": [
           {
             "type": "input_dummy"
@@ -167,7 +167,7 @@ Blockly.Blocks['stemkit_ultrasonic_checkdistance'] = {
         ],
         "output": "Boolean",
         "colour": StemKitColorBlock,
-        "tooltip": "Kiểm tra xem khoảng cách đo được của cảm biến có lớn hơn giá trị được chọn hay không",
+        "tooltip": Blockly.Msg.BLOCK_STEMKIT_SONIC_CHECK_TOOLTIP,
         "helpUrl": ""
       }
     );
@@ -197,7 +197,8 @@ Blockly.Blocks['stemkit_soil_sensor'] = {
     this.jsonInit(
       {
         "type": "stemkit_soil_sensor",
-        "message0": "%2độ ẩm đất (%%) %1",
+        "message0": Blockly.Msg.BLOCK_STEMKIT_SOIL_SENSOR_MESSAGE0,
+        "tooltip": Blockly.Msg.BLOCK_STEMKIT_SOIL_SENSOR_TOOLTIP,
         "args0": [
           {
             "type": "field_dropdown",
@@ -224,7 +225,7 @@ Blockly.Blocks['stemkit_soil_sensor'] = {
         ],
         "output": "Number",
         "colour": StemKitColorBlock,
-        "tooltip": "",
+        "tooltip": Blockly.Msg.BLOCK_STEMKIT_SOIL_SENSOR_TOOLTIP,
         "helpUrl": ""
       }
     );
@@ -247,7 +248,7 @@ Blockly.Blocks['stemkit_light_sensor'] = {
     this.jsonInit(
       {
         "type": "stemkit_light_sensor",
-        "message0": "%2 đọc cảm biến ánh sáng (%%) %1",
+        "message0": Blockly.Msg.BLOCK_STEMKIT_LIGHT_SENSOR_MESSAGE0,
         "args0": [
           {
             "type": "field_dropdown",
@@ -274,7 +275,7 @@ Blockly.Blocks['stemkit_light_sensor'] = {
         ],
         "output": null,
         "colour": StemKitColorBlock,
-        "tooltip": "Đọc giá trị của cảm biến ánh sáng",
+        "tooltip": Blockly.Msg.BLOCK_STEMKIT_LIGHT_SENSOR_TOOLTIP,
         "helpUrl": ""
       }
     );
@@ -300,7 +301,7 @@ Blockly.Blocks['stemkit_mini_pump'] = {
     this.jsonInit(
       {
         "type": "stemkit_mini_pump",
-        "message0": "%3 máy bơm %1 bật %2 %%",
+        "message0": Blockly.Msg.BLOCK_STEMKIT_MINI_PUMP_MESSAGE0,
         "args0": [
           {
             "type": "field_dropdown",
@@ -333,7 +334,7 @@ Blockly.Blocks['stemkit_mini_pump'] = {
         "previousStatement": null,
         "nextStatement": null,
         "colour": StemKitColorBlock,
-        "tooltip": "",
+        "tooltip": Blockly.Msg.BLOCK_STEMKIT_MINI_PUMP_TOOLTIP,
         "helpUrl": ""
       }
     );
@@ -358,7 +359,8 @@ Blockly.Blocks['stemkit_move_motor'] = {
     this.jsonInit(
       {
         "type": "stemkit_move_motor",
-        "message0": "%3 M1 %1 M2 %2 (-100:100)",
+        "message0": Blockly.Msg.BLOCK_STEMKIT_MOVE_MOTOR_MESSAGE0,
+        "tooltip": Blockly.Msg.BLOCK_STEMKIT_MOVE_MOTOR_TOOLTIP,
         "args0": [
           {
             "type": "input_value",
@@ -401,7 +403,8 @@ Blockly.Blocks['motor_stop'] = {
   init: function () {
     this.jsonInit({
       "type": "motor_stop",
-      "message0": "%1 dừng động cơ",
+      "message0": Blockly.Msg.BLOCK_STEMKIT_STOP_MESSAGE0,
+      "tooltip": Blockly.Msg.BLOCK_STEMKIT_STOP_TOOLTIP,
       "args0": [
         {
           "type": "field_image",
@@ -432,7 +435,8 @@ Blockly.Blocks["servo_write_angle"] = {
     this.jsonInit({
       colour: StemKitColorBlock,
       nextStatement: null,
-      message0: "%3 xoay servo %2 góc %1 (0:180)",
+      message0: Blockly.Msg.BLOCK_STEMKIT_SERVO_WRITE_MESSAGE0,
+      tooltip: Blockly.Msg.BLOCK_STEMKIT_SERVO_WRITE_TOOLTIP,
       previousStatement: null,
       args0: [
         { type: "input_value", name: "angle", check: "Number" },
@@ -477,7 +481,8 @@ Blockly.Blocks['servo360_write'] = {
     this.jsonInit(
       {
         "type": "servo360_write",
-        "message0": "%3 quay servo 360 %1 tốc độ %2 (-100:100)",
+        "message0": Blockly.Msg.BLOCK_STEMKIT_SERVO360_WRITE_MESSAGE0,
+        "tooltip": Blockly.Msg.BLOCK_STEMKIT_SERVO360_WRITE_TOOLTIP,
         "args0": [
           {
             type: "field_dropdown",
@@ -529,7 +534,7 @@ Blockly.Blocks['stemkit_sound_playtrack'] = {
     this.jsonInit(
       {
         type: "stemkit_sound_playtrack",
-        message0: "%4 loa %2 phát bài %1 âm lượng %3",
+        message0: Blockly.Msg.BLOCK_STEMKIT_SOUND_PLAY_MESSAGE0,
         args0: [
           {
             type: "input_value",
@@ -567,7 +572,7 @@ Blockly.Blocks['stemkit_sound_playtrack'] = {
         previousStatement: null,
         nextStatement: null,
         colour: StemKitColorBlock,
-        tooltip: "",
+        tooltip: Blockly.Msg.BLOCK_STEMKIT_SOUND_PLAY_TOOLTIP,
         helpUrl: ""
       }
     );
@@ -600,7 +605,7 @@ Blockly.Python['stemkit_sound_playtrack'] = function(block) {
 Blockly.Blocks["stemkit_mpr121_scan"] = {
   init: function() {
     this.jsonInit({
-      "message0": '%1keypad có phím đang nhấn',
+      "message0": Blockly.Msg.BLOCK_STEMKIT_MPR121_SCAN_MESSAGE0,
       "args0":[
         {
           "type": "field_image",
@@ -613,7 +618,7 @@ Blockly.Blocks["stemkit_mpr121_scan"] = {
       ],
       "output": null,
       "colour": StemKitColorBlock,
-      "tooltip": "",
+      "tooltip": Blockly.Msg.BLOCK_STEMKIT_MPR121_SCAN_TOOLTIP,
       "helpUrl": ""
     });
   }
@@ -633,7 +638,7 @@ Blockly.Blocks['stemkit_mpr121_check'] = {
     this.jsonInit(
       {
         "type": "stemkit_mpr121_check",
-        "message0": '%2keypad phím %1 được nhấn',
+        "message0": Blockly.Msg.BLOCK_STEMKIT_MPR121_CHECK_MESSAGE0,
         "args0": [
           {
             "type": "field_dropdown",
@@ -700,7 +705,7 @@ Blockly.Blocks['stemkit_mpr121_check'] = {
         ],
         "output": "Boolean",
         "colour": StemKitColorBlock,
-        "tooltip": "",
+        "tooltip": Blockly.Msg.BLOCK_STEMKIT_MPR121_CHECK_TOOLTIP,
         "helpUrl": ""
       }
     );
@@ -720,7 +725,7 @@ Blockly.Python['stemkit_mpr121_check'] = function(block) {
 Blockly.Blocks["stemkit_mpr121_read"] = {
   init: function() {
     this.jsonInit({
-      "message0": '%2keypad các chữ đã nhấn = %1 %3',
+      "message0": Blockly.Msg.BLOCK_STEMKIT_MPR121_READ_MESSAGE0,
       "args0": [
         { type: "input_value", name: "VALUE", check: "String" },
         {
@@ -738,7 +743,7 @@ Blockly.Blocks["stemkit_mpr121_read"] = {
       ],
       "output": null,
       "colour": StemKitColorBlock,
-      "tooltip": "",
+      "tooltip": Blockly.Msg.BLOCK_STEMKIT_MPR121_READ_TOOLTIP,
       "helpUrl": ""
     });
   }
@@ -760,8 +765,8 @@ Blockly.Blocks['stemkit_mpr121_clear'] = {
     this.jsonInit({
       "colour": StemKitColorBlock,
       nextStatement: null,
-      tooltip: "keypad xóa các chữ đã nhấn",
-      message0: "%1keypad xóa các chữ đã nhấn",
+      tooltip: Blockly.Msg.BLOCK_STEMKIT_MPR121_CLEAR_TOOLTIP,
+      message0: Blockly.Msg.BLOCK_STEMKIT_MPR121_CLEAR_MESSAGE0,
       previousStatement: null,
       args0: [
         {
@@ -790,8 +795,8 @@ Blockly.Blocks['stemkit_mpr121_sound_off'] = {
     this.jsonInit({
       "colour": StemKitColorBlock,
       nextStatement: null,
-      tooltip: "keypad tắt âm thanh",
-      message0: "%1keypad tắt âm thanh",
+      tooltip: Blockly.Msg.BLOCK_STEMKIT_MPR121_SOUND_TOOLTIP,
+      message0: Blockly.Msg.BLOCK_STEMKIT_MPR121_SOUND_MESSAGE0,
       previousStatement: null,
       args0: [
         {
@@ -820,8 +825,8 @@ Blockly.Blocks["stemkit_gas_sensor"] = {
   init: function () {
     this.jsonInit({
       colour: StemKitColorBlock,
-      tooltip: "",
-      message0: "%2 nồng độ khí Gas %1",
+      tooltip: Blockly.Msg.BLOCK_STEMKIT_GAS_SENSOR_TOOLTIP,
+      message0: Blockly.Msg.BLOCK_STEMKIT_GAS_SENSOR_MESSAGE0,
       args0: [
         {
           "type": "field_dropdown",
@@ -875,8 +880,8 @@ Blockly.Blocks["stemkit_gas_detected"] = {
   init: function () {
     this.jsonInit({
       colour: StemKitColorBlock,
-      tooltip: "",
-      message0: "%2 %1 phát hiện khí Gas",
+      tooltip: Blockly.Msg.BLOCK_STEMKIT_GAS_DETECT_TOOLTIP,
+      message0: Blockly.Msg.BLOCK_STEMKIT_GAS_DETECT_MESSAGE0,
       args0: [
         {
           "type": "field_dropdown",
@@ -933,7 +938,7 @@ Blockly.Blocks['robot_move'] = {
     this.jsonInit(
       {
         "type": "robot_move",
-        "message0": "%1 di chuyển %2 tốc độ %3",
+        "message0": Blockly.Msg.BLOCK_STEMKIT_ROBOT_MOVE_MESSAGE0,
         "args0": [
           {
             "type": "field_image",
@@ -997,7 +1002,7 @@ Blockly.Blocks['robot_move'] = {
         "previousStatement": null,
         "nextStatement": null,
         "colour": StemKitColorBlock,
-        "tooltip": "",
+        "tooltip": Blockly.Msg.BLOCK_STEMKIT_ROBOT_MOVE_TOOLTIP,
         "helpUrl": ""
       }
     );
@@ -1018,7 +1023,7 @@ Blockly.Blocks['robot_move_delay'] = {
     this.jsonInit(
       {
         "type": "robot_move_delay",
-        "message0": "%1 di chuyển %2 tốc độ %3 trong %4 giây",
+        "message0": Blockly.Msg.BLOCK_STEMKIT_ROBOT_MOVE_DELAY_MESSAGE0,
         "args0": [
           {
             "type": "field_image",
@@ -1088,7 +1093,7 @@ Blockly.Blocks['robot_move_delay'] = {
         "previousStatement": null,
         "nextStatement": null,
         "colour": StemKitColorBlock,
-        "tooltip": "",
+        "tooltip": Blockly.Msg.BLOCK_STEMKIT_ROBOT_MOVE_DELAY_TOOLTIP,
         "helpUrl": ""
       }
     );
@@ -1110,7 +1115,7 @@ Blockly.Blocks['robot_move_motor'] = {
     this.jsonInit(
       {
         "type": "robot_move_motor",
-        "message0": "%3 M1 %1 M2 %2 (-100:100)",
+        "message0": Blockly.Msg.BLOCK_STEMKIT_MOVE_MOTOR_MESSAGE0,
         "args0": [
           {
             "type": "input_value",
@@ -1135,7 +1140,7 @@ Blockly.Blocks['robot_move_motor'] = {
         "previousStatement": null,
         "nextStatement": null,
         "colour": StemKitColorBlock,
-        "tooltip": "",
+        "tooltip": Blockly.Msg.BLOCK_STEMKIT_MOVE_MOTOR_TOOLTIP,
         "helpUrl": ""
       }
     );
@@ -1155,7 +1160,7 @@ Blockly.Blocks['robot_stop'] = {
   init: function () {
     this.jsonInit({
       "type": "robot_stop",
-      "message0": "%1 dừng di chuyển",
+      "message0": Blockly.Msg.BLOCK_STEMKIT_ROBOT_STOP_MESSAGE0,
       "args0": [
         {
           "type": "field_image",
@@ -1169,7 +1174,7 @@ Blockly.Blocks['robot_stop'] = {
       "previousStatement": null,
       "nextStatement": null,
       "colour": StemKitColorBlock,
-      "tooltip": "",
+      "tooltip": Blockly.Msg.BLOCK_STEMKIT_ROBOT_STOP_TOOLTIP,
       "helpUrl": ""
     });
   }
@@ -1189,7 +1194,7 @@ Blockly.Blocks['robot_line_sensor_read_all'] = {
     this.jsonInit(
       {
         "type": "robot_line_sensor_read_all",
-        "message0": "%1 cảm biến line phát hiện S1 %2 S2 %3 S3 %4 S4 %5",
+        "message0": Blockly.Msg.BLOCK_STEMKIT_LINE_READ_ALL_MESSAGE0,
         "args0": [
           {
             "type": "field_image",
@@ -1298,7 +1303,7 @@ Blockly.Blocks['robot_line_sensor_read_all'] = {
         ],
         "colour": StemKitColorBlock,
         "output": "Boolean",
-        "tooltip": "",
+        "tooltip": Blockly.Msg.BLOCK_STEMKIT_LINE_READ_ALL_TOOLTIP,
         "helpUrl": ""
       }
     );
@@ -1322,7 +1327,7 @@ Blockly.Blocks['robot_line_sensor_read_single'] = {
     this.jsonInit(
       {
         "type": "robot_line_sensor_read_single",
-        "message0": "%1 cảm biến line đọc giá trị %2",
+        "message0": Blockly.Msg.BLOCK_STEMKIT_LINE_READ_SINGLE_MESSAGE0,
         "args0": [
           {
             "type": "field_image",
@@ -1345,7 +1350,7 @@ Blockly.Blocks['robot_line_sensor_read_single'] = {
         ],
         "colour": StemKitColorBlock,
         "output": "",
-        "tooltip": "",
+        "tooltip": Blockly.Msg.BLOCK_STEMKIT_LINE_READ_SINGLE_TOOLTIP,
         "helpUrl": ""
       }
     );
@@ -1368,7 +1373,7 @@ Blockly.Blocks['stemkit_robocon_follow_line_until_cross'] = {
     this.jsonInit(
       {
         "type": "stemkit_robocon_follow_line_until_cross",
-        "message0": "%3 dò line tốc độ %1 gặp vạch ngang rồi %2",
+        "message0": Blockly.Msg.BLOCK_STEMKIT_ROBOCON_LINE_UNTIL_CROSS_MESSAGE0,
         "args0": [
           {
             type: "input_value",
@@ -1397,7 +1402,7 @@ Blockly.Blocks['stemkit_robocon_follow_line_until_cross'] = {
         "previousStatement": null,
         "nextStatement": null,
         "colour": StemKitColorBlock,
-        "tooltip": "",
+        "tooltip": Blockly.Msg.BLOCK_STEMKIT_ROBOCON_LINE_UNTIL_CROSS_TOOLTIP,
         "helpUrl": ""
       }
     );
@@ -1419,7 +1424,7 @@ Blockly.Blocks['stemkit_robocon_follow_line_until_end'] = {
     this.jsonInit(
       {
         "type": "stemkit_robocon_follow_line_until_end",
-        "message0": "%3 dò line tốc độ %1 đến cuối vạch đen rồi %2",
+        "message0": Blockly.Msg.BLOCK_STEMKIT_ROBOCON_LINE_UNTIL_END_MESSAGE0,
         "args0": [
           {
             type: "input_value",
@@ -1448,7 +1453,7 @@ Blockly.Blocks['stemkit_robocon_follow_line_until_end'] = {
         "previousStatement": null,
         "nextStatement": null,
         "colour": StemKitColorBlock,
-        "tooltip": "",
+        "tooltip": Blockly.Msg.BLOCK_STEMKIT_ROBOCON_LINE_UNTIL_END_TOOLTIP,
         "helpUrl": ""
       }
     );
@@ -1470,7 +1475,7 @@ Blockly.Blocks['stemkit_robocon_turn_until_line_detected_then'] = {
     this.jsonInit(
       {
         "type": "stemkit_robocon_turn_until_line_detected_then",
-        "message0": "%4 quay %1 tốc độ %2 gặp vạch đen rồi %3",
+        "message0": Blockly.Msg.BLOCK_STEMKIT_ROBOCON_LINE_TURN_UNTIL_LINE_MESSAGE0,
         "args0": [
           {
             "type": "field_dropdown",
@@ -1522,7 +1527,7 @@ Blockly.Blocks['stemkit_robocon_turn_until_line_detected_then'] = {
         "previousStatement": null,
         "nextStatement": null,
         "colour": StemKitColorBlock,
-        "tooltip": "",
+        "tooltip": Blockly.Msg.BLOCK_STEMKIT_ROBOCON_LINE_TURN_UNTIL_LINE_TOOLTIP,
         "helpUrl": ""
       }
     );
@@ -1550,7 +1555,7 @@ Blockly.Blocks['stemkit_robocon_follow_line_until'] = {
     this.jsonInit(
       {
         "type": "stemkit_robocon_follow_line_until",
-        "message0": "%4 dò line tốc độ %1 đến khi %2 tối đa %3 giây",
+        "message0": Blockly.Msg.BLOCK_STEMKIT_ROBOCON_LINE_FOLLOW_UNTIL_MESSAGE0,
         "args0": [
           {
             type: "input_value",
@@ -1563,11 +1568,6 @@ Blockly.Blocks['stemkit_robocon_follow_line_until'] = {
             "name": "condition",
           },
           {
-            type: "input_value",
-            check: "Number",
-            name: "timeout",
-          },
-          {
             "type": "field_image",
             "src": ImgUrl2 + 'line.svg',
             "width": 15,
@@ -1580,7 +1580,7 @@ Blockly.Blocks['stemkit_robocon_follow_line_until'] = {
         "previousStatement": null,
         "nextStatement": null,
         "colour": StemKitColorBlock,
-        "tooltip": "",
+        "tooltip": Blockly.Msg.BLOCK_STEMKIT_ROBOCON_LINE_FOLLOW_UNTIL_TOOLTIP,
         "helpUrl": ""
       }
     );
@@ -1591,7 +1591,7 @@ Blockly.Python["stemkit_robocon_follow_line_until"] = function (block) {
   Blockly.Python.definitions_['import_robocon'] = 'from stemkit_robocon import *';
   var speed = Blockly.Python.valueToCode(block, 'speed', Blockly.Python.ORDER_ATOMIC);
   var condition = Blockly.Python.valueToCode(block, 'condition', Blockly.Python.ORDER_ATOMIC);
-  var timeout = Blockly.Python.valueToCode(block, 'timeout', Blockly.Python.ORDER_ATOMIC);
+  var timeout = 30;
   // TODO: Assemble Python into code variable.
   var code = "follow_line_until(" + speed + ", " + "lambda: (" + condition + "), " + timeout * 1000 + ")\n";
   return code;
@@ -1602,7 +1602,7 @@ Blockly.Blocks['stemkit_robocon_follow_line_delay'] = {
     this.jsonInit(
       {
         "type": "stemkit_robocon_follow_line_delay",
-        "message0": "%3 dò line tốc độ %1 (0-100) trong %2 giây",
+        "message0": Blockly.Msg.BLOCK_STEMKIT_ROBOCON_LINE_FOLLOW_DELAY_MESSAGE0,
         "args0": [
 
           {
@@ -1631,7 +1631,7 @@ Blockly.Blocks['stemkit_robocon_follow_line_delay'] = {
         "previousStatement": null,
         "nextStatement": null,
         "colour": StemKitColorBlock,
-        "tooltip": "",
+        "tooltip": Blockly.Msg.BLOCK_STEMKIT_ROBOCON_LINE_FOLLOW_DELAY_TOOLTIP,
         "helpUrl": ""
       }
     );
@@ -1656,13 +1656,13 @@ Blockly.Blocks['stemkit_remote_control_init'] = {
     this.jsonInit(
       {
         type: "stemkit_remote_control_init",
-        message0: "bật chế độ điều khiển bằng gamepad",
+        message0: Blockly.Msg.BLOCK_STEMKIT_REMOTE_CONTROL_INIT_MESSAGE0,
         previousStatement: null,
         nextStatement: null,
         args0: [
         ],
         colour: StemKitColorBlock,
-        tooltip: "",
+        tooltip: Blockly.Msg.BLOCK_STEMKIT_REMOTE_CONTROL_INIT_TOOLTIP,
         helpUrl: ""
       }
     )
@@ -1681,13 +1681,13 @@ Blockly.Blocks['stemkit_remote_control_processing'] = {
     this.jsonInit(
       {
         type: "stemkit_remote_control_processing",
-        message0: "xử lý lệnh từ gamepad",
+        message0: Blockly.Msg.BLOCK_STEMKIT_REMOTE_CONTROL_PROCESS_MESSAGE0,
         previousStatement: null,
         nextStatement: null,
         args0: [
         ],
         colour: StemKitColorBlock,
-        tooltip: "",
+        tooltip: Blockly.Msg.BLOCK_STEMKIT_REMOTE_CONTROL_PROCESS_TOOLTIP,
         helpUrl: ""
       }
     )
@@ -1705,8 +1705,8 @@ Blockly.Blocks["stemkit_remote_control_on_button_pressed"] = {
   init: function () {
     this.jsonInit({
       colour: StemKitColorBlock,
-      message0: "nếu nút %1 được nhấn%2%3",
-      tooltip: "",
+      message0: Blockly.Msg.BLOCK_STEMKIT_REMOTE_CONTROL_ON_BTN_MESSAGE0,
+      tooltip: Blockly.Msg.BLOCK_STEMKIT_REMOTE_CONTROL_ON_BTN_TOOLTIP,
       args0: [
         {
           type: "field_dropdown",

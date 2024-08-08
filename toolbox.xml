@@ -1,6 +1,6 @@
 <xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display: none">
   <category name="STEM KIT" colour="#44cbc6" icon="share-alt">
-    <label text="Động cơ và robot" web-class="blockLabelStyle"></label>
+    <label text="{{STEMKIT_CAT_MOTORS}}" web-class="blockLabelStyle"></label>
     <block type="robot_move">
       <value name="speed">
         <shadow type="math_number">
@@ -52,7 +52,7 @@
     </block>
 
     <sep gap="30"></sep>
-    <label text="Điều khiển" web-class="blockLabelStyle"></label>
+    <label text="{{STEMKIT_CAT_OUTPUT}}" web-class="blockLabelStyle"></label>
 
     <block type="stemkit_mini_pump">
       <value name="percent"><shadow type="math_number"><field name="NUM">70</field></shadow></value>
@@ -79,7 +79,7 @@
     </block>
 
     <sep gap="30"></sep>
-    <label text="Cảm biến" web-class="blockLabelStyle"></label>
+    <label text="{{STEMKIT_CAT_SENSOR}}" web-class="blockLabelStyle"></label>
 
     <block type="stemkit_soil_sensor"/>
     <block type="stemkit_ultrasonic_read"/>
@@ -112,7 +112,7 @@
     <block type="stemkit_mpr121_sound_off"/>
     
 
-    <label text="ROBOTICS" web-class="blockLabelStyle"></label>
+    <label text="ROBOCON" web-class="blockLabelStyle"></label>
     
     <block type="stemkit_robocon_follow_line_until_cross">
       <value name="speed">
