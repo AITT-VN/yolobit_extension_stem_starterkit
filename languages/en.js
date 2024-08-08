@@ -91,6 +91,9 @@ Blockly.Msg.BLOCK_STEMKIT_ROBOCON_LINE_FOLLOW_UNTIL_TOOLTIP = "Robot follows lin
 Blockly.Msg.BLOCK_STEMKIT_ROBOCON_LINE_FOLLOW_DELAY_MESSAGE0 = "%3 follow line with speed %1 (0-100) in %2 seconds"
 Blockly.Msg.BLOCK_STEMKIT_ROBOCON_LINE_FOLLOW_DELAY_TOOLTIP = "Robot follow line in a time duration"
 
+Blockly.Msg.ROBOCON_THEN_ACTION_BRAKE = "brake"
+Blockly.Msg.ROBOCON_THEN_ACTION_NONE = "do nothing"
+
 Blockly.Msg.BLOCK_STEMKIT_REMOTE_CONTROL_INIT_MESSAGE0 = "run gamepad mode"
 Blockly.Msg.BLOCK_STEMKIT_REMOTE_CONTROL_INIT_TOOLTIP = "Run gamepad mode to remote control robot"
 

@@ -91,6 +91,9 @@ Blockly.Msg.BLOCK_STEMKIT_ROBOCON_LINE_FOLLOW_UNTIL_TOOLTIP = "Cho robot dò lin
 Blockly.Msg.BLOCK_STEMKIT_ROBOCON_LINE_FOLLOW_DELAY_MESSAGE0 = "%3 dò line tốc độ %1 (0-100) trong %2 giây"
 Blockly.Msg.BLOCK_STEMKIT_ROBOCON_LINE_FOLLOW_DELAY_TOOLTIP = "Cho robot dò line trong một khoảng thời gian"
 
+Blockly.Msg.ROBOCON_THEN_ACTION_BRAKE = "dừng và khóa"
+Blockly.Msg.ROBOCON_THEN_ACTION_NONE = "không làm gì"
+
 Blockly.Msg.BLOCK_STEMKIT_REMOTE_CONTROL_INIT_MESSAGE0 = "bật chế độ điều khiển bằng gamepad"
 Blockly.Msg.BLOCK_STEMKIT_REMOTE_CONTROL_INIT_TOOLTIP = "Bật chế độ điều khiển robot di chuyển bằng gamepad"
 

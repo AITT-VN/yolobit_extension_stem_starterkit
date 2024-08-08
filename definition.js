@@ -1385,8 +1385,8 @@ Blockly.Blocks['stemkit_robocon_follow_line_until_cross'] = {
             type: "field_dropdown",
             name: "stop",
             options: [
-            ["dừng và khóa", "BRAKE"],
-            ["không làm gì", "None"],
+              [Blockly.Msg.ROBOCON_THEN_ACTION_BRAKE, "BRAKE"],
+              [Blockly.Msg.ROBOCON_THEN_ACTION_NONE, "None"],
             ]
           },
           {
@@ -1436,8 +1436,8 @@ Blockly.Blocks['stemkit_robocon_follow_line_until_end'] = {
             type: "field_dropdown",
             name: "stop",
             options: [
-            ["dừng và khóa", "BRAKE"],
-            ["không làm gì", "None"],
+              [Blockly.Msg.ROBOCON_THEN_ACTION_BRAKE, "BRAKE"],
+              [Blockly.Msg.ROBOCON_THEN_ACTION_NONE, "None"],
             ]
           },
           {
@@ -1510,8 +1510,8 @@ Blockly.Blocks['stemkit_robocon_turn_until_line_detected_then'] = {
             type: "field_dropdown",
             name: "stop",
             options: [
-            ["dừng và khóa", "BRAKE"],
-            ["không làm gì", "None"],
+              [Blockly.Msg.ROBOCON_THEN_ACTION_BRAKE, "BRAKE"],
+              [Blockly.Msg.ROBOCON_THEN_ACTION_NONE, "None"],
             ]
           },
           {
@@ -1712,10 +1712,90 @@ Blockly.Blocks["stemkit_remote_control_on_button_pressed"] = {
           type: "field_dropdown",
           name: "BUTTON",
           options: [
-            ['A', 'A'],
-            ['B', 'B'],
-            ['C', 'C'],
-            ['D', 'D']
+            ['A', 'BTN_A'],
+            ['B', 'BTN_B'],
+            ['C', 'BTN_C'],
+            ['D', 'BTN_D'],
+            [
+              {
+                "src": 'static/blocks/block_images/gamepad-square.png',
+                "width": 15,
+                "height": 15,
+                "alt": "*"
+              },
+              "BTN_SQUARE"
+            ],
+            [
+              {
+                "src": 'static/blocks/block_images/gamepad-circle.png',
+                "width": 15,
+                "height": 15,
+                "alt": "*"
+              },
+              "BTN_CIRCLE"
+            ],
+            [
+              {
+                "src": 'static/blocks/block_images/gamepad-cross.png',
+                "width": 15,
+                "height": 15,
+                "alt": "*"
+              },
+              "BTN_CROSS"
+            ],
+            [
+              {
+                "src": 'static/blocks/block_images/gamepad-triangle.png',
+                "width": 15,
+                "height": 15,
+                "alt": "*"
+              },
+              "BTN_TRIANGLE"
+            ],
+            ["L1", "BTN_L1"],
+            ["R1", "BTN_R1"],
+            ["L2", "BTN_L2"],
+            ["R2", "BTN_R2"],
+            ["SHARE", "BTN_M1"],
+            ["OPTIONS", "BTN_M2"],
+            ["Left Joystick", "BTN_THUMBL"],
+            ["Right Joystick", "BTN_THUMBR"],
+            [
+              {
+                "src": "static/blocks/block_images/59043.svg",
+                "width": 15,
+                "height": 15,
+                "alt": "*"
+              },
+              "BTN_FORWARD"
+            ],
+            [
+              {
+                "src": "static/blocks/block_images/959159.svg",
+                "width": 15,
+                "height": 15,
+                "alt": "*"
+              },
+              "BTN_BACKWARD"
+            ],
+            [
+              {
+                "src": "static/blocks/block_images/arrow-left.svg",
+                "width": 15,
+                "height": 15,
+                "alt": "side left"
+              },
+              "BTN_LEFT"
+            ],
+            [
+              {
+                "src": "static/blocks/block_images/arrow-right.svg",
+                "width": 15,
+                "height": 15,
+                "alt": "side right"
+              },
+              "BTN_RIGHT"
+            ],
           ],
         },
         {
@@ -1749,7 +1829,7 @@ Blockly.Python['stemkit_remote_control_on_button_pressed'] = function (block) {
       statements_action || Blockly.Python.PASS
       ]);
 
-  var code = 'stemkit_rc_mode.set_command(BTN_' + button + ', ' + cbFunctionName + ')\n';
+  var code = 'stemkit_rc_mode.set_command(' + button + ', ' + cbFunctionName + ')\n';
   Blockly.Python.definitions_['on_gamepad_button_callback' + button] = code;
 
   return '';
