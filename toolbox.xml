@@ -52,6 +52,27 @@
     </block>
 
     <sep gap="30"></sep>
+    <label text="LCD" web-class="blockLabelStyle"></label>
+    <block type="stemkit_lcd1602_display">
+      <value name="string">
+        <shadow type="text">
+          <field name="TEXT">Hello</field>
+        </shadow>
+      </value>
+      <value name="X">
+        <shadow type="math_number">
+          <field name="NUM">0</field>
+        </shadow>
+      </value>
+      <value name="Y">
+        <shadow type="math_number">
+          <field name="NUM">0</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="stemkit_lcd1602_clear"/>
+
+    <sep gap="30"></sep>
     <label text="{{STEMKIT_CAT_OUTPUT}}" web-class="blockLabelStyle"></label>
 
     <block type="stemkit_mini_pump">
@@ -173,27 +194,6 @@
     <block type="stemkit_remote_control_init"/>
     <block type="stemkit_remote_control_processing"/>
     <block type="stemkit_remote_control_on_button_pressed" />
-
-    <sep gap="30"></sep>
-    <label text="LCD" web-class="blockLabelStyle"></label>
-    <block type="stemkit_lcd1602_display">
-      <value name="string">
-        <shadow type="text">
-          <field name="TEXT">Hello</field>
-        </shadow>
-      </value>
-      <value name="X">
-        <shadow type="math_number">
-          <field name="NUM">0</field>
-        </shadow>
-      </value>
-      <value name="Y">
-        <shadow type="math_number">
-          <field name="NUM">0</field>
-        </shadow>
-      </value>
-    </block>
-    <block type="stemkit_lcd1602_clear"/>
 
   </category>
 </xml>

@@ -104,19 +104,19 @@ Blockly.Msg.BLOCK_STEMKIT_REMOTE_CONTROL_ON_BTN_MESSAGE0 = "nếu nút %1 đư�
 Blockly.Msg.BLOCK_STEMKIT_REMOTE_CONTROL_ON_BTN_TOOLTIP = "Khai báo xử lý khi một nút trên gamepad được nhấn"
 
 
-Blockly.Msg.BLOCK_STEMKIT_DHT_MEANSURE_MESSAGE0 = "%1 cập nhật cảm biến nhiệt độ & độ ẩm DHT20"
+Blockly.Msg.BLOCK_STEMKIT_DHT_MEANSURE_MESSAGE0 = "%1 cập nhật cảm biến DHT20"
 Blockly.Msg.BLOCK_STEMKIT_DHT_MEANSURE_TOOLTIP = "Cập nhập giá trị nhiệt độ và độ ẩm từ cảm biến nhiệt độ & độ ẩm DHT20"
 Blockly.Msg.BLOCK_STEMKIT_DHT_MEANSURE_HELPURL = ""
 
 
-Blockly.Msg.BLOCK_STEMKIT_DHT_READ_MESSAGE0 = "%2 đọc %1 từ cảm biến DHT20"
+Blockly.Msg.BLOCK_STEMKIT_DHT_READ_MESSAGE0 = "%2 đọc %1 DHT20"
 Blockly.Msg.BLOCK_STEMKIT_DHT_READ_MESSAGE1 = "nhiệt độ"
 Blockly.Msg.BLOCK_STEMKIT_DHT_READ_MESSAGE2 = "độ ẩm"
 Blockly.Msg.BLOCK_STEMKIT_DHT_READ_TOOLTIP = ""
 Blockly.Msg.BLOCK_STEMKIT_DHT_READ_HELPURL = ""
 
 
-Blockly.Msg.BLOCK_STEMKIT_LCD1602_MESSAGE0 = "%5 hiện lên LCD1602 %1 tại x %2 y %3 %4"
+Blockly.Msg.BLOCK_STEMKIT_LCD1602_MESSAGE0 = "%5 màn hình LCD hiển thị %1 x %2 y %3 %4"
 Blockly.Msg.BLOCK_STEMKIT_LCDCLEAR_MESSAGE0 = "%1 xóa màn hình LCD1602"
 
-Blockly.Msg.BLOCK_STEMKIT_SOUND_SENSOR_MESSAGE0 = "%2 mức độ âm thanh %1"
+Blockly.Msg.BLOCK_STEMKIT_SOUND_SENSOR_MESSAGE0 = "%2 mức độ âm thanh (%%) %1"

@@ -1,7 +1,6 @@
 const StemKitColorBlock = '#44cbc6';
 const ImgUrl = 'https://ohstem-public.s3.ap-southeast-1.amazonaws.com/extensions/AITT-VN/yolobit_extension_stem_starterkit/images/';
 const ImgUrl2 = 'https://ohstem-public.s3.ap-southeast-1.amazonaws.com/extensions/AITT-VN/yolobit_extension_rover/images/';
-
 // RGB LED
 Blockly.Blocks["stemkit_led_tiny"] = {
   init: function () {
