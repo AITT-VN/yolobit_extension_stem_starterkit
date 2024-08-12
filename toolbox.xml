@@ -93,6 +93,9 @@
     <block type="stemkit_gas_sensor"/>
     <block type="stemkit_gas_detected"/>
     <block type="stemkit_light_sensor"/>
+    <block type="stemkit_sound_sensor"/>
+    <block type="stemkit_dht_measure"/>
+    <block type="stemkit_dht_read"/>
     <block type="robot_line_sensor_read_all"/>
 
     <sep gap="30"></sep>
@@ -170,6 +173,27 @@
     <block type="stemkit_remote_control_init"/>
     <block type="stemkit_remote_control_processing"/>
     <block type="stemkit_remote_control_on_button_pressed" />
+
+    <sep gap="30"></sep>
+    <label text="LCD" web-class="blockLabelStyle"></label>
+    <block type="stemkit_lcd1602_display">
+      <value name="string">
+        <shadow type="text">
+          <field name="TEXT">Hello</field>
+        </shadow>
+      </value>
+      <value name="X">
+        <shadow type="math_number">
+          <field name="NUM">0</field>
+        </shadow>
+      </value>
+      <value name="Y">
+        <shadow type="math_number">
+          <field name="NUM">0</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="stemkit_lcd1602_clear"/>
 
   </category>
 </xml>

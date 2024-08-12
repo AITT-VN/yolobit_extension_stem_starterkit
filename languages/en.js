@@ -102,3 +102,20 @@ Blockly.Msg.BLOCK_STEMKIT_REMOTE_CONTROL_PROCESS_TOOLTIP = "Check gamepad event 
 
 Blockly.Msg.BLOCK_STEMKIT_REMOTE_CONTROL_ON_BTN_MESSAGE0 = "on button %1 pressed %2%3"
 Blockly.Msg.BLOCK_STEMKIT_REMOTE_CONTROL_ON_BTN_TOOLTIP = "Handle a gamepad event"
+
+Blockly.Msg.BLOCK_STEMKIT_DHT_MEANSURE_MESSAGE0 = "%1 update temperature & humidity DHT20"
+Blockly.Msg.BLOCK_STEMKIT_DHT_MEANSURE_TOOLTIP = "update value temperature & humidity of DHT20"
+Blockly.Msg.BLOCK_STEMKIT_DHT_MEANSURE_HELPURL = ""
+
+
+Blockly.Msg.BLOCK_STEMKIT_DHT_READ_MESSAGE0 = "%2 read %1 data DHT20"
+Blockly.Msg.BLOCK_STEMKIT_DHT_READ_MESSAGE1 = "temperature"
+Blockly.Msg.BLOCK_STEMKIT_DHT_READ_MESSAGE2 = "humidity"
+Blockly.Msg.BLOCK_STEMKIT_DHT_READ_TOOLTIP = ""
+Blockly.Msg.BLOCK_STEMKIT_DHT_READ_HELPURL = ""
+
+
+Blockly.Msg.BLOCK_STEMKIT_LCD1602_MESSAGE0 = "%5 show LCD1602 %1 at x %2 y %3 %4"
+Blockly.Msg.BLOCK_STEMKIT_LCDCLEAR_MESSAGE0 = "%1 clear LCD1602"
+
+Blockly.Msg.BLOCK_STEMKIT_SOUND_SENSOR_MESSAGE0 = "%2 sound level %1"

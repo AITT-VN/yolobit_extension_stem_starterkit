@@ -1834,3 +1834,229 @@ Blockly.Python['stemkit_remote_control_on_button_pressed'] = function (block) {
 
   return '';
 };
+
+
+// DHT20
+
+Blockly.Blocks["stemkit_dht_measure"] = {
+  init: function() {
+    this.jsonInit({
+      message0: Blockly.Msg.BLOCK_STEMKIT_DHT_MEANSURE_MESSAGE0,
+      args0: [
+        {
+          "type": "field_image",
+          "src": ImgUrl + 'temp-humi.png',
+          "width": 20,
+          "height": 20,
+          "alt": "*",
+          "flipRtl": false
+        }
+      ],
+      previousStatement: null,
+      nextStatement: null,
+      colour: StemKitColorBlock,
+      tooltip: Blockly.Msg.BLOCK_STEMKIT_DHT_MEANSURE_TOOLTIP,
+      helpUrl: Blockly.Msg.BLOCK_STEMKIT_DHT_MEANSURE_HELPURL
+    });
+  },
+};
+
+Blockly.Python["stemkit_dht_measure"] = function(block) {
+  // TODO: Assemble Python into code variable.
+  Blockly.Python.definitions_['import_i2c'] = 'from machine import Pin, SoftI2C';
+  Blockly.Python.definitions_["import_dht20"] = "from stemkit_dht20 import DHT20";
+  Blockly.Python.definitions_["import_create_dht20"] = "stemkit_dht20 = DHT20(SoftI2C(scl=Pin(22), sda=Pin(21)))";
+  var code = "stemkit_dht20.read_dht20()\n";
+  return code;
+};
+
+Blockly.Blocks["stemkit_dht_read"] = {
+  init: function() {
+    this.jsonInit({
+      message0: Blockly.Msg.BLOCK_STEMKIT_DHT_READ_MESSAGE0,
+      args0: [
+        {
+          type: "field_dropdown",
+          name: "DATA",
+          options: [
+            [Blockly.Msg.BLOCK_STEMKIT_DHT_READ_MESSAGE1, "TEMP"],
+            [Blockly.Msg.BLOCK_STEMKIT_DHT_READ_MESSAGE2, "HUMID"]
+          ]
+        },
+        {
+          "type": "field_image",
+          "src": ImgUrl + 'temp-humi.png',
+          "width": 20,
+          "height": 20,
+          "alt": "*",
+          "flipRtl": false
+        }
+        
+      ],
+      output: null,
+      colour: StemKitColorBlock,
+      tooltip: Blockly.Msg.BLOCK_STEMKIT_DHT_READ_TOOLTIP,
+      helpUrl: Blockly.Msg.BLOCK_STEMKIT_DHT_READ_HELPURL
+    });
+  },
+  getDeveloperVars: function() {
+    return ['stemkit_dht_read'];
+  }
+};
+
+Blockly.Python["stemkit_dht_read"] = function(block) {
+  var dropdown_data = block.getFieldValue("DATA");
+  // TODO: Assemble Python into code variable.
+  Blockly.Python.definitions_['import_i2c'] = 'from machine import Pin, SoftI2C';
+  Blockly.Python.definitions_["import_dht20"] = "from stemkit_dht20 import DHT20";
+  Blockly.Python.definitions_["import_create_dht20"] = "stemkit_dht20 = DHT20(SoftI2C(scl=Pin(22), sda=Pin(21)))";
+  var code = "";
+  if (dropdown_data == "TEMP")
+    code = "stemkit_dht20.dht20_temperature()";
+  else 
+    code = "stemkit_dht20.dht20_humidity()";
+  // TODO: Change ORDER_NONE to the correct strength.
+  return [code, Blockly.Python.ORDER_NONE];
+};
+
+
+// LCD 1602
+
+Blockly.Blocks["stemkit_lcd1602_display"] = {
+  init: function () {
+    this.jsonInit({
+      colour: StemKitColorBlock,
+      tooltip: "",
+      message0: Blockly.Msg.BLOCK_STEMKIT_LCD1602_MESSAGE0,
+      args0: [
+        {
+          type: "input_value",
+          name: "string"
+        },
+        {
+          type: "input_value",
+          name: "X",
+          check: "Number",
+          min: 0,
+          max: 16
+        },
+        {
+          type: "input_value",
+          name: "Y",
+          check: "Number",
+          min: 0,
+          max: 2
+        },
+        {
+          type: "input_dummy"
+        },
+        {
+          "type": "field_image",
+          "src": ImgUrl + 'lcd.png',
+          "width": 20,
+          "height": 20,
+          "alt": "*",
+          "flipRtl": false
+        }
+      ],
+      previousStatement: null,
+      nextStatement: null,
+      helpUrl: "",
+    });
+  },
+  getDeveloperVars: function() {
+    return ['stemkit_lcd1602_display'];
+  }
+};
+
+Blockly.Python["stemkit_lcd1602_display"] = function (block) {
+  Blockly.Python.definitions_['import_lcd1602'] = 'from stemkit_lcd1602 import LCD1602';
+  Blockly.Python.definitions_['import_lcd1602_init'] = 'stemkit_lcd1602 = LCD1602()';
+  var string = Blockly.Python.valueToCode(block, 'string', Blockly.Python.ORDER_ATOMIC);
+  var x = Blockly.Python.valueToCode(block, 'X', Blockly.Python.ORDER_ATOMIC);
+  var y = Blockly.Python.valueToCode(block, 'Y', Blockly.Python.ORDER_ATOMIC);  // TODO: Assemble Python into code variable.
+  var code = "stemkit_lcd1602.move_to(" + x + ", "+ y +")\n" + "stemkit_lcd1602.putstr("+ string +")\n";
+  return code;
+};
+
+Blockly.Blocks["stemkit_lcd1602_clear"] = {
+  init: function () {
+    this.jsonInit({
+      colour: StemKitColorBlock,
+      tooltip: "",
+      message0: Blockly.Msg.BLOCK_STEMKIT_LCDCLEAR_MESSAGE0,
+      args0: [
+        {
+          "type": "field_image",
+          "src": ImgUrl + 'lcd.png',
+          "width": 20,
+          "height": 20,
+          "alt": "*",
+          "flipRtl": false
+        }
+      ],
+      previousStatement: null,
+      nextStatement: null,
+      helpUrl: "",
+    });
+  },
+  getDeveloperVars: function() {
+    return ['stemkit_lcd1602_clear'];
+  }
+};
+
+Blockly.Python["stemkit_lcd1602_clear"] = function (block) {
+  // TODO: Assemble Python into code variable.
+  Blockly.Python.definitions_['import_lcd1602'] = 'from stemkit_lcd1602 import LCD1602';
+  Blockly.Python.definitions_['import_lcd1602_init'] = 'stemkit_lcd1602 = LCD1602()';
+  var code = "stemkit_lcd1602.clear()\n";
+  return code;
+};
+
+Blockly.Blocks['stemkit_sound_sensor'] = {
+  init: function() {
+    this.jsonInit(
+      {
+        "type": "stemkit_sound_sensor",
+        "message0": Blockly.Msg.BLOCK_STEMKIT_SOUND_SENSOR_MESSAGE0,
+        "args0": [
+          {
+            "type": "field_dropdown",
+            "name": "NAME",
+            "options": [
+              [
+                "A",
+                "pin0"
+              ],
+              [
+                "B",
+                "pin1"
+              ]
+            ]
+          },
+          {
+            "type": "field_image",
+            "src": "https://i.ibb.co/1mM59bs/sound.png",
+            "width": 30,
+            "height": 30,
+            "alt": "*",
+            "flipRtl": false
+          }
+        ],
+        "output": null,
+        "colour": StemKitColorBlock,
+        "tooltip": Blockly.Msg.BLOCK_STEMKIT_SOUND_SENSOR_TOOLTIP,
+        "helpUrl": ""
+      }
+    );
+  }
+};
+
+Blockly.Python['stemkit_sound_sensor'] = function(block) {
+  Blockly.Python.definitions_['import_yolobit'] = 'from yolobit import *';
+  var dropdown_name = block.getFieldValue('NAME');
+  // TODO: Assemble Python into code variable.
+  var code = 'round(translate((' + dropdown_name + '.read_analog()), 0, 4095, 0, 100))';
+  // TODO: Change ORDER_NONE to the correct strength.
+  return [code, Blockly.Python.ORDER_NONE];
+};

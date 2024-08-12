@@ -9,6 +9,8 @@
         "stemkit_mpr121.py",
         "stemkit_mq.py",
         "stemkit_pcf8574.py",
+        "stemkit_lcd1602.py",
+        "stemkit_dht20.py",
         "stemkit_robocon.py",
         "stemkit_remotecontrol.py",
         "gamepad.py"
