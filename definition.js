@@ -1864,7 +1864,7 @@ Blockly.Python["stemkit_dht_measure"] = function(block) {
   // TODO: Assemble Python into code variable.
   Blockly.Python.definitions_['import_i2c'] = 'from machine import Pin, SoftI2C';
   Blockly.Python.definitions_["import_dht20"] = "from stemkit_dht20 import DHT20";
-  Blockly.Python.definitions_["import_create_dht20"] = "stemkit_dht20 = DHT20(SoftI2C(scl=Pin(22), sda=Pin(21)))";
+  Blockly.Python.definitions_["import_create_dht20"] = "stemkit_dht20 = DHT20()";
   var code = "stemkit_dht20.read_dht20()\n";
   return code;
 };
@@ -1908,7 +1908,7 @@ Blockly.Python["stemkit_dht_read"] = function(block) {
   // TODO: Assemble Python into code variable.
   Blockly.Python.definitions_['import_i2c'] = 'from machine import Pin, SoftI2C';
   Blockly.Python.definitions_["import_dht20"] = "from stemkit_dht20 import DHT20";
-  Blockly.Python.definitions_["import_create_dht20"] = "stemkit_dht20 = DHT20(SoftI2C(scl=Pin(22), sda=Pin(21)))";
+  Blockly.Python.definitions_["import_create_dht20"] = "stemkit_dht20 = DHT20()";
   var code = "";
   if (dropdown_data == "TEMP")
     code = "stemkit_dht20.dht20_temperature()";
@@ -2058,4 +2058,125 @@ Blockly.Python['stemkit_sound_sensor'] = function(block) {
   var code = 'round(translate((' + dropdown_name + '.read_analog()), 0, 4095, 0, 100))';
   // TODO: Change ORDER_NONE to the correct strength.
   return [code, Blockly.Python.ORDER_NONE];
+};
+
+// Cảm biến chuyển động PIR
+
+Blockly.Blocks['stemkit_motion'] = {
+  /**
+   * Block for waiting.
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.jsonInit(
+      {
+        "type": "stemkit_motion",
+        "message0": Blockly.Msg.BLOCK_STEMKIT_PIR_MESSAGE0,
+        "args0": [
+          {
+            "type": "field_dropdown",
+            "name": "NAME",
+            "options": [
+              [
+                "A",
+                "pin0"
+              ],
+              [
+                "B",
+                "pin1"
+              ],
+            ]
+          },
+          {
+            "type": "field_image",
+            "src": ImgUrl + 'pir.png',
+            "width": 20,
+            "height": 20,
+            "alt": "*",
+            "flipRtl": false
+          }
+        ],
+        output: "Boolean",
+        "colour": StemKitColorBlock,
+        "tooltip": "",
+        "helpUrl": ""
+      }
+    );
+  }
+};
+
+Blockly.Python['stemkit_motion'] = function(block) {
+  Blockly.Python.definitions_['import_yolobit'] = 'from yolobit import *';
+  var dropdown_name = block.getFieldValue('NAME');
+  // TODO: Assemble Python into code variable.
+  var code = '' + dropdown_name + '.read_digital() == 1';
+  return [code, Blockly.Python.ORDER_NONE];
+};
+
+// Relay Module
+Blockly.Blocks['stemkit_relay'] = {
+  /**
+   * Block for waiting.
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.jsonInit(
+      {
+        "type": "stemkit_relay",
+        "message0": Blockly.Msg.BLOCK_STEMKIT_RELAY_MESSAGE0,
+        "args0": [
+          {
+            "type": "field_dropdown",
+            "name": "NAME",
+            "options": [
+              [
+                "A",
+                "pin0"
+              ],
+              [
+                "B",
+                "pin1"
+              ],
+            ]
+          },
+          {
+            "type": "field_dropdown",
+            "name": "state",
+            "options": [
+              [
+                "bật",
+                "1"
+              ],
+              [
+                "tắt",
+                "0"
+              ]
+            ]
+          },
+          {
+            "type": "field_image",
+            "src": ImgUrl + 'relay.png',
+            "width": 20,
+            "height": 20,
+            "alt": "*",
+            "flipRtl": false
+          }
+        ],
+        "previousStatement": null,
+        "nextStatement": null,
+        "colour": StemKitColorBlock,
+        "tooltip": "",
+        "helpUrl": ""
+      }
+    );
+  }
+};
+
+Blockly.Python['stemkit_relay'] = function(block) {
+  Blockly.Python.definitions_['import_yolobit'] = 'from yolobit import *';
+  var dropdown_name = block.getFieldValue('NAME');
+  var dropdown_state = block.getFieldValue('state');
+  // TODO: Assemble Python into code variable.
+  var code = ''+dropdown_name+'.write_digital('+dropdown_state+')\n';
+  return code;
 };

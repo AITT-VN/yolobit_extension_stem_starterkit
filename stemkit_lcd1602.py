@@ -1,4 +1,5 @@
 import machine
+from yolobit import *
 from time import sleep_ms, sleep_us
 from utility import *
 
@@ -231,8 +232,8 @@ class LCD1602(LcdApi):
         super().__init__(2, 16)
          
         # Grove port: GND VCC SCL SDA
-        scl_pin = machine.Pin(22)
-        sda_pin = machine.Pin(21)
+        scl_pin = machine.Pin(pin19.pin)
+        sda_pin = machine.Pin(pin20.pin)
         self.i2c = machine.SoftI2C(scl=scl_pin, sda=sda_pin)
         try:
             super().init_display()

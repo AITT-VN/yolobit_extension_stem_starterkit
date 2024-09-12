@@ -120,3 +120,6 @@ Blockly.Msg.BLOCK_STEMKIT_LCD1602_MESSAGE0 = "%5 màn hình LCD hiển thị %1 
 Blockly.Msg.BLOCK_STEMKIT_LCDCLEAR_MESSAGE0 = "%1 xóa màn hình LCD1602"
 
 Blockly.Msg.BLOCK_STEMKIT_SOUND_SENSOR_MESSAGE0 = "%2 mức độ âm thanh (%%) %1"
+
+Blockly.Msg.BLOCK_STEMKIT_RELAY_MESSAGE0 = "%3 %2 relay %1"
+Blockly.Msg.BLOCK_STEMKIT_PIR_MESSAGE0 = "%2 PIR %1 phát hiện có người"

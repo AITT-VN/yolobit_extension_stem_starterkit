@@ -119,3 +119,6 @@ Blockly.Msg.BLOCK_STEMKIT_LCD1602_MESSAGE0 = "%5 LCD1602 show %1 x %2 y %3 %4"
 Blockly.Msg.BLOCK_STEMKIT_LCDCLEAR_MESSAGE0 = "%1 LCD1602 clear"
 
 Blockly.Msg.BLOCK_STEMKIT_SOUND_SENSOR_MESSAGE0 = "%2 sound level (%%) %1"
+
+Blockly.Msg.BLOCK_STEMKIT_RELAY_MESSAGE0 = "%3 %2 relay %1"
+Blockly.Msg.BLOCK_STEMKIT_PIR_MESSAGE0 = "%2 PIR %1 detected"

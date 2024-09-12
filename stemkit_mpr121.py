@@ -5,7 +5,7 @@ https://github.com/mcauser/micropython-mpr121
 MIT License
 Copyright (c) 2018 Mike Causer
 """
-
+from yolobit import *
 from micropython import const
 import ustruct, time
 import _thread
@@ -43,7 +43,7 @@ class MPR121:
 
     def __init__(self, i2c=None, address=0x5A):
         if i2c == None:
-            self.i2c = SoftI2C(scl=Pin(22), sda=Pin(21), freq=200000)
+            self.i2c = SoftI2C(scl=Pin(pin19.pin), sda=Pin(pin20.pin), freq=200000)
         else:
             self.i2c = i2c
         self.address = address

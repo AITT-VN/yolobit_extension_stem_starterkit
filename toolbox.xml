@@ -1,5 +1,5 @@
 <xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display: none">
-  <category name="STEM KIT" colour="#44cbc6" icon="share-alt">
+  <category id="stemkit" name="STEM KIT" colour="#44cbc6" icon="share-alt">
     <label text="{{STEMKIT_CAT_MOTORS}}" web-class="blockLabelStyle"></label>
     <block type="robot_move">
       <value name="speed">
@@ -113,11 +113,7 @@
     </block>
     <block type="stemkit_gas_sensor"/>
     <block type="stemkit_gas_detected"/>
-    <block type="stemkit_light_sensor"/>
-    <block type="stemkit_sound_sensor"/>
-    <block type="stemkit_dht_measure"/>
-    <block type="stemkit_dht_read"/>
-    <block type="robot_line_sensor_read_all"/>
+    
 
     <sep gap="30"></sep>
     <label text="KEYPAD" web-class="blockLabelStyle"></label>
@@ -135,6 +131,28 @@
     <block type="stemkit_mpr121_scan"/>
     <block type="stemkit_mpr121_sound_off"/>
     
+  </category>
+
+  <category id="stemkit-more" name="..." colour="#44cbc6" icon="ellipsis-h">
+
+    <sep gap="30"></sep>
+    <label text="Cảm biến mở rộng" web-class="blockLabelStyle"></label>
+
+    <block type="stemkit_light_sensor"/>
+    <block type="stemkit_sound_sensor"/>
+    <block type="stemkit_dht_measure"/>
+    <block type="stemkit_dht_read"/>
+    <block type="robot_line_sensor_read_all"/>
+    <sep gap="30"></sep>
+    <label text="Gamepad" web-class="blockLabelStyle"></label>
+
+    <block type="stemkit_remote_control_init"/>
+    <block type="stemkit_remote_control_processing"/>
+    <block type="stemkit_remote_control_on_button_pressed" />
+
+    
+    <block type="stemkit_relay"/>
+    <block type="stemkit_motion"/>
 
     <label text="ROBOCON" web-class="blockLabelStyle"></label>
     
@@ -188,12 +206,6 @@
       </value>
     </block>
 
-    <sep gap="30"></sep>
-    <label text="Gamepad" web-class="blockLabelStyle"></label>
-
-    <block type="stemkit_remote_control_init"/>
-    <block type="stemkit_remote_control_processing"/>
-    <block type="stemkit_remote_control_on_button_pressed" />
-
   </category>
+
 </xml>
