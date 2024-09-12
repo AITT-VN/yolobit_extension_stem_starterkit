@@ -136,13 +136,16 @@
   <category id="stemkit-more" name="..." colour="#44cbc6" icon="ellipsis-h">
 
     <sep gap="30"></sep>
-    <label text="Cảm biến mở rộng" web-class="blockLabelStyle"></label>
+    <label text="Nâng cao" web-class="blockLabelStyle"></label>
 
     <block type="stemkit_light_sensor"/>
     <block type="stemkit_sound_sensor"/>
     <block type="stemkit_dht_measure"/>
     <block type="stemkit_dht_read"/>
     <block type="robot_line_sensor_read_all"/>
+     
+    <block type="stemkit_relay"/>
+    <block type="stemkit_motion"/>
     <sep gap="30"></sep>
     <label text="Gamepad" web-class="blockLabelStyle"></label>
 
@@ -150,9 +153,7 @@
     <block type="stemkit_remote_control_processing"/>
     <block type="stemkit_remote_control_on_button_pressed" />
 
-    
-    <block type="stemkit_relay"/>
-    <block type="stemkit_motion"/>
+   
 
     <label text="ROBOCON" web-class="blockLabelStyle"></label>
     
