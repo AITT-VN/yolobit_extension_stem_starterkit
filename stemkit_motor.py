@@ -71,6 +71,16 @@ class Motor():
         time.sleep_ms(20)
 
     def set_wheel_speed(self, m1=None, m2=None):
+
+        if m1 > 100:
+            m1 = 100
+        if m1 < -100:
+            m1 = -100
+        if m2 > 100:
+            m2 = 100
+        if m2 < -100:
+            m2 = -100
+
         # logic to smoothen motion, avoid voltage spike
         # if wheel speed change > 100, need to change to 30 first
         if (m1 != None and m2 != None and m1 != 0 and abs(m1 - self.m1_speed) > 100) and (m2 != 0 and abs(m2 - self.m2_speed) > 100):
