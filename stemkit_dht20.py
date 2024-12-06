@@ -2,7 +2,7 @@ from yolobit import *
 from machine import SoftI2C, Pin
 from time import sleep_ms
 class DHT20(object):
-    def __init__(self, i2c):
+    def __init__(self):
         self.i2c = SoftI2C(scl=Pin(pin19.pin), sda=Pin(pin20.pin))
         if (self.dht20_read_status() & 0x80) == 0x80:
             self.dht20_init()  
