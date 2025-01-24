@@ -92,7 +92,7 @@ class StemKitRemoteControlMode():
             BTN_THUMBR: None,
         }
         
-        self._i2c_gp = SoftI2C(scl=Pin(22), sda=Pin(21), freq=100000)
+        self._i2c_gp = SoftI2C(scl=Pin(pin19.pin), sda=Pin(pin20.pin), freq=100000)
         if self._i2c_gp.scan().count(GAMEPAD_RECEIVER_ADDR) == 0:
             self._gamepad_v2 = None
             print('Gamepad V2 Receiver not found {:#x}'.format(GAMEPAD_RECEIVER_ADDR))
