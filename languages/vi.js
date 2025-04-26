@@ -123,3 +123,5 @@ Blockly.Msg.BLOCK_STEMKIT_SOUND_SENSOR_MESSAGE0 = "%2 mức độ âm thanh (%%)
 
 Blockly.Msg.BLOCK_STEMKIT_RELAY_MESSAGE0 = "%3 %2 relay %1"
 Blockly.Msg.BLOCK_STEMKIT_PIR_MESSAGE0 = "%2 PIR %1 phát hiện có người"
+
+Blockly.Msg.BLOCK_STEMKIT_WATER_MESSAGE0 = "%2 cảm biến %1 phát hiện nước"

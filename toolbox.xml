@@ -146,6 +146,7 @@
      
     <block type="stemkit_relay"/>
     <block type="stemkit_motion"/>
+    <block type="stemkit_water_sensor"/>
     <sep gap="30"></sep>
     <label text="Gamepad" web-class="blockLabelStyle"></label>
 

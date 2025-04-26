@@ -2180,3 +2180,52 @@ Blockly.Python['stemkit_relay'] = function(block) {
   var code = ''+dropdown_name+'.write_digital('+dropdown_state+')\n';
   return code;
 };
+
+Blockly.Blocks['stemkit_water_sensor'] = {
+  init: function() {
+    this.jsonInit(
+      {
+        "type": "stemkit_water_sensor",
+        "message0": Blockly.Msg.BLOCK_STEMKIT_WATER_MESSAGE0,
+        "args0": [
+          {
+            "type": "field_dropdown",
+            "name": "NAME",
+            "options": [
+              [
+                "A",
+                "pin0"
+              ],
+              [
+                "B",
+                "pin1"
+              ]
+            ]
+          },
+          {
+            "type": "field_image",
+            "src": ImgUrl + 'water.png',
+            "width": 20,
+            "height": 20,
+            "alt": "*",
+            "flipRtl": false
+          }
+
+        ],
+        "output": null,
+        "colour": StemKitColorBlock,
+        "tooltip": "Trả về giá trị ngập (0) hay không ngập (1) của cảm biến ngập nước",
+        "helpUrl": ""
+      }
+    );
+  }
+};
+
+Blockly.Python['stemkit_water_sensor'] = function(block) {
+  Blockly.Python.definitions_['import_yolobit'] = 'from yolobit import *';
+  var dropdown_name = block.getFieldValue('NAME');
+  // TODO: Assemble Python into code variable.
+  var code = dropdown_name + '.read_digital() == 0';
+  // TODO: Change ORDER_NONE to the correct strength.
+  return [code, Blockly.Python.ORDER_NONE];
+};

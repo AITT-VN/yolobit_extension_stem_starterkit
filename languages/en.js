@@ -122,3 +122,5 @@ Blockly.Msg.BLOCK_STEMKIT_SOUND_SENSOR_MESSAGE0 = "%2 sound level (%%) %1"
 
 Blockly.Msg.BLOCK_STEMKIT_RELAY_MESSAGE0 = "%3 %2 relay %1"
 Blockly.Msg.BLOCK_STEMKIT_PIR_MESSAGE0 = "%2 PIR %1 detected"
+
+Blockly.Msg.BLOCK_STEMKIT_WATER_MESSAGE0 = "%2 is water on  %1 water sensor"
