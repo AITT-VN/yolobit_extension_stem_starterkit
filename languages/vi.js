@@ -144,7 +144,7 @@ Blockly.Msg.BLOCK_STEMKIT_RFID_SCAN_HELPURL = "";
 Blockly.Msg.BLOCK_STEMKIT_RFID_CHECK_MESSAGE0 = "%2 kiểm tra thẻ có trong danh sách %1 không";
 Blockly.Msg.BLOCK_STEMKIT_RFID_CHECK_TOOLTIP = "Kiểm tra xem mã thẻ có nằm trong danh sách đã lưu hay không";
 Blockly.Msg.BLOCK_STEMKIT_RFID_CHECK_HELPURL = "";
-Ư
+
 Blockly.Msg.BLOCK_STEMKIT_RFID_ADD_MESSAGE0 = "%2 thêm thẻ vào danh sách %1";
 Blockly.Msg.BLOCK_STEMKIT_RFID_ADD_TOOLTIP = "Thêm mã thẻ đang quét vào danh sách đã lưu";
 Blockly.Msg.BLOCK_STEMKIT_RFID_ADD_HELPURL = "";
