@@ -73,6 +73,27 @@
     <block type="stemkit_lcd1602_clear"/>
 
     <sep gap="30"></sep>
+    <label text="OLED" web-class="blockLabelStyle"></label>
+    <block type="stemkit_oled_display">
+      <value name="string">
+        <shadow type="text">
+          <field name="TEXT">Hello</field>
+        </shadow>
+      </value>
+      <value name="X">
+        <shadow type="math_number">
+          <field name="NUM">0</field>
+        </shadow>
+      </value>
+      <value name="Y">
+        <shadow type="math_number">
+          <field name="NUM">0</field>
+        </shadow>
+      </value>
+      </block>
+    <block type="stemkit_oled_clear"/>
+
+    <sep gap="30"></sep>
     <label text="{{STEMKIT_CAT_OUTPUT}}" web-class="blockLabelStyle"></label>
 
     <block type="stemkit_mini_pump">
@@ -147,6 +168,40 @@
     <block type="stemkit_relay"/>
     <block type="stemkit_motion"/>
     <block type="stemkit_water_sensor"/>
+
+    <sep gap="30"></sep>
+    <label text="RFID" web-class="blockLabelStyle"></label>
+
+    <block type="stemkit_scan_card"></block>
+    <block type="stemkit_scan_and_check">
+      <value name="list_name">
+        <shadow type="math_number">
+          <field name="NUM"></field>
+        </shadow>
+      </value>
+    </block>
+    <block type="stemkit_scan_and_add_card">
+      <value name="list_name">
+        <shadow type="math_number">
+          <field name="NUM"></field>
+        </shadow>
+      </value>
+    </block>
+    <block type="stemkit_scan_and_remove_card">
+      <value name="list_name">
+        <shadow type="math_number">
+          <field name="NUM"></field>
+        </shadow>
+      </value>
+    </block>
+    <block type="stemkit_clear_list">
+      <value name="list_name">
+        <shadow type="math_number">
+          <field name="NUM"></field>
+        </shadow>
+      </value>
+    </block>
+
     <sep gap="30"></sep>
     <label text="Gamepad" web-class="blockLabelStyle"></label>
 
