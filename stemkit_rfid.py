@@ -391,7 +391,7 @@ class RFID:
                 del self.lists[list_name]  
             else:
                 self.save_list(list_name)
-                print("Remove card success!")  
+                print("Remove card success!")
             
     def clear_list(self, list_name):
         filename = f"{list_name}.json"

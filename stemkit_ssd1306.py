@@ -106,13 +106,7 @@ class SSD1306_I2C(SSD1306):
     def __init__(self, width=128, height=64, addr=0x3c, external_vcc=False):
         scl_pin = machine.Pin(pin19.pin)
         sda_pin = machine.Pin(pin20.pin)
-        self.i2c = machine.SoftI2C(scl=scl_pin, sda=sda_pin)
-        try:
-            super().init_display()
-        except:
-            say('OLED not found')
-            raise Exception('OLED not found')
-        
+        self.i2c = machine.SoftI2C(scl=scl_pin, sda=sda_pin)       
         self.addr = addr
         self.temp = bytearray(2)
         # Add an extra byte to the data buffer to hold an I2C data/command byte
@@ -123,7 +117,11 @@ class SSD1306_I2C(SSD1306):
         self.buffer = bytearray(((height // 8) * width) + 1)
         self.buffer[0] = 0x40  # Set first byte of data buffer to Co=0, D/C=1
         self.framebuf = framebuf.FrameBuffer1(memoryview(self.buffer)[1:], width, height)
-        super().__init__(width, height, external_vcc)
+        try:
+            super().__init__(width, height, external_vcc)
+        except:
+            say('OLED not found')
+            raise Exception('OLED not found')
 
     def write_cmd(self, cmd):
         self.temp[0] = 0x80 # Co=1, D/C#=0

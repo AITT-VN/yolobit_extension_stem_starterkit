@@ -132,7 +132,7 @@ Blockly.Msg.BLOCK_STEMKIT_OLED_MESSAGE0 = "%5 OLED show %1 x %2 y %3 %4"
 Blockly.Msg.BLOCK_STEMKIT_OLED_TOOLTIP = "Show text on OLED display at given position"
 Blockly.Msg.BLOCK_STEMKIT_OLED_HELPURL = ""
 
-Blockly.Msg.BLOCK_STEMKIT_OLEDCLEAR_TOOLTIP = "Clear OLED display"
+Blockly.Msg.BLOCK_STEMKIT_OLEDCLEAR_TOOLTIP = "clear OLED display"
 Blockly.Msg.BLOCK_STEMKIT_OLEDCLEAR_MESSAGE0 = "%1 OLED clear"
 Blockly.Msg.BLOCK_STEMKIT_OLEDCLEAR_URL = ""
 
