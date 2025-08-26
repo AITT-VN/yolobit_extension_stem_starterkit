@@ -14,7 +14,7 @@
     "stemkit_robocon.py",
     "stemkit_remotecontrol.py",
     "gamepad.py",
-    "stemkit_oled.py",
+    "stemkit_ssd1306.py",
     "stemkit_rfid.py",
     "stemkit_rfid_expansion.py"
   ],

@@ -2062,13 +2062,12 @@ Blockly.Blocks["stemkit_oled_display"] = {
 };
 
 Blockly.Python['stemkit_oled_display'] = function(block) {
-  Blockly.Python.definitions_['import_oled'] = 'from stemkit_oled import SSD1306_I2C';
+  Blockly.Python.definitions_['import_oled'] = 'from stemkit_ssd1306 import SSD1306_I2C';
   Blockly.Python.definitions_['import_oled_init'] = 'stemkit_oled = SSD1306_I2C()';
   var value_text = Blockly.Python.valueToCode(block, 'string', Blockly.Python.ORDER_ATOMIC);
   var value_x = Blockly.Python.valueToCode(block, 'X', Blockly.Python.ORDER_ATOMIC);
   var value_y = Blockly.Python.valueToCode(block, 'Y', Blockly.Python.ORDER_ATOMIC);
   // TODO: Assemble Python into code variable.
-  //oled.text('Hello, World 1!', 0, 0, col); oled.show()
   var code = 'stemkit_oled.text(str(' + value_text + '), ' + value_x + ', ' + value_y + ', 1);\nstemkit_oled.show()\n';
   return code;
 };
@@ -2101,6 +2100,8 @@ Blockly.Blocks["stemkit_oled_clear"] = {
 };
 
 Blockly.Python['stemkit_oled_clear'] = function(block) {
+  Blockly.Python.definitions_['import_oled'] = 'from stemkit_ssd1306 import SSD1306_I2C';
+  Blockly.Python.definitions_['import_oled_init'] = 'stemkit_oled = SSD1306_I2C()';
   // TODO: Assemble Python into code variable.
   //oled.fill(1); oled.show()
   var code = 'stemkit_oled.fill(0);\nstemkit_oled.show()\n';
@@ -2358,10 +2359,9 @@ Blockly.Blocks['stemkit_scan_card'] = {
 Blockly.Python['stemkit_scan_card'] = function(block) {
   Blockly.Python.definitions_['import_rfid'] = 'from stemkit_rfid import *';
   Blockly.Python.definitions_['import_rfid_init'] = 'stemkit_rfid = RFID()';
-  var code = 'rfid.scan_card()';
+  var code = 'stemkit_rfid.scan_card()';
   return [code, Blockly.Python.ORDER_ATOMIC];
 };
-
 
 Blockly.Blocks['stemkit_scan_and_check'] = {
   init: function() {
@@ -2404,7 +2404,7 @@ Blockly.Python['stemkit_scan_and_check'] = function(block) {
   var list_name = block.getFieldValue('list_name');
   Blockly.Python.definitions_['import_rfid'] = 'from stemkit_rfid import *';
   Blockly.Python.definitions_['import_rfid_init'] = 'stemkit_rfid = RFID()';
-  var code = `rfid.scan_and_check("rfids_${list_name}")`;
+  var code = `stemkit_rfid.scan_and_check("rfids_${list_name}")`;
   return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
@@ -2448,9 +2448,9 @@ Blockly.Blocks['stemkit_scan_and_add_card'] = {
 
 Blockly.Python['stemkit_scan_and_add_card'] = function(block) {
   var list_name = block.getFieldValue('list_name');
-  Blockly.Python.definitions_['import_rfid'] = 'from rfid import *';
+  Blockly.Python.definitions_['import_rfid'] = 'from stemkit_rfid import *';
   Blockly.Python.definitions_['import_rfid_init'] = 'stemkit_rfid = RFID()';
-  var code = code = `rfid.scan_and_add_card("rfids_${list_name}")\n`;
+  var code = code = `stemkit_rfid.scan_and_add_card("rfids_${list_name}")\n`;
   return code;
 };
 
@@ -2496,7 +2496,7 @@ Blockly.Python['stemkit_scan_and_remove_card'] = function(block) {
   var list_name = block.getFieldValue('list_name');
   Blockly.Python.definitions_['import_rfid'] = 'from stemkit_rfid import *';
   Blockly.Python.definitions_['import_rfid_init'] = 'stemkit_rfid = RFID()';
-  var code = `rfid.scan_and_remove_card("rfids_${list_name}")\n`;
+  var code = `stemkit_rfid.scan_and_remove_card("rfids_${list_name}")\n`;
   return code;
 };
 
@@ -2542,6 +2542,6 @@ Blockly.Python['stemkit_clear_list'] = function(block) {
   var list_name = block.getFieldValue('list_name');
   Blockly.Python.definitions_['import_rfid'] = 'from stemkit_rfid import *';
   Blockly.Python.definitions_['import_rfid_init'] = 'stemkit_rfid = RFID()';
-  var code = `rfid.clear_list("rfids_${list_name}")\n`;
+  var code = `stemkit_rfid.clear_list("rfids_${list_name}")\n`;
   return code;
 };
