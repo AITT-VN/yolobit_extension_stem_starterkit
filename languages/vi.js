@@ -116,8 +116,8 @@ Blockly.Msg.BLOCK_STEMKIT_DHT_READ_MESSAGE2 = "độ ẩm"
 Blockly.Msg.BLOCK_STEMKIT_DHT_READ_TOOLTIP = ""
 Blockly.Msg.BLOCK_STEMKIT_DHT_READ_HELPURL = ""
 
-
-Blockly.Msg.BLOCK_STEMKIT_LCD1602_MESSAGE0 = "%5 màn hình LCD hiển thị %1 x %2 y %3 %4"
+Blockly.Msg.BLOCK_STEMKIT_LCD1602_SAMPLE_MESSAGE0 = "%7 màn hình LCD1602 hiển thị %1 %2 %3 x %4 y %5 %6"
+Blockly.Msg.BLOCK_STEMKIT_LCD1602_MESSAGE0 = "%5 màn hình LCD1602 hiển thị %1 x %2 y %3 %4"
 Blockly.Msg.BLOCK_STEMKIT_LCDCLEAR_MESSAGE0 = "%1 xóa màn hình LCD1602"
 
 Blockly.Msg.BLOCK_STEMKIT_SOUND_SENSOR_MESSAGE0 = "%2 mức độ âm thanh (%%) %1"
@@ -128,6 +128,10 @@ Blockly.Msg.BLOCK_STEMKIT_PIR_MESSAGE0 = "%2 PIR %1 phát hiện có người"
 
 Blockly.Msg.BLOCK_STEMKIT_WATER_MESSAGE0 = "%2 cảm biến %1 phát hiện nước"
 Blockly.Msg.BLOCK_STEMKIT_WATER_SENSOR_TOOLTIP = "Trả về giá trị ngập (0) hay không ngập (1) của cảm biến ngập nước";
+
+Blockly.Msg.BLOCK_STEMKIT_OLED_SAMPLE_MESSAGE0 = "%7 màn hình OLED hiển thị %1 %2 %3 x %4 y %5 %6";
+Blockly.Msg.BLOCK_STEMKIT_OLED_SAMPLE_TOOLTIP = "Hiển thị mẫu văn bản lên màn hình OLED tại vị trí chỉ định";
+Blockly.Msg.BLOCK_STEMKIT_OLED_SAMPLE_HELPURL = "";
 
 Blockly.Msg.BLOCK_STEMKIT_OLED_MESSAGE0 = "%5 màn hình OLED hiển thị %1 x %2 y %3 %4";
 Blockly.Msg.BLOCK_STEMKIT_OLED_TOOLTIP = "Hiển thị văn bản lên màn hình OLED tại vị trí chỉ định";
@@ -141,15 +145,15 @@ Blockly.Msg.BLOCK_STEMKIT_RFID_SCAN_MESSAGE0 = "%1 đọc ID thẻ";
 Blockly.Msg.BLOCK_STEMKIT_RFID_SCAN_TOOLTIP = "Đọc mã thẻ RFID hiện tại";
 Blockly.Msg.BLOCK_STEMKIT_RFID_SCAN_HELPURL = "";
 
-Blockly.Msg.BLOCK_STEMKIT_RFID_CHECK_MESSAGE0 = "%2 quét và kiểm tra thẻ trong danh sách %1";
+Blockly.Msg.BLOCK_STEMKIT_RFID_CHECK_MESSAGE0 = "%2 thẻ có trong danh sách %1";
 Blockly.Msg.BLOCK_STEMKIT_RFID_CHECK_TOOLTIP = "Kiểm tra xem mã thẻ có nằm trong danh sách đã lưu hay không";
 Blockly.Msg.BLOCK_STEMKIT_RFID_CHECK_HELPURL = "";
 
-Blockly.Msg.BLOCK_STEMKIT_RFID_ADD_MESSAGE0 = "%2 quét và thêm thẻ vào danh sách %1";
+Blockly.Msg.BLOCK_STEMKIT_RFID_ADD_MESSAGE0 = "%2 thêm thẻ vào danh sách %1";
 Blockly.Msg.BLOCK_STEMKIT_RFID_ADD_TOOLTIP = "Thêm mã thẻ đang quét vào danh sách đã lưu";
 Blockly.Msg.BLOCK_STEMKIT_RFID_ADD_HELPURL = "";
 
-Blockly.Msg.BLOCK_STEMKIT_RFID_REMOVE_MESSAGE0 = "%2 quét và xóa thẻ khỏi danh sách %1";
+Blockly.Msg.BLOCK_STEMKIT_RFID_REMOVE_MESSAGE0 = "%2 xóa thẻ khỏi danh sách %1";
 Blockly.Msg.BLOCK_STEMKIT_RFID_REMOVE_TOOLTIP = "Xóa mã thẻ đang quét khỏi danh sách đã lưu";
 Blockly.Msg.BLOCK_STEMKIT_RFID_REMOVE_HELPURL = "";
 

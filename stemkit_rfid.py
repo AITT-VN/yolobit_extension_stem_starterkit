@@ -347,9 +347,10 @@ class RFID:
 
     def scan_and_add_card(self, list_name):
         if list_name not in self.lists:
-            self.load_list(list_name) 
+            self.load_list(list_name)
 
-        uuid = self.scan_card()
+        wait_for(lambda: self.tagPresent())
+        uuid = self.readID()
         if not uuid:
             return
 
@@ -375,12 +376,15 @@ class RFID:
 
     def scan_and_remove_card(self, list_name):
         if list_name not in self.lists:
-            self.load_list(list_name)  
+            self.load_list(list_name)
+        
+        wait_for(lambda: self.tagPresent())
+        uuid = self.readID()
+        if not uuid:
+            return
 
-        uuid = self.scan_card()
         if uuid in self.lists[list_name]:  
             self.lists[list_name].remove(uuid)
-
             if not self.lists[list_name]:  
                 filename = f"{list_name}.json"
                 try:
@@ -392,6 +396,7 @@ class RFID:
             else:
                 self.save_list(list_name)
                 print("Remove card success!")
+        sleep_ms(250)
             
     def clear_list(self, list_name):
         filename = f"{list_name}.json"

@@ -114,7 +114,7 @@ Blockly.Msg.BLOCK_STEMKIT_DHT_READ_MESSAGE2 = "humidity"
 Blockly.Msg.BLOCK_STEMKIT_DHT_READ_TOOLTIP = ""
 Blockly.Msg.BLOCK_STEMKIT_DHT_READ_HELPURL = ""
 
-
+Blockly.Msg.BLOCK_STEMKIT_LCD1602_SAMPLE_MESSAGE0 = "%7 LCD1602 show %1 %2 %3 x %4 y %5 %6"
 Blockly.Msg.BLOCK_STEMKIT_LCD1602_MESSAGE0 = "%5 LCD1602 show %1 x %2 y %3 %4"
 Blockly.Msg.BLOCK_STEMKIT_LCDCLEAR_MESSAGE0 = "%1 LCD1602 clear"
 
@@ -128,6 +128,7 @@ Blockly.Msg.BLOCK_STEMKIT_PIR_MESSAGE0 = "%2 PIR %1 detected"
 Blockly.Msg.BLOCK_STEMKIT_WATER_MESSAGE0 = "%2 is water on  %1 water sensor"
 Blockly.Msg.BLOCK_STEMKIT_WATER_SENSOR_TOOLTIP = "Return 0 if water detected, otherwise 1";
 
+Blockly.Msg.BLOCK_STEMKIT_OLED_SAMPLE_MESSAGE0 = "%5 màn hình OLED hiển thị %1 x %2 y %3 %4";
 Blockly.Msg.BLOCK_STEMKIT_OLED_MESSAGE0 = "%5 OLED show %1 x %2 y %3 %4"
 Blockly.Msg.BLOCK_STEMKIT_OLED_TOOLTIP = "Show text on OLED display at given position"
 Blockly.Msg.BLOCK_STEMKIT_OLED_HELPURL = ""
@@ -136,7 +137,7 @@ Blockly.Msg.BLOCK_STEMKIT_OLEDCLEAR_TOOLTIP = "clear OLED display"
 Blockly.Msg.BLOCK_STEMKIT_OLEDCLEAR_MESSAGE0 = "%1 OLED clear"
 Blockly.Msg.BLOCK_STEMKIT_OLEDCLEAR_URL = ""
 
-Blockly.Msg.BLOCK_STEMKIT_RFID_CHECK_MESSAGE0 = "%2 scan and check card in list %1"
+Blockly.Msg.BLOCK_STEMKIT_RFID_CHECK_MESSAGE0 = "%2 card in list %1"
 Blockly.Msg.BLOCK_STEMKIT_RFID_CHECK_TOOLTIP = "Scan RFID card and check if  it is in the list"
 Blockly.Msg.BLOCK_STEMKIT_RFID_CHECK_HELPURL = ""
 
@@ -144,11 +145,11 @@ Blockly.Msg.BLOCK_STEMKIT_RFID_SCAN_MESSAGE0 = "%1 rfid read card id"
 Blockly.Msg.BLOCK_STEMKIT_RFID_SCAN_TOOLTIP = "Read RFID card id"
 Blockly.Msg.BLOCK_STEMKIT_RFID_SCAN_HELPURL = ""
 
-Blockly.Msg.BLOCK_STEMKIT_RFID_ADD_MESSAGE0 = "%2 scan and add card to list %1"
+Blockly.Msg.BLOCK_STEMKIT_RFID_ADD_MESSAGE0 = "%2 add card to list %1"
 Blockly.Msg.BLOCK_STEMKIT_RFID_ADD_TOOLTIP = "Scan RFID card and add it to the list"
 Blockly.Msg.BLOCK_STEMKIT_RFID_ADD_HELPURL = ""
 
-Blockly.Msg.BLOCK_STEMKIT_RFID_REMOVE_MESSAGE0 = "%2 scan and remove card from list %1"
+Blockly.Msg.BLOCK_STEMKIT_RFID_REMOVE_MESSAGE0 = "%2 remove card from list %1"
 Blockly.Msg.BLOCK_STEMKIT_RFID_REMOVE_TOOLTIP = "Scan RFID card and remove it from the list"
 Blockly.Msg.BLOCK_STEMKIT_RFID_REMOVE_HELPURL = ""
 

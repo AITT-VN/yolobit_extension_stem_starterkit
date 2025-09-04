@@ -1921,6 +1921,72 @@ Blockly.Python["stemkit_dht_read"] = function(block) {
 
 // LCD 1602
 
+Blockly.Blocks["stemkit_lcd1602_display_sample"] = {
+  init: function () {
+    this.jsonInit({
+      colour: StemKitColorBlock,
+      tooltip: "",
+      message0: Blockly.Msg.BLOCK_STEMKIT_LCD1602_SAMPLE_MESSAGE0,
+      args0: [
+        {
+          type: "input_value",
+          name: "data_name"
+        },
+        {
+          type: "input_value",
+          name: "data_value",
+          check: "Number",
+        },
+        {
+          type: "input_value",
+          name: "data_unit",
+        },
+        {
+          type: "input_value",
+          name: "X",
+          check: "Number",
+          min: 0,
+          max: 16
+        },
+        {
+          type: "input_value",
+          name: "Y",
+          check: "Number",
+          min: 0,
+          max: 2
+        },
+        {
+          type: "input_dummy"
+        },
+        {
+          "type": "field_image",
+          "src": ImgUrl + 'lcd.png',
+          "width": 20,
+          "height": 20,
+          "alt": "*",
+          "flipRtl": false
+        }
+      ],
+      previousStatement: null,
+      nextStatement: null,
+      helpUrl: "",
+    });
+  },
+};
+
+Blockly.Python["stemkit_lcd1602_display_sample"] = function (block) {
+  Blockly.Python.definitions_['import_lcd1602'] = 'from stemkit_lcd1602 import LCD1602';
+  Blockly.Python.definitions_['import_lcd1602_init'] = 'stemkit_lcd1602 = LCD1602()';
+  var data_name = Blockly.Python.valueToCode(block, 'data_name', Blockly.Python.ORDER_ATOMIC);
+  var data_value = Blockly.Python.valueToCode(block, 'data_value', Blockly.Python.ORDER_ATOMIC);
+  var data_unit = Blockly.Python.valueToCode(block, 'data_unit', Blockly.Python.ORDER_ATOMIC);
+  var data = data_name + ' + ": " + str(' + data_value + ') + ' + data_unit;
+  var x = Blockly.Python.valueToCode(block, 'X', Blockly.Python.ORDER_ATOMIC);
+  var y = Blockly.Python.valueToCode(block, 'Y', Blockly.Python.ORDER_ATOMIC);  // TODO: Assemble Python into code variable.
+  var code = "stemkit_lcd1602.move_to(" + x + ", "+ y +")\n" + "stemkit_lcd1602.putstr("+ data +")\n";
+  return code;
+};
+
 Blockly.Blocks["stemkit_lcd1602_display"] = {
   init: function () {
     this.jsonInit({
@@ -2013,6 +2079,72 @@ Blockly.Python["stemkit_lcd1602_clear"] = function (block) {
 };
 
 // OLED
+Blockly.Blocks["stemkit_oled_display_sample"] = {
+  init: function () {
+    this.jsonInit({
+      colour: StemKitColorBlock,
+      tooltip: "",
+      message0: Blockly.Msg.BLOCK_STEMKIT_OLED_SAMPLE_MESSAGE0,
+      args0: [
+        {
+          type: "input_value",
+          name: "data_name"
+        },
+        {
+          type: "input_value",
+          name: "data_value",
+          check: "Number",
+        },
+        {
+          type: "input_value",
+          name: "data_unit",
+        },
+        {
+          type: "input_value",
+          name: "X",
+          check: "Number",
+          min: 0,
+          max: 128
+        },
+        {
+          type: "input_value",
+          name: "Y",
+          check: "Number",
+          min: 0,
+          max: 64
+        },
+        {
+          type: "input_dummy"
+        },
+        {
+          "type": "field_image",
+          "src": ImgUrl + 'oled.png',
+          "width": 20,
+          "height": 20,
+          "alt": "*",
+          "flipRtl": false
+        }
+      ],
+      previousStatement: null,
+      nextStatement: null,
+      helpUrl: "",
+    });
+  },
+};
+
+Blockly.Python['stemkit_oled_display_sample'] = function(block) {
+  Blockly.Python.definitions_['import_oled'] = 'from stemkit_ssd1306 import SSD1306_I2C';
+  Blockly.Python.definitions_['import_oled_init'] = 'stemkit_oled = SSD1306_I2C()';
+  var data_name = Blockly.Python.valueToCode(block, 'data_name', Blockly.Python.ORDER_ATOMIC);
+  var data_value = Blockly.Python.valueToCode(block, 'data_value', Blockly.Python.ORDER_ATOMIC);
+  var data_unit = Blockly.Python.valueToCode(block, 'data_unit', Blockly.Python.ORDER_ATOMIC);
+  var value_x = Blockly.Python.valueToCode(block, 'X', Blockly.Python.ORDER_ATOMIC);
+  var value_y = Blockly.Python.valueToCode(block, 'Y', Blockly.Python.ORDER_ATOMIC);
+  // TODO: Assemble Python into code variable.
+  var data = data_name + ' + ": " + str(' + data_value + ') + ' + data_unit;
+  var code = 'stemkit_oled.text(str(' + data + '), ' + value_x + ', ' + value_y + ', 1);\nstemkit_oled.show()\n';
+  return code;
+};
 
 Blockly.Blocks["stemkit_oled_display"] = {
   init: function () {
