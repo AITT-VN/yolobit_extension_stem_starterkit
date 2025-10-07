@@ -142,7 +142,7 @@ class Motor():
         self.pcf.pin(0) = 1 black line
         '''
 
-        self.pcf.port |= 0x0F # It's only use for Rover with 2 white led.
+        #self.pcf.port |= 0x0F # It's only use for Rover with 2 white led.
 
         if index < 0 or index > 4:
             return 1
