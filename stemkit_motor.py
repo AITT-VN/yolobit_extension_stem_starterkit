@@ -32,8 +32,8 @@ class Motor():
         try:
             self.pcf = stemkit_pcf8574.PCF8574(
                 machine.SoftI2C(
-                    scl=machine.Pin(22),
-                    sda=machine.Pin(21)), 0x23)
+                    scl=machine.Pin(pin19.pin),
+                    sda=machine.Pin(pin20.pin)), 0x23)
         except:
             say('Line IR sensors not detected')
             self.pcf = None

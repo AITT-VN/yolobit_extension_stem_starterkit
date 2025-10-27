@@ -8,7 +8,7 @@ Copyright (c) 2019 Mike Causer
 """
 
 class PCF8574:
-    def __init__(self, i2c, address=0x20):
+    def __init__(self, i2c, address=0x23):
         self._i2c = i2c
         self._address = address
         self._port = bytearray(1)
