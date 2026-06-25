@@ -2,6 +2,7 @@ Blockly.Msg.STEMKIT_CAT_MOTORS = 'Động cơ và robot';
 Blockly.Msg.STEMKIT_CAT_OUTPUT = 'Điều khiển';
 Blockly.Msg.STEMKIT_CAT_SENSOR = 'Cảm biến';
 Blockly.Msg.STEMKIT_CAT_5CH_LINE = '5CH Line';
+Blockly.Msg.STEMKIT_LABEL_FAST_LINE = 'DÒ LINE NHANH (PID)';
 
 Blockly.Msg.BLOCK_STEMKIT_ALL_MSG = "tất cả"
 
@@ -93,6 +94,48 @@ Blockly.Msg.BLOCK_STEMKIT_LINE5_WHITE_LED_MESSAGE0 = "%1 %2 led trắng line 5 m
 Blockly.Msg.BLOCK_STEMKIT_LINE5_WHITE_LED_TOOLTIP = "Bật/tắt đèn LED trắng của cảm biến dò line 5 mắt"
 Blockly.Msg.BLOCK_STEMKIT_LINE5_LED_ON = "bật"
 Blockly.Msg.BLOCK_STEMKIT_LINE5_LED_OFF = "tắt"
+
+Blockly.Msg.BLOCK_STEMKIT_FAST_LINE_ENABLE_MESSAGE0 = "%1 khởi tạo dò line nhanh (PID)"
+Blockly.Msg.BLOCK_STEMKIT_FAST_LINE_ENABLE_TOOLTIP = "Khởi tạo bộ dò line PID tốc độ cao cho cảm biến 5 mắt"
+
+Blockly.Msg.BLOCK_STEMKIT_FAST_LINE_SET_PID_MESSAGE0 = "%1 đặt PID  Kp %2  Ki %3  Kd %4"
+Blockly.Msg.BLOCK_STEMKIT_FAST_LINE_SET_PID_TOOLTIP = "Đặt hệ số PID. Tăng Kp trước, rồi tăng Kd để dập dao động"
+
+Blockly.Msg.BLOCK_STEMKIT_FAST_LINE_SET_SPEED_MESSAGE0 = "%1 đặt tốc độ dò line nhanh %2"
+Blockly.Msg.BLOCK_STEMKIT_FAST_LINE_SET_SPEED_TOOLTIP = "Đặt tốc độ chạy nền (0-100) cho dò line nhanh"
+
+Blockly.Msg.BLOCK_STEMKIT_FAST_LINE_SET_DEBUG_MESSAGE0 = "%1 %2 ghi log debug dò line nhanh"
+Blockly.Msg.BLOCK_STEMKIT_FAST_LINE_SET_DEBUG_TOOLTIP = "Bật/tắt log CSV (gửi log cho AI để tinh chỉnh PID)"
+
+Blockly.Msg.BLOCK_STEMKIT_FAST_LINE_SET_DEBUG_INTERVAL_MESSAGE0 = "%1 đặt khoảng in debug %2 ms"
+Blockly.Msg.BLOCK_STEMKIT_FAST_LINE_SET_DEBUG_INTERVAL_TOOLTIP = "Số mili giây giữa hai dòng log debug"
+
+Blockly.Msg.BLOCK_STEMKIT_FAST_LINE_RESET_PID_MESSAGE0 = "%1 reset PID"
+Blockly.Msg.BLOCK_STEMKIT_FAST_LINE_RESET_PID_TOOLTIP = "Xóa tích lũy (integral) và lỗi trước khi vào đoạn mới"
+
+Blockly.Msg.BLOCK_STEMKIT_FAST_LINE_ERROR_MESSAGE0 = "%1 lỗi dò line nhanh"
+Blockly.Msg.BLOCK_STEMKIT_FAST_LINE_ERROR_TOOLTIP = "Lỗi line đã chuẩn hóa (~ -2..2, 0 = giữa line)"
+
+Blockly.Msg.BLOCK_STEMKIT_FAST_LINE_READ_MESSAGE0 = "%1 đọc mảng 5 mắt dò line nhanh"
+Blockly.Msg.BLOCK_STEMKIT_FAST_LINE_READ_TOOLTIP = "Đọc mảng 5 mắt (s0..s4), mỗi mắt 0/1"
+
+Blockly.Msg.BLOCK_STEMKIT_FAST_LINE_STEP_MESSAGE0 = "%1 chạy 1 bước PID dò line"
+Blockly.Msg.BLOCK_STEMKIT_FAST_LINE_STEP_TOOLTIP = "Chạy một vòng PID (dùng trong vòng lặp tự viết)"
+
+Blockly.Msg.BLOCK_STEMKIT_FAST_LINE_FOLLOW_DELAY_MESSAGE0 = "%3 dò line nhanh trong %1 giây rồi %2"
+Blockly.Msg.BLOCK_STEMKIT_FAST_LINE_FOLLOW_DELAY_TOOLTIP = "Dò line PID tốc độ cao trong một khoảng thời gian"
+
+Blockly.Msg.BLOCK_STEMKIT_FAST_LINE_FOLLOW_CROSS_MESSAGE0 = "%2 dò line nhanh đến vạch ngang rồi %1"
+Blockly.Msg.BLOCK_STEMKIT_FAST_LINE_FOLLOW_CROSS_TOOLTIP = "Dò line PID tốc độ cao đến khi gặp vạch ngang"
+
+Blockly.Msg.BLOCK_STEMKIT_FAST_LINE_FOLLOW_UNTIL_MESSAGE0 = "%3 dò line nhanh đến khi %1 rồi %2"
+Blockly.Msg.BLOCK_STEMKIT_FAST_LINE_FOLLOW_UNTIL_TOOLTIP = "Dò line PID tốc độ cao đến khi điều kiện đúng"
+
+Blockly.Msg.BLOCK_STEMKIT_FAST_LINE_SET_CURVE_GAIN_MESSAGE0 = "%1 đặt giảm tốc khi cua %2"
+Blockly.Msg.BLOCK_STEMKIT_FAST_LINE_SET_CURVE_GAIN_TOOLTIP = "Mức giảm tốc tiến khi vào cua gắt (0 = không giảm, 1 = xoay tại chỗ khi mất line). Nên 0.6-0.9"
+
+Blockly.Msg.BLOCK_STEMKIT_FAST_LINE_STOP_MESSAGE0 = "%1 dò line nhanh %2"
+Blockly.Msg.BLOCK_STEMKIT_FAST_LINE_STOP_TOOLTIP = "Dừng robot, hoặc thắng (brake) động cơ để dừng gấp"
 
 Blockly.Msg.BLOCK_STEMKIT_ROBOCON_LINE_UNTIL_CROSS_MESSAGE0 = "%3 dò line tốc độ %1 gặp vạch ngang rồi %2"
 Blockly.Msg.BLOCK_STEMKIT_ROBOCON_LINE_UNTIL_CROSS_TOOLTIP = "Cho robot dò line đến gặp vạch ngang"

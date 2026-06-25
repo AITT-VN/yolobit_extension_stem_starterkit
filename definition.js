@@ -1594,6 +1594,394 @@ Blockly.Python["stemkit_line5_white_led"] = function (block) {
 };
 
 
+// ===== FAST LINE (PID) - do line 5 mat toc do cao (FastLine5) =====
+
+function fastLineInit() {
+  line5Init(); // tao line_5ch (dung lai key cu -> khong tao trung instance)
+  Blockly.Python.definitions_['import_fast_line'] = 'from stemkit_fast_line import FastLine5, STOP, BRAKE';
+  Blockly.Python.definitions_['import_fast_line_init'] = 'fast_line = FastLine5(sensor=line_5ch)';
+}
+
+function fastLineImage() {
+  return {
+    "type": "field_image",
+    "src": ImgUrl2 + 'line.svg',
+    "width": 15,
+    "height": 15,
+    "alt": "*",
+    "flipRtl": false
+  };
+}
+
+function fastLineThenOptions() {
+  return {
+    "type": "field_dropdown",
+    "name": "then",
+    "options": [
+      [Blockly.Msg.ROBOCON_THEN_ACTION_BRAKE, "BRAKE"],
+      [Blockly.Msg.ROBOCON_THEN_ACTION_NONE, "STOP"]
+    ]
+  };
+}
+
+// 1) Khoi tao fast line
+Blockly.Blocks['stemkit_fast_line_enable'] = {
+  init: function () {
+    this.jsonInit({
+      "type": "stemkit_fast_line_enable",
+      "message0": Blockly.Msg.BLOCK_STEMKIT_FAST_LINE_ENABLE_MESSAGE0,
+      "args0": [fastLineImage()],
+      "inputsInline": true,
+      "previousStatement": null,
+      "nextStatement": null,
+      "colour": StemKitColorBlock,
+      "tooltip": Blockly.Msg.BLOCK_STEMKIT_FAST_LINE_ENABLE_TOOLTIP,
+      "helpUrl": ""
+    });
+  }
+};
+
+Blockly.Python["stemkit_fast_line_enable"] = function (block) {
+  fastLineInit();
+  return '';
+};
+
+// 2) Dat he so PID
+Blockly.Blocks['stemkit_fast_line_set_pid'] = {
+  init: function () {
+    this.jsonInit({
+      "type": "stemkit_fast_line_set_pid",
+      "message0": Blockly.Msg.BLOCK_STEMKIT_FAST_LINE_SET_PID_MESSAGE0,
+      "args0": [
+        fastLineImage(),
+        { "type": "input_value", "check": "Number", "name": "kp" },
+        { "type": "input_value", "check": "Number", "name": "ki" },
+        { "type": "input_value", "check": "Number", "name": "kd" }
+      ],
+      "inputsInline": true,
+      "previousStatement": null,
+      "nextStatement": null,
+      "colour": StemKitColorBlock,
+      "tooltip": Blockly.Msg.BLOCK_STEMKIT_FAST_LINE_SET_PID_TOOLTIP,
+      "helpUrl": ""
+    });
+  }
+};
+
+Blockly.Python["stemkit_fast_line_set_pid"] = function (block) {
+  fastLineInit();
+  var kp = Blockly.Python.valueToCode(block, 'kp', Blockly.Python.ORDER_ATOMIC) || '0';
+  var ki = Blockly.Python.valueToCode(block, 'ki', Blockly.Python.ORDER_ATOMIC) || '0';
+  var kd = Blockly.Python.valueToCode(block, 'kd', Blockly.Python.ORDER_ATOMIC) || '0';
+  return "fast_line.set_pid(" + kp + ", " + ki + ", " + kd + ")\n";
+};
+
+// 3) Dat toc do
+Blockly.Blocks['stemkit_fast_line_set_speed'] = {
+  init: function () {
+    this.jsonInit({
+      "type": "stemkit_fast_line_set_speed",
+      "message0": Blockly.Msg.BLOCK_STEMKIT_FAST_LINE_SET_SPEED_MESSAGE0,
+      "args0": [
+        fastLineImage(),
+        { "type": "input_value", "check": "Number", "name": "speed" }
+      ],
+      "inputsInline": true,
+      "previousStatement": null,
+      "nextStatement": null,
+      "colour": StemKitColorBlock,
+      "tooltip": Blockly.Msg.BLOCK_STEMKIT_FAST_LINE_SET_SPEED_TOOLTIP,
+      "helpUrl": ""
+    });
+  }
+};
+
+Blockly.Python["stemkit_fast_line_set_speed"] = function (block) {
+  fastLineInit();
+  var speed = Blockly.Python.valueToCode(block, 'speed', Blockly.Python.ORDER_ATOMIC) || '60';
+  return "fast_line.set_speed(" + speed + ")\n";
+};
+
+// 4) Bat/tat debug
+Blockly.Blocks['stemkit_fast_line_set_debug'] = {
+  init: function () {
+    this.jsonInit({
+      "type": "stemkit_fast_line_set_debug",
+      "message0": Blockly.Msg.BLOCK_STEMKIT_FAST_LINE_SET_DEBUG_MESSAGE0,
+      "args0": [
+        fastLineImage(),
+        {
+          "type": "field_dropdown",
+          "name": "state",
+          "options": [
+            [Blockly.Msg.BLOCK_STEMKIT_LINE5_LED_ON, "True"],
+            [Blockly.Msg.BLOCK_STEMKIT_LINE5_LED_OFF, "False"]
+          ]
+        }
+      ],
+      "inputsInline": true,
+      "previousStatement": null,
+      "nextStatement": null,
+      "colour": StemKitColorBlock,
+      "tooltip": Blockly.Msg.BLOCK_STEMKIT_FAST_LINE_SET_DEBUG_TOOLTIP,
+      "helpUrl": ""
+    });
+  }
+};
+
+Blockly.Python["stemkit_fast_line_set_debug"] = function (block) {
+  fastLineInit();
+  var state = block.getFieldValue("state");
+  return "fast_line.set_debug(" + state + ")\n";
+};
+
+// 5) Dat khoang in debug (ms)
+Blockly.Blocks['stemkit_fast_line_set_debug_interval'] = {
+  init: function () {
+    this.jsonInit({
+      "type": "stemkit_fast_line_set_debug_interval",
+      "message0": Blockly.Msg.BLOCK_STEMKIT_FAST_LINE_SET_DEBUG_INTERVAL_MESSAGE0,
+      "args0": [
+        fastLineImage(),
+        { "type": "input_value", "check": "Number", "name": "ms" }
+      ],
+      "inputsInline": true,
+      "previousStatement": null,
+      "nextStatement": null,
+      "colour": StemKitColorBlock,
+      "tooltip": Blockly.Msg.BLOCK_STEMKIT_FAST_LINE_SET_DEBUG_INTERVAL_TOOLTIP,
+      "helpUrl": ""
+    });
+  }
+};
+
+Blockly.Python["stemkit_fast_line_set_debug_interval"] = function (block) {
+  fastLineInit();
+  var ms = Blockly.Python.valueToCode(block, 'ms', Blockly.Python.ORDER_ATOMIC) || '100';
+  return "fast_line.set_debug_interval(" + ms + ")\n";
+};
+
+// 6) Reset PID
+Blockly.Blocks['stemkit_fast_line_reset_pid'] = {
+  init: function () {
+    this.jsonInit({
+      "type": "stemkit_fast_line_reset_pid",
+      "message0": Blockly.Msg.BLOCK_STEMKIT_FAST_LINE_RESET_PID_MESSAGE0,
+      "args0": [fastLineImage()],
+      "inputsInline": true,
+      "previousStatement": null,
+      "nextStatement": null,
+      "colour": StemKitColorBlock,
+      "tooltip": Blockly.Msg.BLOCK_STEMKIT_FAST_LINE_RESET_PID_TOOLTIP,
+      "helpUrl": ""
+    });
+  }
+};
+
+Blockly.Python["stemkit_fast_line_reset_pid"] = function (block) {
+  fastLineInit();
+  return "fast_line.reset_pid()\n";
+};
+
+// 7) Lay error hien tai
+Blockly.Blocks['stemkit_fast_line_error'] = {
+  init: function () {
+    this.jsonInit({
+      "type": "stemkit_fast_line_error",
+      "message0": Blockly.Msg.BLOCK_STEMKIT_FAST_LINE_ERROR_MESSAGE0,
+      "args0": [fastLineImage()],
+      "inputsInline": true,
+      "colour": StemKitColorBlock,
+      "output": "Number",
+      "tooltip": Blockly.Msg.BLOCK_STEMKIT_FAST_LINE_ERROR_TOOLTIP,
+      "helpUrl": ""
+    });
+  }
+};
+
+Blockly.Python["stemkit_fast_line_error"] = function (block) {
+  fastLineInit();
+  return ["fast_line.error()", Blockly.Python.ORDER_NONE];
+};
+
+// 8) Doc mang 5 mat
+Blockly.Blocks['stemkit_fast_line_read'] = {
+  init: function () {
+    this.jsonInit({
+      "type": "stemkit_fast_line_read",
+      "message0": Blockly.Msg.BLOCK_STEMKIT_FAST_LINE_READ_MESSAGE0,
+      "args0": [fastLineImage()],
+      "inputsInline": true,
+      "colour": StemKitColorBlock,
+      "output": "",
+      "tooltip": Blockly.Msg.BLOCK_STEMKIT_FAST_LINE_READ_TOOLTIP,
+      "helpUrl": ""
+    });
+  }
+};
+
+Blockly.Python["stemkit_fast_line_read"] = function (block) {
+  fastLineInit();
+  return ["fast_line.read()", Blockly.Python.ORDER_NONE];
+};
+
+// 9) Mot buoc PID (de tu ghep vong lap)
+Blockly.Blocks['stemkit_fast_line_step'] = {
+  init: function () {
+    this.jsonInit({
+      "type": "stemkit_fast_line_step",
+      "message0": Blockly.Msg.BLOCK_STEMKIT_FAST_LINE_STEP_MESSAGE0,
+      "args0": [fastLineImage()],
+      "inputsInline": true,
+      "previousStatement": null,
+      "nextStatement": null,
+      "colour": StemKitColorBlock,
+      "tooltip": Blockly.Msg.BLOCK_STEMKIT_FAST_LINE_STEP_TOOLTIP,
+      "helpUrl": ""
+    });
+  }
+};
+
+Blockly.Python["stemkit_fast_line_step"] = function (block) {
+  fastLineInit();
+  return "fast_line.step()\n";
+};
+
+// 10) Do line trong N giay
+Blockly.Blocks['stemkit_fast_line_follow_delay'] = {
+  init: function () {
+    this.jsonInit({
+      "type": "stemkit_fast_line_follow_delay",
+      "message0": Blockly.Msg.BLOCK_STEMKIT_FAST_LINE_FOLLOW_DELAY_MESSAGE0,
+      "args0": [
+        { "type": "input_value", "check": "Number", "name": "seconds" },
+        fastLineThenOptions(),
+        fastLineImage()
+      ],
+      "inputsInline": true,
+      "previousStatement": null,
+      "nextStatement": null,
+      "colour": StemKitColorBlock,
+      "tooltip": Blockly.Msg.BLOCK_STEMKIT_FAST_LINE_FOLLOW_DELAY_TOOLTIP,
+      "helpUrl": ""
+    });
+  }
+};
+
+Blockly.Python["stemkit_fast_line_follow_delay"] = function (block) {
+  fastLineInit();
+  var seconds = Blockly.Python.valueToCode(block, 'seconds', Blockly.Python.ORDER_ATOMIC) || '3';
+  var then = block.getFieldValue('then');
+  return "fast_line.follow_delay(" + seconds + ", " + then + ")\n";
+};
+
+// 11) Do line den vach ngang (cross)
+Blockly.Blocks['stemkit_fast_line_follow_until_cross'] = {
+  init: function () {
+    this.jsonInit({
+      "type": "stemkit_fast_line_follow_until_cross",
+      "message0": Blockly.Msg.BLOCK_STEMKIT_FAST_LINE_FOLLOW_CROSS_MESSAGE0,
+      "args0": [
+        fastLineThenOptions(),
+        fastLineImage()
+      ],
+      "inputsInline": true,
+      "previousStatement": null,
+      "nextStatement": null,
+      "colour": StemKitColorBlock,
+      "tooltip": Blockly.Msg.BLOCK_STEMKIT_FAST_LINE_FOLLOW_CROSS_TOOLTIP,
+      "helpUrl": ""
+    });
+  }
+};
+
+Blockly.Python["stemkit_fast_line_follow_until_cross"] = function (block) {
+  fastLineInit();
+  var then = block.getFieldValue('then');
+  return "fast_line.follow_until_cross(15000, " + then + ")\n";
+};
+
+// 12) Do line den khi dieu kien dung
+Blockly.Blocks['stemkit_fast_line_follow_until'] = {
+  init: function () {
+    this.jsonInit({
+      "type": "stemkit_fast_line_follow_until",
+      "message0": Blockly.Msg.BLOCK_STEMKIT_FAST_LINE_FOLLOW_UNTIL_MESSAGE0,
+      "args0": [
+        { "type": "input_value", "check": "Boolean", "name": "condition" },
+        fastLineThenOptions(),
+        fastLineImage()
+      ],
+      "inputsInline": true,
+      "previousStatement": null,
+      "nextStatement": null,
+      "colour": StemKitColorBlock,
+      "tooltip": Blockly.Msg.BLOCK_STEMKIT_FAST_LINE_FOLLOW_UNTIL_TOOLTIP,
+      "helpUrl": ""
+    });
+  }
+};
+
+Blockly.Python["stemkit_fast_line_follow_until"] = function (block) {
+  fastLineInit();
+  var condition = Blockly.Python.valueToCode(block, 'condition', Blockly.Python.ORDER_NONE) || 'False';
+  var then = block.getFieldValue('then');
+  return "fast_line.follow_until(lambda: (" + condition + "), 15000, " + then + ")\n";
+};
+
+// 13) Dat do giam toc khi cua (curve_gain)
+Blockly.Blocks['stemkit_fast_line_set_curve_gain'] = {
+  init: function () {
+    this.jsonInit({
+      "type": "stemkit_fast_line_set_curve_gain",
+      "message0": Blockly.Msg.BLOCK_STEMKIT_FAST_LINE_SET_CURVE_GAIN_MESSAGE0,
+      "args0": [
+        fastLineImage(),
+        { "type": "input_value", "check": "Number", "name": "gain" }
+      ],
+      "inputsInline": true,
+      "previousStatement": null,
+      "nextStatement": null,
+      "colour": StemKitColorBlock,
+      "tooltip": Blockly.Msg.BLOCK_STEMKIT_FAST_LINE_SET_CURVE_GAIN_TOOLTIP,
+      "helpUrl": ""
+    });
+  }
+};
+
+Blockly.Python["stemkit_fast_line_set_curve_gain"] = function (block) {
+  fastLineInit();
+  var gain = Blockly.Python.valueToCode(block, 'gain', Blockly.Python.ORDER_ATOMIC) || '0.7';
+  return "fast_line.set_curve_gain(" + gain + ")\n";
+};
+
+// 14) Dung / thang dong co
+Blockly.Blocks['stemkit_fast_line_stop'] = {
+  init: function () {
+    this.jsonInit({
+      "type": "stemkit_fast_line_stop",
+      "message0": Blockly.Msg.BLOCK_STEMKIT_FAST_LINE_STOP_MESSAGE0,
+      "args0": [
+        fastLineImage(),
+        fastLineThenOptions()
+      ],
+      "inputsInline": true,
+      "previousStatement": null,
+      "nextStatement": null,
+      "colour": StemKitColorBlock,
+      "tooltip": Blockly.Msg.BLOCK_STEMKIT_FAST_LINE_STOP_TOOLTIP,
+      "helpUrl": ""
+    });
+  }
+};
+
+Blockly.Python["stemkit_fast_line_stop"] = function (block) {
+  fastLineInit();
+  var then = block.getFieldValue('then');
+  return "fast_line.stop(" + then + ")\n";
+};
+
+
 //Robocon
 
 Blockly.Blocks['stemkit_robocon_follow_line_until_cross'] = {

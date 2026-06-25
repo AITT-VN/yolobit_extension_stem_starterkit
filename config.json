@@ -17,7 +17,8 @@
     "stemkit_ssd1306.py",
     "stemkit_rfid.py",
     "stemkit_rfid_expansion.py",
-    "stemkit_line5.py"
+    "stemkit_line5.py",
+    "stemkit_fast_line.py"
   ],
   "blocks": [
     "definition.js"

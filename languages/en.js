@@ -2,6 +2,7 @@ Blockly.Msg.STEMKIT_CAT_MOTORS = 'Robot and motors';
 Blockly.Msg.STEMKIT_CAT_OUTPUT = 'Output';
 Blockly.Msg.STEMKIT_CAT_SENSOR = 'Sensor';
 Blockly.Msg.STEMKIT_CAT_5CH_LINE = '5CH Line';
+Blockly.Msg.STEMKIT_LABEL_FAST_LINE = 'FAST LINE (PID)';
 
 Blockly.Msg.BLOCK_STEMKIT_ALL_MSG = "all"
 
@@ -93,6 +94,48 @@ Blockly.Msg.BLOCK_STEMKIT_LINE5_WHITE_LED_MESSAGE0 = "%1 %2 white LED of 5-eye l
 Blockly.Msg.BLOCK_STEMKIT_LINE5_WHITE_LED_TOOLTIP = "Turn the white LED of the 5-eye line sensor on/off"
 Blockly.Msg.BLOCK_STEMKIT_LINE5_LED_ON = "turn on"
 Blockly.Msg.BLOCK_STEMKIT_LINE5_LED_OFF = "turn off"
+
+Blockly.Msg.BLOCK_STEMKIT_FAST_LINE_ENABLE_MESSAGE0 = "%1 initialize fast line (PID)"
+Blockly.Msg.BLOCK_STEMKIT_FAST_LINE_ENABLE_TOOLTIP = "Initialize high-speed PID line follower for the 5-eye sensor"
+
+Blockly.Msg.BLOCK_STEMKIT_FAST_LINE_SET_PID_MESSAGE0 = "%1 set PID  Kp %2  Ki %3  Kd %4"
+Blockly.Msg.BLOCK_STEMKIT_FAST_LINE_SET_PID_TOOLTIP = "Set PID gains. Tune Kp first, then Kd to damp oscillation"
+
+Blockly.Msg.BLOCK_STEMKIT_FAST_LINE_SET_SPEED_MESSAGE0 = "%1 set fast line speed %2"
+Blockly.Msg.BLOCK_STEMKIT_FAST_LINE_SET_SPEED_TOOLTIP = "Set base driving speed (0-100) for fast line following"
+
+Blockly.Msg.BLOCK_STEMKIT_FAST_LINE_SET_DEBUG_MESSAGE0 = "%1 %2 fast line debug log"
+Blockly.Msg.BLOCK_STEMKIT_FAST_LINE_SET_DEBUG_TOOLTIP = "Turn CSV debug log on/off (give the log to AI to tune PID)"
+
+Blockly.Msg.BLOCK_STEMKIT_FAST_LINE_SET_DEBUG_INTERVAL_MESSAGE0 = "%1 set debug interval %2 ms"
+Blockly.Msg.BLOCK_STEMKIT_FAST_LINE_SET_DEBUG_INTERVAL_TOOLTIP = "Milliseconds between two debug log lines"
+
+Blockly.Msg.BLOCK_STEMKIT_FAST_LINE_RESET_PID_MESSAGE0 = "%1 reset PID"
+Blockly.Msg.BLOCK_STEMKIT_FAST_LINE_RESET_PID_TOOLTIP = "Reset PID integral and last error before a new segment"
+
+Blockly.Msg.BLOCK_STEMKIT_FAST_LINE_ERROR_MESSAGE0 = "%1 fast line error"
+Blockly.Msg.BLOCK_STEMKIT_FAST_LINE_ERROR_TOOLTIP = "Current normalized line error (~ -2..2, 0 = centered)"
+
+Blockly.Msg.BLOCK_STEMKIT_FAST_LINE_READ_MESSAGE0 = "%1 read fast line 5-eye array"
+Blockly.Msg.BLOCK_STEMKIT_FAST_LINE_READ_TOOLTIP = "Read the 5-eye array (s0..s4), each 0/1"
+
+Blockly.Msg.BLOCK_STEMKIT_FAST_LINE_STEP_MESSAGE0 = "%1 fast line PID step"
+Blockly.Msg.BLOCK_STEMKIT_FAST_LINE_STEP_TOOLTIP = "Run one PID iteration (use inside your own loop)"
+
+Blockly.Msg.BLOCK_STEMKIT_FAST_LINE_FOLLOW_DELAY_MESSAGE0 = "%3 fast follow line in %1 seconds then %2"
+Blockly.Msg.BLOCK_STEMKIT_FAST_LINE_FOLLOW_DELAY_TOOLTIP = "Fast PID line following for a time duration"
+
+Blockly.Msg.BLOCK_STEMKIT_FAST_LINE_FOLLOW_CROSS_MESSAGE0 = "%2 fast follow line until cross then %1"
+Blockly.Msg.BLOCK_STEMKIT_FAST_LINE_FOLLOW_CROSS_TOOLTIP = "Fast PID line following until a cross line is detected"
+
+Blockly.Msg.BLOCK_STEMKIT_FAST_LINE_FOLLOW_UNTIL_MESSAGE0 = "%3 fast follow line until %1 then %2"
+Blockly.Msg.BLOCK_STEMKIT_FAST_LINE_FOLLOW_UNTIL_TOOLTIP = "Fast PID line following until a condition becomes true"
+
+Blockly.Msg.BLOCK_STEMKIT_FAST_LINE_SET_CURVE_GAIN_MESSAGE0 = "%1 set curve slow-down %2"
+Blockly.Msg.BLOCK_STEMKIT_FAST_LINE_SET_CURVE_GAIN_TOOLTIP = "How much to slow forward speed in sharp turns (0=never, 1=spin in place when line lost). Try 0.6-0.9"
+
+Blockly.Msg.BLOCK_STEMKIT_FAST_LINE_STOP_MESSAGE0 = "%1 fast line %2"
+Blockly.Msg.BLOCK_STEMKIT_FAST_LINE_STOP_TOOLTIP = "Stop the robot, or actively brake the motors to a quick halt"
 
 Blockly.Msg.BLOCK_STEMKIT_ROBOCON_LINE_UNTIL_CROSS_MESSAGE0 = "%3 follows line with speed %1 until cross-line then %2"
 Blockly.Msg.BLOCK_STEMKIT_ROBOCON_LINE_UNTIL_CROSS_TOOLTIP = "Robot follows line with selected speed until cross line"
