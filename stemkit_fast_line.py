@@ -176,9 +176,11 @@ class FastLine5:
         if time.ticks_diff(now, self._last_dbg) < self.debug_interval:
             return
         self._last_dbg = now
-        s = self.sensor.read()
+        # lay trang thai 5 mat tu CACHE cua update() (cung khung voi error),
+        # khong doc I2C lai -> moi dong log nhat quan de phan tich.
+        pat = self.sensor.get_pattern()
         print('FASTLINE,%d,%d,%d,%d,%d,%d,%.3f,%.3f,%.3f,%.3f,%.3f,%d,%d' % (
-            now, s[0], s[1], s[2], s[3], s[4],
+            now, pat & 1, (pat >> 1) & 1, (pat >> 2) & 1, (pat >> 3) & 1, (pat >> 4) & 1,
             error, p, i, d, correction, int(m1), int(m2)))
 
     # ---------------- cac che do do line ----------------
