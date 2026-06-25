@@ -95,8 +95,13 @@ Blockly.Msg.BLOCK_STEMKIT_LINE5_WHITE_LED_TOOLTIP = "Bật/tắt đèn LED trắ
 Blockly.Msg.BLOCK_STEMKIT_LINE5_LED_ON = "bật"
 Blockly.Msg.BLOCK_STEMKIT_LINE5_LED_OFF = "tắt"
 
-Blockly.Msg.BLOCK_STEMKIT_FAST_LINE_ENABLE_MESSAGE0 = "%1 khởi tạo dò line nhanh (PID)"
-Blockly.Msg.BLOCK_STEMKIT_FAST_LINE_ENABLE_TOOLTIP = "Khởi tạo bộ dò line PID tốc độ cao cho cảm biến 5 mắt"
+Blockly.Msg.BLOCK_STEMKIT_FAST_LINE_ENABLE_MESSAGE0 = "%1 khởi tạo dò line nhanh (PID) - chế độ %2"
+Blockly.Msg.BLOCK_STEMKIT_FAST_LINE_ENABLE_TOOLTIP = "Khởi tạo bộ dò line PID tốc độ cao. DIGITAL = ổn định (không cần calib). RAW = analog mượt hơn (phải calibrate trước)"
+Blockly.Msg.BLOCK_STEMKIT_FAST_LINE_MODE_DIGITAL = "DIGITAL"
+Blockly.Msg.BLOCK_STEMKIT_FAST_LINE_MODE_RAW = "RAW (analog)"
+
+Blockly.Msg.BLOCK_STEMKIT_FAST_LINE_CALIBRATE_MESSAGE0 = "%1 calib cảm biến line trong %2 giây"
+Blockly.Msg.BLOCK_STEMKIT_FAST_LINE_CALIBRATE_TOOLTIP = "Chỉ cho chế độ RAW: robot tự xoay quét 5 mắt qua line + nền để học ngưỡng. Đặt robot trên line trước khi gọi"
 
 Blockly.Msg.BLOCK_STEMKIT_FAST_LINE_SET_PID_MESSAGE0 = "%1 đặt PID  Kp %2  Ki %3  Kd %4"
 Blockly.Msg.BLOCK_STEMKIT_FAST_LINE_SET_PID_TOOLTIP = "Đặt hệ số PID. Tăng Kp trước, rồi tăng Kd để dập dao động"

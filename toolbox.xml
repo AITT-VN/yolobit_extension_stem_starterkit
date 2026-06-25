@@ -334,6 +334,13 @@
     <label text="{{STEMKIT_LABEL_FAST_LINE}}" web-class="blockLabelStyle"></label>
 
     <block type="stemkit_fast_line_enable"/>
+    <block type="stemkit_fast_line_calibrate">
+      <value name="seconds">
+        <shadow type="math_number">
+          <field name="NUM">3</field>
+        </shadow>
+      </value>
+    </block>
     <block type="stemkit_fast_line_set_pid">
       <value name="kp">
         <shadow type="math_number">

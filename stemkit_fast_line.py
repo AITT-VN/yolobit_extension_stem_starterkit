@@ -48,15 +48,31 @@ BRAKE = const(1)
 # gioi han chong tich luy qua muc (integral windup) khi dung Ki
 _INTEGRAL_LIMIT = 1000.0
 
+# trong so truc S1..S5 cho centroid analog (thang [-2, 2])
+_WEIGHTS = (-2.0, -1.0, 0.0, 1.0, 2.0)
+
 
 def _clamp(v, lo, hi):
     return lo if v < lo else (hi if v > hi else v)
 
 
 class FastLine5:
-    def __init__(self, sensor=None):
+    def __init__(self, sensor=None, mode='digital'):
         # dung lai cam bien truyen vao (vd line_5ch), neu khong thi tu tao
         self.sensor = sensor if sensor is not None else LineSensor5P_I2C()
+
+        # che do doc vi tri line:
+        #  'digital' -> centroid tu 0/1 (9 muc roi rac, on dinh, khong can calib)
+        #  'raw'     -> centroid analog lien tuc (muot hon) NHUNG phai calibrate() truoc
+        self.mode = mode
+
+        # calib cho che do 'raw'
+        self._cal_min = [4095, 4095, 4095, 4095, 4095]
+        self._cal_max = [0, 0, 0, 0, 0]
+        self._line_high = True       # line cho gia tri raw cao hay thap (tu calib)
+        self._calibrated = False
+        self._last_aerr = 0.0        # giu huong khi mat line (che do raw)
+        self.lost_threshold = 0.5    # tong "do tren line" duoi nguong nay = mat line
 
         # he so PID mac dinh (thang error ~[-2, 2]).
         # Kp=0.5 -> luc error=2.0 thi correction=1.0 -> pivot duoc qua cua.
@@ -100,6 +116,54 @@ class FastLine5:
             gain = 1
         self.curve_gain = gain
 
+    def set_mode(self, mode):
+        # 'digital' (mac dinh, on dinh) hoac 'raw' (analog, muot hon, can calibrate())
+        self.mode = mode
+        if mode == 'raw' and not self._calibrated:
+            print('FastLine5: che do raw chua calibrate -> tam dung digital. Goi calibrate() truoc.')
+
+    def calibrate(self, seconds=3, spin=35):
+        # Hoc nguong cho che do 'raw': robot TU XOAY de quet 5 mat qua line + nen,
+        # ghi lai min/max moi mat. Dat robot tren/canh line roi goi ham nay.
+        # Sau khi xong, vi tri line se duoc tinh lien tuc (muot hon digital).
+        self._cal_min = [4095, 4095, 4095, 4095, 4095]
+        self._cal_max = [0, 0, 0, 0, 0]
+        on_total = 0
+        on_count = 0
+        off_total = 0
+        off_count = 0
+        duration = int(seconds * 1000)
+        half = duration // 2
+        start = time.ticks_ms()
+        self._set_wheels(spin, spin)        # xoay 1 chieu
+        flipped = False
+        while time.ticks_diff(time.ticks_ms(), start) < duration:
+            if not flipped and time.ticks_diff(time.ticks_ms(), start) > half:
+                self._set_wheels(-spin, -spin)   # xoay nguoc lai de quet day du
+                flipped = True
+            raw = self.sensor.read_raw()
+            dig = self.sensor.read()
+            for k in range(5):
+                v = raw[k]
+                if v < self._cal_min[k]:
+                    self._cal_min[k] = v
+                if v > self._cal_max[k]:
+                    self._cal_max[k] = v
+                if dig[k]:
+                    on_total += v
+                    on_count += 1
+                else:
+                    off_total += v
+                    off_count += 1
+            time.sleep_ms(5)
+        motor.stop()
+        # xac dinh chieu: tren-line cho raw cao hay thap (dua vao digital dang tin)
+        if on_count > 0 and off_count > 0:
+            self._line_high = (on_total / on_count) > (off_total / off_count)
+        self._calibrated = True
+        print('FastLine5 calib xong. min=%s max=%s line_high=%s' % (
+            self._cal_min, self._cal_max, self._line_high))
+
     def set_debug(self, on):
         self.debug = bool(on)
         if self.debug:
@@ -116,16 +180,52 @@ class FastLine5:
     # ---------------- doc gia tri ----------------
     def error(self):
         # loi line da chuan hoa ~[-2, 2] (0 = giua line)
-        return self.sensor.get_error() / 1000.0
+        return self._read_error()
 
     def read(self):
         # tuple 5 mat (s0..s4), moi mat 0/1
         return self.sensor.read()
 
+    def _read_error(self):
+        # tra ve loi line ~[-2, 2] theo che do hien tai
+        if self.mode == 'raw' and self._calibrated:
+            return self._analog_error()
+        return self.sensor.get_error() / 1000.0
+
+    def _analog_error(self):
+        # centroid analog lien tuc tu read_raw + calib -> muot hon digital
+        raw = self.sensor.read_raw()
+        acc = 0.0
+        tot = 0.0
+        for k in range(5):
+            rng = self._cal_max[k] - self._cal_min[k]
+            if rng < 1:
+                n = 0.0
+            else:
+                n = (raw[k] - self._cal_min[k]) / rng
+                if not self._line_high:
+                    n = 1.0 - n
+                if n < 0.0:
+                    n = 0.0
+                elif n > 1.0:
+                    n = 1.0
+            acc += n * _WEIGHTS[k]
+            tot += n
+        if tot < self.lost_threshold:
+            # mat line -> giu huong cu (giong get_error cua che do digital)
+            if self._last_aerr > 0:
+                return 2.0
+            elif self._last_aerr < 0:
+                return -2.0
+            return 0.0
+        err = acc / tot
+        self._last_aerr = err
+        return err
+
     # ---------------- 1 vong PID ----------------
     def step(self):
-        self.sensor.update()
-        error = self.sensor.get_error() / 1000.0     # ~[-2, 2]
+        self.sensor.update()                # van can: checkpoint cho follow_until_cross
+        error = self._read_error()          # ~[-2, 2], theo che do digital/raw
 
         self.integral = _clamp(self.integral + error, -_INTEGRAL_LIMIT, _INTEGRAL_LIMIT)
         p = self.kp * error

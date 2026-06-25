@@ -1624,13 +1624,23 @@ function fastLineThenOptions() {
   };
 }
 
-// 1) Khoi tao fast line
+// 1) Khoi tao fast line (chon che do DIGITAL / RAW)
 Blockly.Blocks['stemkit_fast_line_enable'] = {
   init: function () {
     this.jsonInit({
       "type": "stemkit_fast_line_enable",
       "message0": Blockly.Msg.BLOCK_STEMKIT_FAST_LINE_ENABLE_MESSAGE0,
-      "args0": [fastLineImage()],
+      "args0": [
+        fastLineImage(),
+        {
+          "type": "field_dropdown",
+          "name": "mode",
+          "options": [
+            [Blockly.Msg.BLOCK_STEMKIT_FAST_LINE_MODE_DIGITAL, "digital"],
+            [Blockly.Msg.BLOCK_STEMKIT_FAST_LINE_MODE_RAW, "raw"]
+          ]
+        }
+      ],
       "inputsInline": true,
       "previousStatement": null,
       "nextStatement": null,
@@ -1643,7 +1653,34 @@ Blockly.Blocks['stemkit_fast_line_enable'] = {
 
 Blockly.Python["stemkit_fast_line_enable"] = function (block) {
   fastLineInit();
-  return '';
+  var mode = block.getFieldValue("mode");
+  return "fast_line.set_mode('" + mode + "')\n";
+};
+
+// 1b) Calibrate cam bien (cho che do RAW)
+Blockly.Blocks['stemkit_fast_line_calibrate'] = {
+  init: function () {
+    this.jsonInit({
+      "type": "stemkit_fast_line_calibrate",
+      "message0": Blockly.Msg.BLOCK_STEMKIT_FAST_LINE_CALIBRATE_MESSAGE0,
+      "args0": [
+        fastLineImage(),
+        { "type": "input_value", "check": "Number", "name": "seconds" }
+      ],
+      "inputsInline": true,
+      "previousStatement": null,
+      "nextStatement": null,
+      "colour": StemKitColorBlock,
+      "tooltip": Blockly.Msg.BLOCK_STEMKIT_FAST_LINE_CALIBRATE_TOOLTIP,
+      "helpUrl": ""
+    });
+  }
+};
+
+Blockly.Python["stemkit_fast_line_calibrate"] = function (block) {
+  fastLineInit();
+  var seconds = Blockly.Python.valueToCode(block, 'seconds', Blockly.Python.ORDER_ATOMIC) || '3';
+  return "fast_line.calibrate(" + seconds + ")\n";
 };
 
 // 2) Dat he so PID

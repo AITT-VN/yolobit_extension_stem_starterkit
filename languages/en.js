@@ -95,8 +95,13 @@ Blockly.Msg.BLOCK_STEMKIT_LINE5_WHITE_LED_TOOLTIP = "Turn the white LED of the 5
 Blockly.Msg.BLOCK_STEMKIT_LINE5_LED_ON = "turn on"
 Blockly.Msg.BLOCK_STEMKIT_LINE5_LED_OFF = "turn off"
 
-Blockly.Msg.BLOCK_STEMKIT_FAST_LINE_ENABLE_MESSAGE0 = "%1 initialize fast line (PID)"
-Blockly.Msg.BLOCK_STEMKIT_FAST_LINE_ENABLE_TOOLTIP = "Initialize high-speed PID line follower for the 5-eye sensor"
+Blockly.Msg.BLOCK_STEMKIT_FAST_LINE_ENABLE_MESSAGE0 = "%1 initialize fast line (PID) - mode %2"
+Blockly.Msg.BLOCK_STEMKIT_FAST_LINE_ENABLE_TOOLTIP = "Initialize high-speed PID line follower. DIGITAL = stable (no calibration). RAW = smoother analog (must calibrate first)"
+Blockly.Msg.BLOCK_STEMKIT_FAST_LINE_MODE_DIGITAL = "DIGITAL"
+Blockly.Msg.BLOCK_STEMKIT_FAST_LINE_MODE_RAW = "RAW (analog)"
+
+Blockly.Msg.BLOCK_STEMKIT_FAST_LINE_CALIBRATE_MESSAGE0 = "%1 calibrate line sensor in %2 s"
+Blockly.Msg.BLOCK_STEMKIT_FAST_LINE_CALIBRATE_TOOLTIP = "RAW mode only: robot spins to sweep the sensors over line+background and learns thresholds. Place it on the line first"
 
 Blockly.Msg.BLOCK_STEMKIT_FAST_LINE_SET_PID_MESSAGE0 = "%1 set PID  Kp %2  Ki %3  Kd %4"
 Blockly.Msg.BLOCK_STEMKIT_FAST_LINE_SET_PID_TOOLTIP = "Set PID gains. Tune Kp first, then Kd to damp oscillation"
