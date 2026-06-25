@@ -1,6 +1,7 @@
 Blockly.Msg.STEMKIT_CAT_MOTORS = 'Động cơ và robot';
 Blockly.Msg.STEMKIT_CAT_OUTPUT = 'Điều khiển';
 Blockly.Msg.STEMKIT_CAT_SENSOR = 'Cảm biến';
+Blockly.Msg.STEMKIT_CAT_5CH_LINE = '5CH Line';
 
 Blockly.Msg.BLOCK_STEMKIT_ALL_MSG = "tất cả"
 
@@ -75,6 +76,23 @@ Blockly.Msg.BLOCK_STEMKIT_LINE_READ_ALL_TOOLTIP = "Kiểm tra các mắt của c
 
 Blockly.Msg.BLOCK_STEMKIT_LINE_READ_SINGLE_MESSAGE0 = "%1 cảm biến line đọc giá trị %2"
 Blockly.Msg.BLOCK_STEMKIT_LINE_READ_SINGLE_TOOLTIP = "Kiểm tra một mắt của cảm biến line"
+
+Blockly.Msg.BLOCK_STEMKIT_LINE5_ENABLE_MESSAGE0 = "%1 bật cảm biến line 5 mắt"
+Blockly.Msg.BLOCK_STEMKIT_LINE5_ENABLE_TOOLTIP = "Khởi tạo cảm biến dò line 5 mắt"
+
+Blockly.Msg.BLOCK_STEMKIT_LINE5_DETECT_MESSAGE0 = "%1 cảm biến line 5 mắt S1 %2 S2 %3 S3 %4 S4 %5 S5 %6"
+Blockly.Msg.BLOCK_STEMKIT_LINE5_DETECT_TOOLTIP = "Kiểm tra các mắt của cảm biến dò line 5 mắt"
+
+Blockly.Msg.BLOCK_STEMKIT_LINE5_READ_MESSAGE0 = "%1 cảm biến line 5 mắt đọc %2"
+Blockly.Msg.BLOCK_STEMKIT_LINE5_READ_TOOLTIP = "Đọc giá trị số (0/1) của cảm biến dò line 5 mắt"
+
+Blockly.Msg.BLOCK_STEMKIT_LINE5_READ_ANALOG_MESSAGE0 = "%1 cảm biến line 5 mắt đọc analog %2"
+Blockly.Msg.BLOCK_STEMKIT_LINE5_READ_ANALOG_TOOLTIP = "Đọc giá trị analog thô của cảm biến dò line 5 mắt"
+
+Blockly.Msg.BLOCK_STEMKIT_LINE5_WHITE_LED_MESSAGE0 = "%1 %2 led trắng line 5 mắt"
+Blockly.Msg.BLOCK_STEMKIT_LINE5_WHITE_LED_TOOLTIP = "Bật/tắt đèn LED trắng của cảm biến dò line 5 mắt"
+Blockly.Msg.BLOCK_STEMKIT_LINE5_LED_ON = "bật"
+Blockly.Msg.BLOCK_STEMKIT_LINE5_LED_OFF = "tắt"
 
 Blockly.Msg.BLOCK_STEMKIT_ROBOCON_LINE_UNTIL_CROSS_MESSAGE0 = "%3 dò line tốc độ %1 gặp vạch ngang rồi %2"
 Blockly.Msg.BLOCK_STEMKIT_ROBOCON_LINE_UNTIL_CROSS_TOOLTIP = "Cho robot dò line đến gặp vạch ngang"

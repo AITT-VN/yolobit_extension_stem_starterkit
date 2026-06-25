@@ -28,16 +28,25 @@ class Motor():
         self.m1_speed = 0
         self.m2_speed = 0
 
-        # line IR sensors
+        # line IR sensors — try 4-eye (PCF8574 @0x23) first, fall back to 5-eye (STM32 @0x24)
+        self.pcf = None
+        self.line5 = None
         try:
             self.pcf = stemkit_pcf8574.PCF8574(
                 machine.SoftI2C(
                     scl=machine.Pin(pin19.pin),
                     sda=machine.Pin(pin20.pin)), 0x23)
         except:
-            say('Line IR sensors not detected')
-            self.pcf = None
-            
+            try:
+                from stemkit_line5 import LineSensor5P_I2C
+                _ls = LineSensor5P_I2C()
+                if _ls.ok:
+                    self.line5 = _ls
+            except:
+                pass
+            if self.line5 is None:
+                say('Line IR sensors not detected')
+
         self.stop()
         
 
@@ -136,6 +145,37 @@ class Motor():
 
             self.m2_speed = m2
 
+    def check_line(self):
+        """Return LINE_* status for whichever sensor is connected (4-eye or 5-eye)."""
+        if self.line5 is not None:
+            return self.line5.check()
+        if self.pcf is None:
+            return LINE_END
+        now = (self.pcf.pin(0), self.pcf.pin(1), self.pcf.pin(2), self.pcf.pin(3))
+        if now == (0, 0, 0, 0):
+            return LINE_END
+        elif now == (1, 1, 1, 1):
+            return LINE_CROSS
+        elif (now[1], now[2]) == (1, 1) or now == (1, 0, 0, 1):
+            return LINE_CENTER
+        elif (now[0], now[1]) == (1, 1):
+            return LINE_RIGHT2
+        elif (now[2], now[3]) == (1, 1):
+            return LINE_LEFT2
+        elif now == (0, 0, 1, 0):
+            return LINE_RIGHT
+        elif now == (0, 1, 0, 0):
+            return LINE_LEFT
+        elif now[1] == 1:
+            return LINE_RIGHT2
+        elif now[2] == 1:
+            return LINE_LEFT2
+        elif now[0] == 1:
+            return LINE_RIGHT3
+        elif now[3] == 1:
+            return LINE_LEFT3
+        return LINE_END
+
     def read_line_sensors(self, index=0):
         '''
         self.pcf.pin(0) = 0 white line
@@ -159,6 +199,17 @@ class Motor():
                 return 1
 
 motor = Motor()
+
+# Line sensor status constants (exported so stemkit_robocon can use them)
+LINE_LEFT3  = -3
+LINE_LEFT2  = -2
+LINE_LEFT   = -1
+LINE_CENTER = 0
+LINE_RIGHT  = 1
+LINE_RIGHT2 = 2
+LINE_RIGHT3 = 3
+LINE_CROSS  = 4
+LINE_END    = 5
 
 def stop_all():  # override stop function called by app
     motor.stop()

@@ -1365,6 +1365,235 @@ Blockly.Python["robot_line_sensor_read_single"] = function (block) {
 };
 
 
+// ===== 5CH Line (cam bien do line 5 mat - LineSensor5P_I2C @0x24) =====
+
+function line5Init() {
+  Blockly.Python.definitions_['import_line_5ch'] = 'from stemkit_line5 import LineSensor5P_I2C';
+  Blockly.Python.definitions_['import_line_5ch_init'] = 'line_5ch = LineSensor5P_I2C()';
+}
+
+function line5DetectOptions(name) {
+  return {
+    "type": "field_dropdown",
+    "name": name,
+    "options": [
+      [
+        { "src": ImgUrl2 + 'line_finder_none_detect.png', "width": 15, "height": 15, "alt": "none" },
+        "0"
+      ],
+      [
+        { "src": ImgUrl2 + 'line_finder_detect.png', "width": 15, "height": 15, "alt": "detect" },
+        "1"
+      ]
+    ]
+  };
+}
+
+function line5EyeOptions() {
+  return {
+    "type": "field_dropdown",
+    "name": "eye",
+    "options": [
+      [Blockly.Msg.BLOCK_STEMKIT_ALL_MSG, "all"],
+      ["S1", "0"],
+      ["S2", "1"],
+      ["S3", "2"],
+      ["S4", "3"],
+      ["S5", "4"]
+    ]
+  };
+}
+
+// 1) Bat (khoi tao) cam bien line 5 mat
+Blockly.Blocks['stemkit_line5_enable'] = {
+  init: function () {
+    this.jsonInit(
+      {
+        "type": "stemkit_line5_enable",
+        "message0": Blockly.Msg.BLOCK_STEMKIT_LINE5_ENABLE_MESSAGE0,
+        "args0": [
+          {
+            "type": "field_image",
+            "src": ImgUrl2 + 'line.svg',
+            "width": 15,
+            "height": 15,
+            "alt": "*",
+            "flipRtl": false
+          }
+        ],
+        "inputsInline": true,
+        "previousStatement": null,
+        "nextStatement": null,
+        "colour": StemKitColorBlock,
+        "tooltip": Blockly.Msg.BLOCK_STEMKIT_LINE5_ENABLE_TOOLTIP,
+        "helpUrl": ""
+      }
+    );
+  }
+};
+
+Blockly.Python["stemkit_line5_enable"] = function (block) {
+  line5Init();
+  return '';
+};
+
+// 2) Phat hien S1..S5
+Blockly.Blocks['stemkit_line5_detect'] = {
+  init: function () {
+    this.jsonInit(
+      {
+        "type": "stemkit_line5_detect",
+        "message0": Blockly.Msg.BLOCK_STEMKIT_LINE5_DETECT_MESSAGE0,
+        "args0": [
+          {
+            "type": "field_image",
+            "src": ImgUrl2 + 'line.svg',
+            "width": 15,
+            "height": 15,
+            "alt": "*",
+            "flipRtl": false
+          },
+          line5DetectOptions("S1"),
+          line5DetectOptions("S2"),
+          line5DetectOptions("S3"),
+          line5DetectOptions("S4"),
+          line5DetectOptions("S5")
+        ],
+        "inputsInline": true,
+        "colour": StemKitColorBlock,
+        "output": "Boolean",
+        "tooltip": Blockly.Msg.BLOCK_STEMKIT_LINE5_DETECT_TOOLTIP,
+        "helpUrl": ""
+      }
+    );
+  }
+};
+
+Blockly.Python["stemkit_line5_detect"] = function (block) {
+  line5Init();
+  var S1 = block.getFieldValue("S1");
+  var S2 = block.getFieldValue("S2");
+  var S3 = block.getFieldValue("S3");
+  var S4 = block.getFieldValue("S4");
+  var S5 = block.getFieldValue("S5");
+  var code = "line_5ch.read() == (" + S1 + ", " + S2 + ", " + S3 + ", " + S4 + ", " + S5 + ")";
+  return [code, Blockly.Python.ORDER_NONE];
+};
+
+// 3) Doc gia tri so (tat ca / tung mat)
+Blockly.Blocks['stemkit_line5_read'] = {
+  init: function () {
+    this.jsonInit(
+      {
+        "type": "stemkit_line5_read",
+        "message0": Blockly.Msg.BLOCK_STEMKIT_LINE5_READ_MESSAGE0,
+        "args0": [
+          {
+            "type": "field_image",
+            "src": ImgUrl2 + 'line.svg',
+            "width": 15,
+            "height": 15,
+            "alt": "*",
+            "flipRtl": false
+          },
+          line5EyeOptions()
+        ],
+        "inputsInline": true,
+        "colour": StemKitColorBlock,
+        "output": "",
+        "tooltip": Blockly.Msg.BLOCK_STEMKIT_LINE5_READ_TOOLTIP,
+        "helpUrl": ""
+      }
+    );
+  }
+};
+
+Blockly.Python["stemkit_line5_read"] = function (block) {
+  line5Init();
+  var eye = block.getFieldValue("eye");
+  var code = (eye === "all") ? "line_5ch.read()" : "line_5ch.read(" + eye + ")";
+  return [code, Blockly.Python.ORDER_NONE];
+};
+
+// 4) Doc gia tri analog (tat ca / tung mat)
+Blockly.Blocks['stemkit_line5_read_analog'] = {
+  init: function () {
+    this.jsonInit(
+      {
+        "type": "stemkit_line5_read_analog",
+        "message0": Blockly.Msg.BLOCK_STEMKIT_LINE5_READ_ANALOG_MESSAGE0,
+        "args0": [
+          {
+            "type": "field_image",
+            "src": ImgUrl2 + 'line.svg',
+            "width": 15,
+            "height": 15,
+            "alt": "*",
+            "flipRtl": false
+          },
+          line5EyeOptions()
+        ],
+        "inputsInline": true,
+        "colour": StemKitColorBlock,
+        "output": "",
+        "tooltip": Blockly.Msg.BLOCK_STEMKIT_LINE5_READ_ANALOG_TOOLTIP,
+        "helpUrl": ""
+      }
+    );
+  }
+};
+
+Blockly.Python["stemkit_line5_read_analog"] = function (block) {
+  line5Init();
+  var eye = block.getFieldValue("eye");
+  var code = (eye === "all") ? "line_5ch.read_raw()" : "line_5ch.read_raw(" + eye + ")";
+  return [code, Blockly.Python.ORDER_NONE];
+};
+
+// 5) Bat/tat LED trang
+Blockly.Blocks['stemkit_line5_white_led'] = {
+  init: function () {
+    this.jsonInit(
+      {
+        "type": "stemkit_line5_white_led",
+        "message0": Blockly.Msg.BLOCK_STEMKIT_LINE5_WHITE_LED_MESSAGE0,
+        "args0": [
+          {
+            "type": "field_image",
+            "src": ImgUrl2 + 'line.svg',
+            "width": 15,
+            "height": 15,
+            "alt": "*",
+            "flipRtl": false
+          },
+          {
+            "type": "field_dropdown",
+            "name": "state",
+            "options": [
+              [Blockly.Msg.BLOCK_STEMKIT_LINE5_LED_ON, "True"],
+              [Blockly.Msg.BLOCK_STEMKIT_LINE5_LED_OFF, "False"]
+            ]
+          }
+        ],
+        "inputsInline": true,
+        "previousStatement": null,
+        "nextStatement": null,
+        "colour": StemKitColorBlock,
+        "tooltip": Blockly.Msg.BLOCK_STEMKIT_LINE5_WHITE_LED_TOOLTIP,
+        "helpUrl": ""
+      }
+    );
+  }
+};
+
+Blockly.Python["stemkit_line5_white_led"] = function (block) {
+  line5Init();
+  var state = block.getFieldValue("state");
+  var code = "line_5ch.set_white_led(" + state + ")\n";
+  return code;
+};
+
+
 //Robocon
 
 Blockly.Blocks['stemkit_robocon_follow_line_until_cross'] = {

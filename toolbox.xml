@@ -322,4 +322,14 @@
 
   </category>
 
+  <category id="stemkit-5ch-line" name="{{STEMKIT_CAT_5CH_LINE}}" colour="#44cbc6" icon="grip-lines">
+
+    <block type="stemkit_line5_enable"/>
+    <block type="stemkit_line5_detect"/>
+    <block type="stemkit_line5_read"/>
+    <block type="stemkit_line5_read_analog"/>
+    <block type="stemkit_line5_white_led"/>
+
+  </category>
+
 </xml>

@@ -1,6 +1,7 @@
 Blockly.Msg.STEMKIT_CAT_MOTORS = 'Robot and motors';
 Blockly.Msg.STEMKIT_CAT_OUTPUT = 'Output';
 Blockly.Msg.STEMKIT_CAT_SENSOR = 'Sensor';
+Blockly.Msg.STEMKIT_CAT_5CH_LINE = '5CH Line';
 
 Blockly.Msg.BLOCK_STEMKIT_ALL_MSG = "all"
 
@@ -75,6 +76,23 @@ Blockly.Msg.BLOCK_STEMKIT_LINE_READ_ALL_TOOLTIP = "Check if line sensor reads as
 
 Blockly.Msg.BLOCK_STEMKIT_LINE_READ_SINGLE_MESSAGE0 = "%1 line sensor reads %2"
 Blockly.Msg.BLOCK_STEMKIT_LINE_READ_SINGLE_TOOLTIP = "Get reading of one line sensor eye"
+
+Blockly.Msg.BLOCK_STEMKIT_LINE5_ENABLE_MESSAGE0 = "%1 turn on 5-eye line sensor"
+Blockly.Msg.BLOCK_STEMKIT_LINE5_ENABLE_TOOLTIP = "Initialize the 5-eye line sensor"
+
+Blockly.Msg.BLOCK_STEMKIT_LINE5_DETECT_MESSAGE0 = "%1 5-eye line sensor S1 %2 S2 %3 S3 %4 S4 %5 S5 %6"
+Blockly.Msg.BLOCK_STEMKIT_LINE5_DETECT_TOOLTIP = "Check the eyes of the 5-eye line sensor"
+
+Blockly.Msg.BLOCK_STEMKIT_LINE5_READ_MESSAGE0 = "%1 5-eye line sensor read %2"
+Blockly.Msg.BLOCK_STEMKIT_LINE5_READ_TOOLTIP = "Read digital value (0/1) of the 5-eye line sensor"
+
+Blockly.Msg.BLOCK_STEMKIT_LINE5_READ_ANALOG_MESSAGE0 = "%1 5-eye line sensor read analog %2"
+Blockly.Msg.BLOCK_STEMKIT_LINE5_READ_ANALOG_TOOLTIP = "Read raw analog value of the 5-eye line sensor"
+
+Blockly.Msg.BLOCK_STEMKIT_LINE5_WHITE_LED_MESSAGE0 = "%1 %2 white LED of 5-eye line sensor"
+Blockly.Msg.BLOCK_STEMKIT_LINE5_WHITE_LED_TOOLTIP = "Turn the white LED of the 5-eye line sensor on/off"
+Blockly.Msg.BLOCK_STEMKIT_LINE5_LED_ON = "turn on"
+Blockly.Msg.BLOCK_STEMKIT_LINE5_LED_OFF = "turn off"
 
 Blockly.Msg.BLOCK_STEMKIT_ROBOCON_LINE_UNTIL_CROSS_MESSAGE0 = "%3 follows line with speed %1 until cross-line then %2"
 Blockly.Msg.BLOCK_STEMKIT_ROBOCON_LINE_UNTIL_CROSS_TOOLTIP = "Robot follows line with selected speed until cross line"

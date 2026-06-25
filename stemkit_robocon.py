@@ -17,66 +17,29 @@ def stop_robot(then=STOP):
     else:
         return
 
-speed_factors = [ 
-    [1, 1], [0.5, 1], [0, 1], [-0.5, 0.5], 
-    [-2/3, -2/3], [0, 1], [-0.5, 0.5], [-0.7, 0.7] 
-] #0: forward, 1: light turn, 2: normal turn, 3: heavy turn, 4:  backward, 5: strong light turn, 6: strong normal turn, 7: strong heavy turn
-
-
-m_dir = -1 #no found
-i_lr = 0 #0 for left, 1 for right
-t_finding_point = time.time_ns()
-s1_current_position = -1
-s2_current_position = -1
 
 def follow_line(speed, now=None, backward=True):
-    global m_dir, i_lr, t_finding_point
-    if now == None:
-        now = motor.read_line_sensors()
+    status = motor.check_line()
 
-    if now == (0, 0, 0, 0): #no line found
+    if status == LINE_END:
         if backward:
             motor.backward(speed)
-    else:
-        if (now[1], now[2]) == (1, 1):
-            if m_dir == 0:
-                motor.set_wheel_speed(speed, -speed) #if it is running straight before then robot should speed up now           
-            else:
-                m_dir = 0 #forward
-                motor.set_wheel_speed(speed * 2/3, -(speed * 2/3)) #just turn before, shouldn't set high speed immediately, speed up slowly
-        else:
-            if (now[0], now[1]) == (1, 1): 
-                m_dir = 2 #left normal turn
-                i_lr = 0
-            elif (now[2], now[3]) == (1, 1): 
-                m_dir = 2 #right normal turn
-                i_lr = 1
-            elif now == (1, 0, 1, 0): 
-                if m_dir != -1:
-                    m_dir = 1
-                    i_lr = 0
-            elif now == (0, 1, 0, 1): 
-                if m_dir != -1:
-                    m_dir = 1
-                    i_lr = 1
-            elif now == (1, 0, 0, 1): 
-                if m_dir != -1:
-                    m_dir = 0
-                    i_lr = 0
-            elif now[1] == 1: 
-                m_dir = 1 #left light turn
-                i_lr = 0
-            elif now[2] == 1:
-                m_dir = 1 #right light turn
-                i_lr = 1
-            elif now[0] == 1: 
-                m_dir = 3 #left heavy turn
-                i_lr = 0
-            elif now[3] == 1: 
-                m_dir = 3 #right heavy turn
-                i_lr = 1
+        return
 
-            motor.set_wheel_speed( speed * speed_factors[m_dir][i_lr], -(speed * speed_factors[m_dir][1-i_lr] ))
+    if status == LINE_CENTER or status == LINE_CROSS:
+        motor.set_wheel_speed(speed, -speed)
+    elif status == LINE_RIGHT:
+        motor.set_wheel_speed(int(speed * 0.5), -speed)
+    elif status == LINE_RIGHT2:
+        motor.set_wheel_speed(0, -speed)
+    elif status == LINE_RIGHT3:
+        motor.set_wheel_speed(int(-speed * 0.5), int(-speed * 0.5))
+    elif status == LINE_LEFT:
+        motor.set_wheel_speed(speed, int(-speed * 0.5))
+    elif status == LINE_LEFT2:
+        motor.set_wheel_speed(speed, 0)
+    elif status == LINE_LEFT3:
+        motor.set_wheel_speed(int(speed * 0.5), int(speed * 0.5))
 
 
 def follow_line_until_end(speed, timeout=10000, then=STOP):
@@ -84,15 +47,13 @@ def follow_line_until_end(speed, timeout=10000, then=STOP):
     last_time = time.ticks_ms()
 
     while time.ticks_ms() - last_time < timeout:
-        now = motor.read_line_sensors()
-
-        if now == (0, 0, 0, 0):
+        if motor.check_line() == LINE_END:
             count = count - 1
             if count == 0:
                 break
 
         if speed >= 0:
-            follow_line(speed, now, False)
+            follow_line(speed, backward=False)
         else:
             motor.backward(abs(speed))
 
@@ -106,19 +67,19 @@ def follow_line_until_cross(speed, timeout=10000, then=STOP):
     last_time = time.ticks_ms()
 
     while time.ticks_ms() - last_time < timeout:
-        now = motor.read_line_sensors()
+        check = motor.check_line()
 
         if status == 1:
-            if now != (1, 1, 1, 1):
+            if check != LINE_CROSS:
                 status = 2
         elif status == 2:
-            if now == (1, 1, 1, 1):
+            if check == LINE_CROSS:
                 count = count + 1
                 if count == 2:
                     break
 
         if speed >= 0:
-            follow_line(speed, now)
+            follow_line(speed)
         else:
             motor.backward(abs(speed))
 
@@ -133,10 +94,10 @@ def follow_line_until(speed, condition, timeout=10000, then=STOP):
     last_time = time.ticks_ms()
 
     while time.ticks_ms() - last_time < timeout:
-        now = motor.read_line_sensors()
+        check = motor.check_line()
 
         if status == 1:
-            if now != (1, 1, 1, 1):
+            if check != LINE_CROSS:
                 status = 2
         elif status == 2:
             if condition():
@@ -145,7 +106,7 @@ def follow_line_until(speed, condition, timeout=10000, then=STOP):
                     break
 
         if speed >= 0:
-            follow_line(speed, now)
+            follow_line(speed)
         else:
             motor.backward(abs(speed))
 
@@ -156,26 +117,25 @@ def follow_line_until(speed, condition, timeout=10000, then=STOP):
 def turn_until_line_detected(m1_speed, m2_speed, timeout=5000, then=STOP):
     counter = 0
     status = 0
-  
+
     last_time = time.ticks_ms()
 
     motor.set_wheel_speed(m1_speed, -(m2_speed))
 
     while time.ticks_ms() - last_time < timeout:
-        line_status = motor.read_line_sensors()
+        check = motor.check_line()
 
         if status == 0:
-            if line_status == (0, 0, 0, 0): # no black line detected
-                # ignore case when robot is still on black line since started turning
+            if check == LINE_END:
                 status = 1
-        
+
         elif status == 1:
             motor.set_wheel_speed(m1_speed, -(m2_speed))
             status = 2
             counter = 3
         elif status == 2:
-            if line_status[0] == 1 or line_status[1] == 1 or line_status[2] == 1 or line_status[3] == 1:
-                motor.set_wheel_speed(int(m1_speed*0.75), int(-(m2_speed*0.75)))
+            if check != LINE_END:
+                motor.set_wheel_speed(int(m1_speed * 0.75), int(-(m2_speed * 0.75)))
                 counter = counter - 1
                 if counter <= 0:
                     break
