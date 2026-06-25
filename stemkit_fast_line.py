@@ -182,9 +182,12 @@ class FastLine5:
         # loi line da chuan hoa ~[-2, 2] (0 = giua line)
         return self._read_error()
 
-    def read(self):
-        # tuple 5 mat (s0..s4), moi mat 0/1
-        return self.sensor.read()
+    def read(self, index=None):
+        # che do 'raw' -> gia tri analog (read_raw); 'digital' -> 0/1 (read).
+        # index None = ca 5 mat (tuple); index 0..4 = 1 mat.
+        if self.mode == 'raw':
+            return self.sensor.read_raw(index)
+        return self.sensor.read(index)
 
     def _read_error(self):
         # tra ve loi line ~[-2, 2] theo che do hien tai
