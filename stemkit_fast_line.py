@@ -51,6 +51,11 @@ _INTEGRAL_LIMIT = 1000.0
 # trong so truc S1..S5 cho centroid analog (thang [-2, 2])
 _WEIGHTS = (-2.0, -1.0, 0.0, 1.0, 2.0)
 
+# range raw toi thieu cua 1 mat de coi la "tin cay" (duoi nguong = nhieu, bo qua)
+_MIN_RANGE = 120
+# calib coi la DAT neu mat tot nhat co range >= nguong nay (line/nen tuong phan ro)
+_GOOD_RANGE = 300
+
 
 def _clamp(v, lo, hi):
     return lo if v < lo else (hi if v > hi else v)
@@ -122,9 +127,10 @@ class FastLine5:
         if mode == 'raw' and not self._calibrated:
             print('FastLine5: che do raw chua calibrate -> tam dung digital. Goi calibrate() truoc.')
 
-    def calibrate(self, seconds=3, spin=35):
+    def calibrate(self, seconds=3, spin=65):
         # Hoc nguong cho che do 'raw': robot TU XOAY de quet 5 mat qua line + nen,
         # ghi lai min/max moi mat. Dat robot tren/canh line roi goi ham nay.
+        # spin phai du manh de robot xoay HAN qua line ca 2 ben (mac dinh 65).
         # Sau khi xong, vi tri line se duoc tinh lien tuc (muot hon digital).
         self._cal_min = [4095, 4095, 4095, 4095, 4095]
         self._cal_max = [0, 0, 0, 0, 0]
@@ -160,9 +166,21 @@ class FastLine5:
         # xac dinh chieu: tren-line cho raw cao hay thap (dua vao digital dang tin)
         if on_count > 0 and off_count > 0:
             self._line_high = (on_total / on_count) > (off_total / off_count)
-        self._calibrated = True
-        print('FastLine5 calib xong. min=%s max=%s line_high=%s' % (
-            self._cal_min, self._cal_max, self._line_high))
+        # kiem tra chat luong calib: mat tot nhat phai co tuong phan ro (range lon)
+        best_range = 0
+        for k in range(5):
+            r = self._cal_max[k] - self._cal_min[k]
+            if r > best_range:
+                best_range = r
+        if best_range < _GOOD_RANGE:
+            self._calibrated = False
+            print('FastLine5 CALIB KEM (range tot nhat chi %d < %d).' % (best_range, _GOOD_RANGE))
+            print('  -> Robot xoay chua qua han line. Tang spin / dat robot dung line / calib lau hon.')
+            print('  -> Tam dung DIGITAL cho an toan.')
+        else:
+            self._calibrated = True
+            print('FastLine5 calib OK. min=%s max=%s line_high=%s' % (
+                self._cal_min, self._cal_max, self._line_high))
 
     def set_debug(self, on):
         self.debug = bool(on)
@@ -202,8 +220,8 @@ class FastLine5:
         tot = 0.0
         for k in range(5):
             rng = self._cal_max[k] - self._cal_min[k]
-            if rng < 1:
-                n = 0.0
+            if rng < _MIN_RANGE:
+                n = 0.0            # mat nay tuong phan qua kem -> bo qua (nhieu)
             else:
                 n = (raw[k] - self._cal_min[k]) / rng
                 if not self._line_high:
