@@ -128,7 +128,7 @@ Blockly.Msg.BLOCK_STEMKIT_PIR_MESSAGE0 = "%2 PIR %1 detected"
 Blockly.Msg.BLOCK_STEMKIT_WATER_MESSAGE0 = "%2 is water on  %1 water sensor"
 Blockly.Msg.BLOCK_STEMKIT_WATER_SENSOR_TOOLTIP = "Return 0 if water detected, otherwise 1";
 
-Blockly.Msg.BLOCK_STEMKIT_OLED_SAMPLE_MESSAGE0 = "%5 màn hình OLED hiển thị %1 x %2 y %3 %4";
+Blockly.Msg.BLOCK_STEMKIT_OLED_SAMPLE_MESSAGE0 = "%7 màn hình OLED hiển thị %1 %2 %3 x %4 y %5 %6";
 Blockly.Msg.BLOCK_STEMKIT_OLED_MESSAGE0 = "%5 OLED show %1 x %2 y %3 %4"
 Blockly.Msg.BLOCK_STEMKIT_OLED_TOOLTIP = "Show text on OLED display at given position"
 Blockly.Msg.BLOCK_STEMKIT_OLED_HELPURL = ""
