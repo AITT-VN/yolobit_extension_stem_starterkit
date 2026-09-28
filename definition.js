@@ -2677,3 +2677,116 @@ Blockly.Python['stemkit_clear_list'] = function(block) {
   var code = `stemkit_rfid.clear_list("rfids_${list_name}")\n`;
   return code;
 };
+
+// ============================================================================
+//  Cam bien do line 5 mat (5 Channel Line Finder Array, STM32G030 I2C 0x24)
+//  cam vao cong I2C. Cac lenh ROBOCON do line tu dung cam bien nay khi tim thay.
+// ============================================================================
+
+Blockly.Blocks['stemkit_robocon_line_sensor_type'] = {
+  init: function () {
+    this.jsonInit({
+      "type": "stemkit_robocon_line_sensor_type",
+      "message0": Blockly.Msg.BLOCK_STEMKIT_LINE_SENSOR_TYPE_MESSAGE0,
+      "args0": [
+        { "type": "field_image", "src": ImgUrl2 + 'line.svg', "width": 15, "height": 15, "alt": "*", "flipRtl": false },
+        {
+          "type": "field_dropdown",
+          "name": "type",
+          "options": [
+            [Blockly.Msg.BLOCK_STEMKIT_LINE_SENSOR_AUTO, "LINE_AUTO"],
+            [Blockly.Msg.BLOCK_STEMKIT_LINE_SENSOR_4, "LINE_STEMKIT"],
+            [Blockly.Msg.BLOCK_STEMKIT_LINE_SENSOR_5, "LINE_ARRAY5"]
+          ]
+        }
+      ],
+      "inputsInline": true,
+      "previousStatement": null,
+      "nextStatement": null,
+      "colour": StemKitColorBlock,
+      "tooltip": Blockly.Msg.BLOCK_STEMKIT_LINE_SENSOR_TYPE_TOOLTIP,
+      "helpUrl": ""
+    });
+  }
+};
+
+Blockly.Python["stemkit_robocon_line_sensor_type"] = function (block) {
+  Blockly.Python.definitions_['import_robot'] = 'from stemkit_motor import *';
+  Blockly.Python.definitions_['import_robocon'] = 'from stemkit_robocon import *';
+  return "line_sensor_type(" + block.getFieldValue('type') + ")\n";
+};
+
+function stemkitLine5Option(name) {
+  return {
+    "type": "field_dropdown",
+    "name": name,
+    "options": [
+      [{ "src": ImgUrl2 + 'line_finder_none_detect.png', "width": 15, "height": 15, "alt": "none" }, "0"],
+      [{ "src": ImgUrl2 + 'line_finder_detect.png', "width": 15, "height": 15, "alt": "detect" }, "1"]
+    ]
+  };
+}
+
+Blockly.Blocks['stemkit_line5_read_all'] = {
+  init: function () {
+    this.jsonInit({
+      "type": "stemkit_line5_read_all",
+      "message0": Blockly.Msg.BLOCK_STEMKIT_LINE5_READ_ALL_MESSAGE0,
+      "args0": [
+        { "type": "field_image", "src": ImgUrl2 + 'line.svg', "width": 15, "height": 15, "alt": "*", "flipRtl": false },
+        stemkitLine5Option("S1"),
+        stemkitLine5Option("S2"),
+        stemkitLine5Option("S3"),
+        stemkitLine5Option("S4"),
+        stemkitLine5Option("S5")
+      ],
+      "colour": StemKitColorBlock,
+      "output": "Boolean",
+      "tooltip": Blockly.Msg.BLOCK_STEMKIT_LINE5_READ_ALL_TOOLTIP,
+      "helpUrl": ""
+    });
+  }
+};
+
+Blockly.Python["stemkit_line5_read_all"] = function (block) {
+  Blockly.Python.definitions_['import_robot'] = 'from stemkit_motor import *';
+  Blockly.Python.definitions_['import_robocon'] = 'from stemkit_robocon import *';
+  var s = ["S1", "S2", "S3", "S4", "S5"].map(function (n) { return block.getFieldValue(n); });
+  return ["read_line_array5() == (" + s.join(", ") + ")", Blockly.Python.ORDER_RELATIONAL];
+};
+
+Blockly.Blocks['stemkit_line5_read'] = {
+  init: function () {
+    this.jsonInit({
+      "type": "stemkit_line5_read",
+      "message0": Blockly.Msg.BLOCK_STEMKIT_LINE5_READ_MESSAGE0,
+      "args0": [
+        { "type": "field_image", "src": ImgUrl2 + 'line.svg', "width": 15, "height": 15, "alt": "*", "flipRtl": false },
+        {
+          "type": "field_dropdown",
+          "name": "mode",
+          "options": [
+            [Blockly.Msg.BLOCK_STEMKIT_LINE5_MODE_DIGITAL, "digital"],
+            [Blockly.Msg.BLOCK_STEMKIT_LINE5_MODE_ANALOG, "analog"]
+          ]
+        },
+        {
+          "type": "field_dropdown",
+          "name": "index",
+          "options": [["S1", "1"], ["S2", "2"], ["S3", "3"], ["S4", "4"], ["S5", "5"]]
+        }
+      ],
+      "colour": StemKitColorBlock,
+      "output": "Number",
+      "tooltip": Blockly.Msg.BLOCK_STEMKIT_LINE5_READ_TOOLTIP,
+      "helpUrl": ""
+    });
+  }
+};
+
+Blockly.Python["stemkit_line5_read"] = function (block) {
+  Blockly.Python.definitions_['import_robot'] = 'from stemkit_motor import *';
+  Blockly.Python.definitions_['import_robocon'] = 'from stemkit_robocon import *';
+  var fn = (block.getFieldValue('mode') === 'analog') ? 'read_line_array5_raw' : 'read_line_array5';
+  return [fn + "(" + block.getFieldValue('index') + ")", Blockly.Python.ORDER_FUNCTION_CALL];
+};
