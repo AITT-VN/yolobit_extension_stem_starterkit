@@ -160,3 +160,15 @@ Blockly.Msg.BLOCK_STEMKIT_RFID_REMOVE_HELPURL = "";
 Blockly.Msg.BLOCK_STEMKIT_RFID_CLEAR_MESSAGE0 = "%2 xóa danh sách %1";
 Blockly.Msg.BLOCK_STEMKIT_RFID_CLEAR_TOOLTIP = "Xóa tất cả mã thẻ đã lưu";
 Blockly.Msg.BLOCK_STEMKIT_RFID_CLEAR_HELPURL = "";
+
+Blockly.Msg.BLOCK_STEMKIT_LINE_SENSOR_TYPE_MESSAGE0 = "%1 dò line bằng %2"
+Blockly.Msg.BLOCK_STEMKIT_LINE_SENSOR_TYPE_TOOLTIP = "Chọn cảm biến dò line cho các lệnh ROBOCON. Tự động: dùng cảm biến 5 mắt nếu có cắm vào cổng I2C, nếu không dùng cảm biến 4 mắt."
+Blockly.Msg.BLOCK_STEMKIT_LINE_SENSOR_AUTO = "tự động"
+Blockly.Msg.BLOCK_STEMKIT_LINE_SENSOR_4 = "cảm biến 4 mắt"
+Blockly.Msg.BLOCK_STEMKIT_LINE_SENSOR_5 = "cảm biến 5 mắt"
+Blockly.Msg.BLOCK_STEMKIT_LINE5_READ_ALL_MESSAGE0 = "%1 cảm biến line 5 mắt phát hiện S1 %2 S2 %3 S3 %4 S4 %5 S5 %6"
+Blockly.Msg.BLOCK_STEMKIT_LINE5_READ_ALL_TOOLTIP = "Đúng khi 5 mắt (S1 bên trái đến S5 bên phải) khớp mẫu đã chọn"
+Blockly.Msg.BLOCK_STEMKIT_LINE5_READ_MESSAGE0 = "%1 đọc cảm biến line 5 mắt %2 mắt %3"
+Blockly.Msg.BLOCK_STEMKIT_LINE5_READ_TOOLTIP = "digital: 1 = thấy vạch đen, 0 = không. analog: giá trị 0-4095"
+Blockly.Msg.BLOCK_STEMKIT_LINE5_MODE_DIGITAL = "digital"
+Blockly.Msg.BLOCK_STEMKIT_LINE5_MODE_ANALOG = "analog"

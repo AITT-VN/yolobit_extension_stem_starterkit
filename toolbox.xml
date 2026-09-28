@@ -221,6 +221,8 @@
     <block type="stemkit_dht_measure"/>
     <block type="stemkit_dht_read"/>
     <block type="robot_line_sensor_read_all"/>
+    <block type="stemkit_line5_read_all"/>
+    <block type="stemkit_line5_read"/>
      
     <block type="stemkit_relay"/>
     <block type="stemkit_motion"/>
@@ -269,6 +271,7 @@
    
 
     <label text="ROBOCON" web-class="blockLabelStyle"></label>
+    <block type="stemkit_robocon_line_sensor_type"/>
     
     <block type="stemkit_robocon_follow_line_until_cross">
       <value name="speed">
